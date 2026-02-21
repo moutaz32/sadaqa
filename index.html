@@ -40,7 +40,7 @@
         [data-theme="dark"] .family-dedication { background: rgba(251, 191, 36, 0.1); border-color: var(--accent); }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .action-btn { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: bold; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.95rem; border: none; }
+        .action-btn { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: bold; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.95rem; border: none; text-decoration: none; }
         [data-theme="dark"] .action-btn { background: rgba(255,255,255,0.05); color: white; }
         .action-btn i { font-size: 1.5rem; color: var(--primary); }
         
@@ -133,7 +133,7 @@
             </video>
         </div>
 
-        <!-- NEW: 4. أدعية للمتوفي (الـ 30 دعاء) -->
+        <!-- 4. أدعية للمتوفي (الـ 30 دعاء) -->
         <div class="card">
             <h2><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية جامعة للمتوفي</h2>
             <p style="font-size:0.85rem; opacity:0.8; margin-bottom:15px;">مجموعة من أفضل 30 دعاء مأثور للمتوفي، اقرأها بنية الرحمة والمغفرة له.</p>
@@ -152,7 +152,7 @@
             <div class="juz-grid" id="juzGrid"></div>
         </div>
 
-        <!-- 6. هدية الفاتحة والسور المنجية -->
+        <!-- 6. قراءة القرآن + المصحف كاملاً -->
         <div class="card">
             <h2><i class="fas fa-book-open"></i> قراءة القرآن</h2>
             <button class="gift-btn" id="fatihaBtn" onclick="giftFatiha()" style="margin-bottom: 10px;">
@@ -164,9 +164,13 @@
                 <button class="action-btn" onclick="fetchSurah(56, 'سورة الواقعة')"><i class="fas fa-leaf" style="color:#22c55e"></i> الواقعة</button>
                 <button class="action-btn" onclick="fetchSurah(18, 'سورة الكهف')"><i class="fas fa-lightbulb" style="color:#eab308"></i> الكهف</button>
             </div>
+            
+            <a href="https://quran.com/ar" target="_blank" class="action-btn" style="width:100%; margin-top:10px; background:var(--primary); color:white; flex-direction:row; justify-content:center; gap:10px; text-decoration:none;">
+                <i class="fas fa-book" style="color:white; font-size:1.2rem;"></i> تصفح المصحف كاملاً
+            </a>
         </div>
 
-        <!-- 7. سجل الدعاء (حائط الرحمات) -->
+        <!-- 7. سجل الدعاء -->
         <div class="card">
             <h2><i class="fas fa-pen-fancy"></i> سجل الدعاء والذكريات</h2>
             <p style="font-size:0.85rem; opacity:0.8; margin-bottom:10px;">اكتب دعوة أو موقفاً طيباً تتذكره للوالد.</p>
@@ -177,7 +181,7 @@
             <div class="dua-list" id="duaList"></div>
         </div>
 
-        <!-- 8. الأذكار والسبحة -->
+        <!-- 8. الأذكار والسبحة (زرار الصلاة على النبي رجع) -->
         <div class="card">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                 <h2><i class="fas fa-fingerprint"></i> السبحة والأذكار</h2>
@@ -193,6 +197,7 @@
                 <button onclick="setZekr('أستغفر الله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">أستغفر الله</button>
                 <button onclick="setZekr('الحمد لله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الحمد لله</button>
                 <button onclick="setZekr('لا حول ولا قوة إلا بالله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الحوقلة</button>
+                <button onclick="setZekr('اللهم صل على محمد ﷺ')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الصلاة على النبي</button>
             </div>
 
             <div class="grid-2">
@@ -285,7 +290,7 @@
             document.getElementById('modal').classList.add('active');
         }
 
-        // باقي الوظائف (الجمعة، الثيم، الختمة، السور، الأذكار، السبحة، إلخ)
+        // باقي الوظائف
         window.onload = function() {
             if (new Date().getDay() === 5) document.getElementById('fridayBanner').style.display = 'block';
             renderKhatmah(); renderDuas();
@@ -367,3 +372,4 @@
 </html>
 
 
+ 
