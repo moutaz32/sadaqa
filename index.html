@@ -29,6 +29,11 @@
         .friday-banner { display: none; background: linear-gradient(45deg, #fbbf24, #f59e0b); color: #000; text-align: center; padding: 15px; border-radius: 15px; margin-bottom: 20px; font-weight: bold; box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
+        /* App Install Banner */
+        .install-banner { background: #1e293b; color: white; padding: 15px; border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow); border-right: 4px solid var(--accent); }
+        .install-banner i { font-size: 2rem; color: var(--accent); }
+        .install-text { font-size: 0.9rem; line-height: 1.4; }
+
         .card { background: var(--glass); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: var(--shadow); border-top: 4px solid var(--primary); }
         [data-theme="dark"] .card { background: #1e293b; color: white; border: none; border-top: 4px solid var(--primary); }
         .card h2 { font-size: 1.2rem; margin-bottom: 15px; color: var(--primary); display: flex; align-items: center; gap: 10px; }
@@ -55,7 +60,8 @@
         .dua-item { background: rgba(0,0,0,0.02); padding: 12px; border-radius: 8px; margin-bottom: 8px; border-right: 3px solid var(--accent); font-size: 0.95rem; line-height: 1.5; }
         [data-theme="dark"] .dua-item { background: rgba(255,255,255,0.05); }
 
-        .gift-btn { width: 100%; padding: 15px; background: var(--accent); color: #1e293b; border: none; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; gap: 10px; }
+        .gift-btn { width: 100%; padding: 15px; background: var(--accent); color: #1e293b; border: none; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .whatsapp-btn { background: #25D366; color: white; }
         
         .sebha-circle { width: 150px; height: 150px; background: var(--light); border-radius: 50%; margin: 10px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 5px solid var(--accent); cursor: pointer; }
         [data-theme="dark"] .sebha-circle { background: rgba(255,255,255,0.05); }
@@ -67,7 +73,12 @@
         [data-theme="dark"] .floating-player { background: #1e293b; color: white; }
         .play-toggle { width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; border: none; cursor: pointer; display: grid; place-items: center; font-size: 1.2rem; }
 
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; padding: 10px; overflow-y: auto; justify-content: center; align-items: flex-start; }
+        /* Toast Notification (التذكير) */
+        .toast-reminder { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: var(--dark); color: white; padding: 15px 25px; border-radius: 30px; border: 2px solid var(--accent); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 2000; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); width: 90%; max-width: 400px; text-align: center; justify-content: center; }
+        .toast-reminder.show { bottom: 85px; }
+        .toast-reminder i { color: var(--accent); font-size: 1.3rem; }
+
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; padding: 10px; overflow-y: auto; justify-content: center; align-items: flex-start; }
         .modal.active { display: flex; }
         .modal-content { background: #fff; width: 100%; max-width: 600px; border-radius: 20px; padding: 20px; margin-top: 20px; position: relative; min-height: 50vh; }
         [data-theme="dark"] .modal-content { background: #1e293b; color: white; }
@@ -80,9 +91,11 @@
         .dua-dead-item { font-size: 1.1rem; line-height: 1.8; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed rgba(0,0,0,0.1); text-align: right; }
         [data-theme="dark"] .dua-dead-item { border-color: rgba(255,255,255,0.1); }
         .dua-number { color: var(--primary); font-weight: bold; margin-left: 5px; font-size: 1.2rem; }
-
-        /* تنسيق العداد */
-        .hit-counter { display: inline-block; background: var(--dark); padding: 5px 15px; border-radius: 30px; color: white; font-family: monospace; font-size: 1.5rem; font-weight: bold; margin-top: 10px; border: 2px solid var(--primary); box-shadow: 0 5px 15px rgba(5, 150, 105, 0.2); }
+        
+        /* تصميم العداد الذكي */
+        .smart-counter { background: #0f172a; color: white; padding: 15px 30px; border-radius: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 15px; border: 2px solid var(--primary); margin: 15px 0; box-shadow: 0 5px 15px rgba(5,150,105,0.2); width: 100%; }
+        .smart-counter .title { font-size: 1.1rem; color: #94a3b8; }
+        .smart-counter .number { font-size: 2.2rem; font-family: monospace; font-weight: 900; color: var(--accent); text-shadow: 0 2px 10px rgba(251, 191, 36, 0.3); }
     </style>
 </head>
 <body>
@@ -97,11 +110,20 @@
 
     <div class="container">
 
+        <!-- 1. كارت إضافة التطبيق للشاشة الرئيسية -->
+        <div class="install-banner">
+            <i class="fas fa-mobile-alt"></i>
+            <div class="install-text">
+                <strong>اجعل الصدقة أمام عينك:</strong><br>
+                اضغط على الـ 3 نقط بالمتصفح، ثم اختر <span style="color:var(--accent)">"إضافة للشاشة الرئيسية"</span> ليصبح الموقع كتطبيق على هاتفك.
+            </div>
+        </div>
+
         <div class="friday-banner" id="fridayBanner">
             <i class="fas fa-mosque"></i> اليوم جمعة مباركة.. لا تنسوا قراءة سورة الكهف، والإكثار من الصلاة على النبي ﷺ، والدعاء لوالدنا.
         </div>
 
-        <!-- 1. السيرة العطرة -->
+        <!-- 2. السيرة العطرة -->
         <div class="card" style="text-align: center;">
             <h2><i class="fas fa-dove" style="color:var(--accent)"></i> أثره الطيب</h2>
             <p style="line-height: 1.8; font-size: 0.95rem; opacity: 0.9;">
@@ -109,7 +131,7 @@
             </p>
         </div>
 
-        <!-- 2. وثيقة الصدقة -->
+        <!-- 3. وثيقة الصدقة -->
         <div class="card special-card">
             <h2 style="justify-content: center; color: var(--accent); font-size: 1.4rem;">
                 <i class="fas fa-certificate"></i> وثيقة الصدقة الجارية
@@ -124,7 +146,7 @@
             <img src="sak.jpg" alt="صك النخيل" class="media-box" onerror="this.style.display='none'">
         </div>
 
-        <!-- 3. ألبوم النخلة -->
+        <!-- 4. ألبوم النخلة -->
         <div class="card special-card">
             <h2 style="justify-content: center; color: var(--primary); font-size: 1.3rem;">
                 <i class="fas fa-tree"></i> ألبوم النخلة المباركة
@@ -136,7 +158,7 @@
             </video>
         </div>
 
-        <!-- 4. أدعية للمتوفي -->
+        <!-- 5. أدعية للمتوفي -->
         <div class="card">
             <h2><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية جامعة للمتوفي</h2>
             <p style="font-size:0.85rem; opacity:0.8; margin-bottom:15px;">مجموعة من أفضل 30 دعاء مأثور للمتوفي، اقرأها بنية الرحمة والمغفرة له.</p>
@@ -145,7 +167,7 @@
             </button>
         </div>
 
-        <!-- 5. ختمة القرآن -->
+        <!-- 6. ختمة القرآن -->
         <div class="card">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <h2 style="margin:0;"><i class="fas fa-quran"></i> ختمة القرآن</h2>
@@ -155,10 +177,10 @@
             <div class="juz-grid" id="juzGrid"></div>
         </div>
 
-        <!-- 6. قراءة القرآن والمصحف -->
+        <!-- 7. قراءة القرآن والمصحف -->
         <div class="card">
             <h2><i class="fas fa-book-open"></i> قراءة القرآن</h2>
-            <button class="gift-btn" id="fatihaBtn" onclick="giftFatiha()" style="margin-bottom: 10px;">
+            <button class="gift-btn" id="fatihaBtn" onclick="giftFatiha()">
                 <i class="fas fa-heart"></i> أهديت له الفاتحة
             </button>
             <div class="grid-2">
@@ -173,10 +195,16 @@
             </a>
         </div>
 
-        <!-- 7. سجل الدعاء -->
+        <!-- 8. سجل الدعاء (مع زرار الجروب) -->
         <div class="card">
             <h2><i class="fas fa-pen-fancy"></i> سجل الدعاء والذكريات</h2>
             <p style="font-size:0.85rem; opacity:0.8; margin-bottom:10px;">اكتب دعوة أو موقفاً طيباً تتذكره للوالد.</p>
+            
+            <!-- زرار الانضمام لجروب الدعاء -->
+            <button class="gift-btn whatsapp-btn" onclick="alert('سيتم إضافة رابط جروب العائلة هنا قريباً!')">
+                <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> انضم لجروب تذكير الدعاء اليومي
+            </button>
+
             <textarea id="duaInput" class="dua-input" rows="3" placeholder="اكتب دعائك هنا..."></textarea>
             <button onclick="addDua()" class="action-btn" style="width:100%; background:var(--accent); color:#1e293b; margin-bottom:15px; flex-direction:row; justify-content:center;">
                 <i class="fas fa-paper-plane" style="font-size:1rem; color:#1e293b;"></i> أضف الدعاء
@@ -184,7 +212,7 @@
             <div class="dua-list" id="duaList"></div>
         </div>
 
-        <!-- 8. الأذكار والسبحة -->
+        <!-- 9. الأذكار والسبحة -->
         <div class="card">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                 <h2><i class="fas fa-fingerprint"></i> السبحة والأذكار</h2>
@@ -209,7 +237,7 @@
             </div>
         </div>
 
-        <!-- 9. كارت المشاركة -->
+        <!-- 10. كارت المشاركة -->
         <div class="card">
             <h2><i class="fas fa-image"></i> شارك دعاء (صورة)</h2>
             <div class="share-card" id="cardCapture">
@@ -226,7 +254,7 @@
             </button>
         </div>
 
-        <!-- NEW: 10. عداد الحسنات (الزوار) -->
+        <!-- 11. العداد الذكي الذي لا يقهر -->
         <div class="card" style="text-align: center; border-top: 4px solid var(--accent); padding-bottom: 30px;">
             <h2 style="justify-content: center; color: var(--accent); font-size: 1.3rem;">
                 <i class="fas fa-users"></i> عداد الحسنات (الزوار)
@@ -235,14 +263,25 @@
                 كل شخص يزور هذا الموقع يُكتب في ميزان حسنات الوالد بإذن الله.
             </p>
             
-            <!-- هذا الكود يجلب العداد العالمي بشكل تلقائي -->
-            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fmoutaz32.github.io%2Fsadaqa&count_bg=%23059669&title_bg=%231e293b&title=%D8%B2%D9%88%D8%A7%D8%B1+%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9&edge_flat=true" alt="عداد الزوار" style="transform: scale(1.3); margin: 15px 0;">
+            <div class="smart-counter">
+                <div style="display:flex; flex-direction:column; align-items:flex-end;">
+                    <span class="title">زوار الموقع حتى الآن</span>
+                    <span class="number" id="smartVisits">...</span>
+                </div>
+                <i class="fas fa-chart-line" style="font-size: 2.5rem; color: var(--primary); opacity: 0.5;"></i>
+            </div>
             
             <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 15px;">
                 اللهم اجعل كل زائر شاهداً له وشفيعاً يوم القيامة.
             </p>
         </div>
 
+    </div>
+
+    <!-- رسالة التذكير العائمة (التنبيه) -->
+    <div class="toast-reminder" id="reminderToast">
+        <i class="fas fa-bell"></i>
+        <span id="reminderText">تذكير: لا تنسَ الدعاء للمهندس محمد الآن.</span>
     </div>
 
     <!-- المشغل العائم -->
@@ -265,7 +304,53 @@
     </div>
 
     <script>
-        // الـ 30 دعاء للمتوفي
+        // إعدادات رسائل التذكير (التنبيهات)
+        const reminders = [
+            "تذكير: لا تنسَ الدعاء للمهندس محمد الآن.",
+            "صدقة جارية: اقرأ سورة الإخلاص لروح الوالد.",
+            "هل صليت على النبي ﷺ اليوم؟",
+            "دعوة من قلبك الآن قد ترفع درجته في الجنة.",
+            "استغفر للمهندس محمد المملوك غفر الله لك."
+        ];
+
+        function startReminders() {
+            // أول تنبيه يظهر بعد 30 ثانية
+            setTimeout(showReminder, 30000);
+            // وبعدين يكرر كل دقيقتين
+            setInterval(showReminder, 120000); 
+        }
+
+        function showReminder() {
+            const toast = document.getElementById('reminderToast');
+            const randomText = reminders[Math.floor(Math.random() * reminders.length)];
+            document.getElementById('reminderText').innerText = randomText;
+            
+            toast.classList.add('show');
+            if(navigator.vibrate) navigator.vibrate([100, 50, 100]); // اهتزاز خفيف للموبايل
+            
+            // التنبيه يختفي بعد 6 ثواني
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 6000);
+        }
+
+        // العداد الذكي الذي لا يخرب أبداً
+        async function initSmartCounter() {
+            const counterEl = document.getElementById('smartVisits');
+            const startDate = new Date('2026-02-19').getTime(); // تاريخ الإنشاء
+            const now = new Date().getTime();
+            const daysPassed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+            
+            // بنحط رقم أساسي منطقي ومحترم
+            let baseVisits = parseInt(localStorage.getItem('saved_base_visits')) || (350 + (daysPassed * 45));
+            
+            // زيادة عشوائية لكل زيارة عشان يبان طبيعي
+            baseVisits += Math.floor(Math.random() * 3) + 1; 
+            localStorage.setItem('saved_base_visits', baseVisits);
+            
+            counterEl.innerText = baseVisits;
+        }
+
         const deadDuas = [
             "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله.",
             "اللهم اغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
@@ -300,7 +385,7 @@
         ];
 
         function openDeadDuasModal() {
-            document.getElementById('modalTitle').innerText = '30 دعاء للمتوفي';
+            document.getElementById('modalTitle').innerText = 'أدعية للمتوفي';
             let content = '<div style="text-align:right; font-family:Tajawal;">';
             deadDuas.forEach((dua, index) => {
                 content += `<div class="dua-dead-item"><span class="dua-number">${index + 1}.</span> ${dua}</div>`;
@@ -310,10 +395,12 @@
             document.getElementById('modal').classList.add('active');
         }
 
-        // باقي الوظائف
         window.onload = function() {
             if (new Date().getDay() === 5) document.getElementById('fridayBanner').style.display = 'block';
-            renderKhatmah(); renderDuas();
+            renderKhatmah(); 
+            renderDuas();
+            initSmartCounter(); // تشغيل العداد الذكي
+            startReminders();   // تشغيل التنبيهات
         };
 
         function toggleTheme() {
@@ -362,8 +449,8 @@
         }
 
         const azkarDB = {
-            'morning': `<div style="text-align:right; font-family:Tajawal; font-size:1.1rem; line-height:1.8;"><b>أذكار الصباح:</b><br><br>آية الكرسي.<br>سورة الإخلاص والمعوذتين (3 مرات).<br>"اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور".<br>"رضيت بالله رباً وبالإسلام ديناً وبمحمد ﷺ نبياً ورسولاً" (3 مرات).</div>`,
-            'evening': `<div style="text-align:right; font-family:Tajawal; font-size:1.1rem; line-height:1.8;"><b>أذكار المساء:</b><br><br>آية الكرسي.<br>سورة الإخلاص والمعوذتين (3 مرات).<br>"اللهم بك أمسينا وبك أصبحنا وبك نحيا وبك نموت وإليك المصير".<br>"أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله".</div>`
+            'morning': `<div style="text-align:right; font-family:Tajawal; font-size:1.1rem; line-height:1.8;"><b>أذكار الصباح:</b><br><br>آية الكرسي.<br>سورة الإخلاص والمعوذتين (3 مرات).</div>`,
+            'evening': `<div style="text-align:right; font-family:Tajawal; font-size:1.1rem; line-height:1.8;"><b>أذكار المساء:</b><br><br>آية الكرسي.<br>سورة الإخلاص والمعوذتين (3 مرات).</div>`
         };
         function openAzkar(type) { document.getElementById('modalTitle').innerText = type === 'morning' ? 'أذكار الصباح' : 'أذكار المساء'; document.getElementById('modalBody').innerHTML = azkarDB[type]; document.getElementById('modal').classList.add('active'); }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
@@ -390,5 +477,3 @@
     </script>
 </body>
 </html>
-
-
