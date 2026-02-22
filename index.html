@@ -86,12 +86,47 @@
         [data-theme="dark"] .dua-dead-item { border-color: rgba(255,255,255,0.1); }
         .dua-number { color: var(--primary); font-weight: bold; margin-left: 5px; font-size: 1.2rem; }
 
-        .charity-box { background: rgba(5, 150, 105, 0.05); border: 1px solid var(--primary); border-radius: 12px; padding: 15px; text-align: center; display: block; text-decoration: none; color: inherit; transition: 0.3s; }
-        [data-theme="dark"] .charity-box { background: rgba(255,255,255,0.05); }
-        .charity-box img { width: 50px; height: 50px; object-fit: contain; margin-bottom: 10px; }
+        .charity-box { background: rgba(5, 150, 105, 0.05); border: 1px solid var(--primary); border-radius: 12px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; user-select: none; -webkit-user-select: none; }
+        [data-theme="dark"] .charity-box { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
+        .charity-box:active { transform: scale(0.95); background: rgba(5, 150, 105, 0.15); }
         
         .ayah-box { background: #f8fafc; border: 2px dashed var(--accent); padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; color: #333; }
         [data-theme="dark"] .ayah-box { background: #0f172a; color: #fff; }
+
+        /* تصميم الإشعار الداخلي (Toast) */
+        .toast-notification {
+            position: fixed;
+            bottom: 85px; /* يظهر فوق مشغل الراديو */
+            left: 50%;
+            transform: translateX(-50%) translateY(200%);
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            width: 90%;
+            max-width: 400px;
+        }
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast-close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+        }
     </style>
 </head>
 <body>
@@ -118,35 +153,35 @@
             </p>
         </div>
 
-        <!-- 2. أبواب الخير (جديد) -->
+        <!-- 2. أبواب الخير (حصالة الصدقات) -->
         <div class="card special-card" style="border-top: 4px solid #ef4444 !important;">
             <h2 style="justify-content: center; color: #ef4444; font-size: 1.4rem;">
                 <i class="fas fa-hand-holding-heart"></i> أبواب الخير (حصالة الصدقات)
             </h2>
             <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 15px;">
-                "تصدق ولو بالقليل بنية خالصة عن الوالد رحمه الله".. روابط رسمية وآمنة للتبرع.
+                "تصدق ولو بالقليل بنية خالصة عن الوالد رحمه الله".. اضغط على المؤسسة للتبرع الرسمي.
             </p>
             <div class="grid-2">
-                <a href="https://www.57357.org/ar/donate/" target="_blank" class="charity-box">
-                    <i class="fas fa-hospital" style="font-size: 2rem; color: #ef4444; margin-bottom: 10px;"></i>
-                    <div style="font-weight: bold; font-size: 0.9rem;">مستشفى 57357</div>
-                </a>
-                <a href="https://myf-egypt.org/" target="_blank" class="charity-box">
-                    <i class="fas fa-heartbeat" style="font-size: 2rem; color: #ef4444; margin-bottom: 10px;"></i>
-                    <div style="font-weight: bold; font-size: 0.9rem;">مجدي يعقوب للقلب</div>
-                </a>
-                <a href="https://dar-alorman.com/Projects/12/water" target="_blank" class="charity-box">
-                    <i class="fas fa-tint" style="font-size: 2rem; color: #3b82f6; margin-bottom: 10px;"></i>
-                    <div style="font-weight: bold; font-size: 0.9rem;">وصلة مياه (الأورمان)</div>
-                </a>
-                <a href="https://mersal-ngo.org/Donate" target="_blank" class="charity-box">
-                    <i class="fas fa-medkit" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
-                    <div style="font-weight: bold; font-size: 0.9rem;">مؤسسة مرسال</div>
-                </a>
+                <div onclick="window.open('https://www.57357.org/ar/donate/', '_blank')" class="charity-box">
+                    <i class="fas fa-hospital" style="font-size: 2.2rem; color: #ef4444; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.95rem;">مستشفى 57357</div>
+                </div>
+                <div onclick="window.open('https://myf-egypt.org/', '_blank')" class="charity-box">
+                    <i class="fas fa-heartbeat" style="font-size: 2.2rem; color: #ef4444; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.95rem;">مجدي يعقوب للقلب</div>
+                </div>
+                <div onclick="window.open('https://dar-alorman.com/Projects/12/water', '_blank')" class="charity-box">
+                    <i class="fas fa-tint" style="font-size: 2.2rem; color: #3b82f6; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.95rem;">وصلة مياه (الأورمان)</div>
+                </div>
+                <div onclick="window.open('https://mersal-ngo.org/Donate', '_blank')" class="charity-box">
+                    <i class="fas fa-medkit" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.95rem;">مؤسسة مرسال</div>
+                </div>
             </div>
         </div>
 
-        <!-- 3. رسالة من القرآن (جديد) -->
+        <!-- 3. رسالة من القرآن -->
         <div class="card">
             <h2><i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة لك اليوم</h2>
             <div class="ayah-box" id="randomAyahText">
@@ -218,7 +253,7 @@
             </a>
         </div>
 
-        <!-- 8. المسبحتين (جديد: مسبحة الصلاة على النبي) -->
+        <!-- 8. المسبحتين -->
         <div class="card">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                 <h2><i class="fas fa-fingerprint"></i> الأذكار ومسبحة النبي ﷺ</h2>
@@ -312,6 +347,15 @@
         <audio id="radio" src="https://n0e.radiojar.com/8s5u5tpdtwzuv?rj-ttl=5&rj-tok=AAABjF_2tEIA2Bw1g4l5qf7mQw"></audio>
     </div>
 
+    <!-- الإشعار الداخلي (Toast) -->
+    <div class="toast-notification" id="localToast">
+        <i class="fas fa-praying-hands" style="color: var(--accent); font-size: 1.8rem;"></i>
+        <div style="flex-grow: 1; font-size: 0.95rem; line-height: 1.5; font-weight: bold; text-align: right;">
+            لا تنسَ الدعاء الآن للمهندس محمد المملوك بالرحمة والمغفرة.
+        </div>
+        <button class="toast-close" onclick="closeToast()"><i class="fas fa-times"></i></button>
+    </div>
+
     <!-- نافذة المحتوى -->
     <div id="modal" class="modal">
         <div class="modal-content">
@@ -386,7 +430,24 @@
         window.onload = function() {
             if (new Date().getDay() === 5) document.getElementById('fridayBanner').style.display = 'block';
             renderKhatmah(); renderDuas(); changeAyah();
+            
+            // نظام الإشعار الداخلي الذكي
+            setTimeout(() => {
+                showToast(); // أول إشعار بعد 15 ثانية للتجربة
+                setInterval(showToast, 3 * 60 * 1000); // تكرار الإشعار كل 3 دقائق
+            }, 15000);
         };
+
+        // دوال الإشعار الداخلي
+        function showToast() {
+            const toast = document.getElementById('localToast');
+            toast.classList.add('show');
+            if(navigator.vibrate) navigator.vibrate([100, 50, 100]); // اهتزاز خفيف للتنبيه
+            setTimeout(() => { closeToast(); }, 8000); // يختفي لوحده بعد 8 ثواني
+        }
+        function closeToast() {
+            document.getElementById('localToast').classList.remove('show');
+        }
 
         function toggleTheme() {
             const body = document.body;
