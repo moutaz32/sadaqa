@@ -98,6 +98,21 @@
         .toast-close { background: rgba(255,255,255,0.1); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; }
         
         .cloud-badge { display: inline-block; font-size: 0.8rem; color: #10b981; margin-top: 5px; background: rgba(16, 185, 129, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #10b981; }
+
+        /* نافذة دعاء اليوم المنبثقة */
+        .daily-modal-content {
+            background: linear-gradient(135deg, #064e3b, #0f172a);
+            color: white;
+            text-align: center;
+            border: 4px solid var(--accent);
+            border-radius: 25px;
+            padding: 30px 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .daily-modal-content i.fa-moon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; }
+        .daily-modal-content h2 { color: var(--accent); margin-bottom: 20px; font-family: 'Amiri', serif; font-size: 2rem; }
+        .daily-dua-text { font-size: 1.3rem; line-height: 1.8; margin-bottom: 25px; font-family: 'Tajawal', sans-serif; }
+        .btn-close-daily { background: var(--accent); color: #0f172a; border: none; padding: 10px 30px; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
@@ -247,7 +262,6 @@
             </div>
         </div>
 
-        <!-- 9. سجل الدعاء (متصل بقاعدة البيانات الحقيقية) -->
         <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <h2><i class="fas fa-pen-fancy"></i> سجل الدعاء العام</h2>
@@ -260,7 +274,6 @@
             <div class="dua-list" id="duaList"></div>
         </div>
 
-        <!-- 10. كارت المشاركة -->
         <div class="card" style="margin-bottom: 30px;">
             <h2><i class="fas fa-image"></i> شارك دعاء (صورة)</h2>
             <div class="share-card" id="cardCapture">
@@ -298,6 +311,7 @@
         <p style="margin-top:30px; color:#f59e0b; font-size:0.9rem;">نسألكم الدعاء له بالرحمة والمغفرة</p>
     </div>
 
+    <!-- مشغل الإذاعة -->
     <div class="floating-player">
         <div style="display:flex; align-items:center; gap:10px;">
             <div style="width:10px; height:10px; background:red; border-radius:50%; animation:blink 1s infinite;"></div>
@@ -307,6 +321,7 @@
         <audio id="radio" src="https://n0e.radiojar.com/8s5u5tpdtwzuv?rj-ttl=5&rj-tok=AAABjF_2tEIA2Bw1g4l5qf7mQw"></audio>
     </div>
 
+    <!-- إشعار متكرر -->
     <div class="toast-notification" id="localToast">
         <i class="fas fa-praying-hands" style="color: var(--accent); font-size: 1.8rem;"></i>
         <div style="flex-grow: 1; font-size: 0.95rem; line-height: 1.5; font-weight: bold; text-align: right;">
@@ -315,6 +330,7 @@
         <button class="toast-close" onclick="closeToast()"><i class="fas fa-times"></i></button>
     </div>
 
+    <!-- النافذة العادية (قرآن وأدعية) -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="close-modal" onclick="closeModal()">&times;</div>
@@ -323,12 +339,23 @@
         </div>
     </div>
 
-    <!-- سكريبت الموقع العادي -->
+    <!-- نافذة دعاء اليوم التلقائية -->
+    <div id="dailyModal" class="modal">
+        <div class="modal-content daily-modal-content">
+            <i class="fas fa-moon"></i>
+            <h2>دعاء اليوم للمتوفي</h2>
+            <div id="dailyDuaText" class="daily-dua-text"></div>
+            <button class="btn-close-daily" onclick="closeDailyModal()">آمين.. إغلاق</button>
+        </div>
+    </div>
+
+    <!-- سكريبت الموقع -->
     <script>
+        // آيات للرسالة العشوائية
         const ayahs = [ "وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ", "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا * إِنَّ مَعَ الْعُسْرِ يُسْرًا", "وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ", "وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ", "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ", "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا", "سَيَجْعَلُ اللَّهُ بَعْدَ عُسْرٍ يُسْرًا" ];
         function changeAyah() { document.getElementById('randomAyahText').innerText = `"${ayahs[Math.floor(Math.random() * ayahs.length)]}"`; }
 
-        // هنا تم استرجاع الـ 30 دعاء كاملين 
+        // قائمة الـ 30 دعاء 
         const deadDuas = [
             "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله.",
             "اللهم اغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
@@ -362,11 +389,34 @@
             "اللهم اجمعنا به وبمن نحب في الفردوس الأعلى من الجنة يا رب العالمين."
         ];
 
+        // منطق دعاء اليوم
+        function checkDailyDua() {
+            const today = new Date().toDateString(); // تاريخ اليوم
+            const lastVisit = localStorage.getItem('last_daily_dua_date');
+            
+            // لو الزائر مفتحش الموقع النهاردة، أو دي أول مرة ليه
+            if (lastVisit !== today) {
+                const randomDua = deadDuas[Math.floor(Math.random() * deadDuas.length)];
+                document.getElementById('dailyDuaText').innerText = `"${randomDua}"`;
+                document.getElementById('dailyModal').classList.add('active');
+                
+                // نسجل إنه شاف دعاء النهاردة عشان ميطلعلوش تاني لو عمل ريفريش
+                localStorage.setItem('last_daily_dua_date', today);
+            }
+        }
+        function closeDailyModal() {
+            document.getElementById('dailyModal').classList.remove('active');
+        }
+
         function openDeadDuasModal() { document.getElementById('modalTitle').innerText = 'أدعية للمتوفي'; let content = '<div style="text-align:right; font-family:Tajawal;">'; deadDuas.forEach((dua, index) => { content += `<div class="dua-dead-item"><span class="dua-number">${index + 1}.</span> ${dua}</div>`; }); content += '</div>'; document.getElementById('modalBody').innerHTML = content; document.getElementById('modal').classList.add('active'); }
 
         window.onload = function() {
             if (new Date().getDay() === 5) document.getElementById('fridayBanner').style.display = 'block';
             renderKhatmah(); changeAyah();
+            
+            // تشغيل دعاء اليوم فوراً أول ما الموقع يفتح
+            checkDailyDua();
+
             setTimeout(() => { showToast(); setInterval(showToast, 3 * 60 * 1000); }, 15000);
         };
 
@@ -400,12 +450,11 @@
         function downloadDuaBooklet() { downloadImage('bookletCapture', 'Dua_Booklet_Haj_Mohamed.png'); }
     </script>
 
-    <!-- سكريبت قاعدة البيانات (Firebase) الخاص بك -->
+    <!-- سكريبت قاعدة البيانات (Firebase) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // بيانات الربط الخاصة بـ (سيرفر معتز)
         const firebaseConfig = {
           apiKey: "AIzaSyAbzVBetgxuzIhf6gHhsqdK_CbkUERIgus",
           authDomain: "sadaqa-640e8.firebaseapp.com",
@@ -418,13 +467,12 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // جلب الأدعية الحية من السيرفر
         try {
             const duasRef = collection(db, 'duas');
             onSnapshot(duasRef, (snapshot) => {
                 const duas = [];
                 snapshot.forEach((doc) => { duas.push({ id: doc.id, ...doc.data() }); });
-                duas.sort((a, b) => b.timestamp - a.timestamp); // ترتيب من الأحدث
+                duas.sort((a, b) => b.timestamp - a.timestamp); 
                 
                 const list = document.getElementById('duaList');
                 list.innerHTML = '';
@@ -441,22 +489,17 @@
             });
         } catch(e) { console.error(e); }
 
-        // دالة إضافة الدعاء للسيرفر
         window.addGlobalDua = async function() {
             const input = document.getElementById('duaInput');
             const text = input.value.trim();
             if (text === '') return;
             
-            // إضافة الدعاء
             try {
-                input.value = ''; // تفريغ المربع
-                await addDoc(collection(db, 'duas'), { 
-                    text: text, 
-                    timestamp: Date.now() 
-                });
+                input.value = ''; 
+                await addDoc(collection(db, 'duas'), { text: text, timestamp: Date.now() });
                 if(navigator.vibrate) navigator.vibrate(50);
             } catch (error) { 
-                alert("لم يتم الإرسال.. تأكد من عمل خطوة (تفعيل قاعدة البيانات) في فايربيس");
+                alert("لم يتم الإرسال.. تأكد من الاتصال بالإنترنت");
                 input.value = text;
             }
         }
