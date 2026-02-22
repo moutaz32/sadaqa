@@ -7,22 +7,6 @@
     <meta name="theme-color" content="#1e293b">
     <title>نور | م. محمد المملوك</title>
     
-    <!-- OneSignal Notifications Setup -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "1c94339d-b2b1-4234-8a19-64db05378cfd",
-          safari_web_id: "web.onesignal.auto.1042799c-611a-4720-96f7-93e1554589d3",
-          notifyButton: {
-            enable: true, /* إضافة زر صغير يظهر للناس لإعادة الاشتراك */
-          },
-          allowLocalhostAsSecureOrigin: true,
-        });
-      });
-    </script>
-
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -56,9 +40,10 @@
         [data-theme="dark"] .family-dedication { background: rgba(251, 191, 36, 0.1); border-color: var(--accent); }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .action-btn { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: bold; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.95rem; border: none; text-decoration: none; }
+        .action-btn { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: bold; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.95rem; border: none; text-decoration: none; transition: 0.2s; }
         [data-theme="dark"] .action-btn { background: rgba(255,255,255,0.05); color: white; }
         .action-btn i { font-size: 1.5rem; color: var(--primary); }
+        .action-btn:active { transform: scale(0.95); }
         
         .juz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 8px; margin-bottom: 15px; }
         .juz-btn { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; text-align: center; font-weight: bold; cursor: pointer; transition: 0.3s; color: inherit; }
@@ -71,11 +56,15 @@
         .dua-item { background: rgba(0,0,0,0.02); padding: 12px; border-radius: 8px; margin-bottom: 8px; border-right: 3px solid var(--accent); font-size: 0.95rem; line-height: 1.5; }
         [data-theme="dark"] .dua-item { background: rgba(255,255,255,0.05); }
 
-        .gift-btn { width: 100%; padding: 15px; background: var(--accent); color: #1e293b; border: none; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; gap: 10px; }
+        .gift-btn { width: 100%; padding: 15px; background: var(--accent); color: #1e293b; border: none; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; gap: 10px; transition: 0.2s; }
+        .gift-btn:active { transform: scale(0.98); }
         
-        .sebha-circle { width: 150px; height: 150px; background: var(--light); border-radius: 50%; margin: 10px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 5px solid var(--accent); cursor: pointer; }
+        .sebha-circle { width: 130px; height: 130px; background: var(--light); border-radius: 50%; margin: 10px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px solid var(--primary); cursor: pointer; }
         [data-theme="dark"] .sebha-circle { background: rgba(255,255,255,0.05); }
-        .counter { font-size: 3.5rem; font-weight: 800; color: var(--primary); }
+        .counter { font-size: 3rem; font-weight: 800; color: var(--primary); }
+
+        .prophet-circle { border-color: #3b82f6; }
+        .prophet-circle .counter { color: #3b82f6; }
 
         .share-card { background: #1e293b; color: white; padding: 25px; border-radius: 15px; text-align: center; border: 2px solid var(--accent); margin-bottom: 15px; }
 
@@ -96,6 +85,13 @@
         .dua-dead-item { font-size: 1.1rem; line-height: 1.8; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed rgba(0,0,0,0.1); text-align: right; }
         [data-theme="dark"] .dua-dead-item { border-color: rgba(255,255,255,0.1); }
         .dua-number { color: var(--primary); font-weight: bold; margin-left: 5px; font-size: 1.2rem; }
+
+        .charity-box { background: rgba(5, 150, 105, 0.05); border: 1px solid var(--primary); border-radius: 12px; padding: 15px; text-align: center; display: block; text-decoration: none; color: inherit; transition: 0.3s; }
+        [data-theme="dark"] .charity-box { background: rgba(255,255,255,0.05); }
+        .charity-box img { width: 50px; height: 50px; object-fit: contain; margin-bottom: 10px; }
+        
+        .ayah-box { background: #f8fafc; border: 2px dashed var(--accent); padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; color: #333; }
+        [data-theme="dark"] .ayah-box { background: #0f172a; color: #fff; }
     </style>
 </head>
 <body>
@@ -122,43 +118,80 @@
             </p>
         </div>
 
-        <!-- 2. وثيقة الصدقة -->
+        <!-- 2. أبواب الخير (جديد) -->
+        <div class="card special-card" style="border-top: 4px solid #ef4444 !important;">
+            <h2 style="justify-content: center; color: #ef4444; font-size: 1.4rem;">
+                <i class="fas fa-hand-holding-heart"></i> أبواب الخير (حصالة الصدقات)
+            </h2>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 15px;">
+                "تصدق ولو بالقليل بنية خالصة عن الوالد رحمه الله".. روابط رسمية وآمنة للتبرع.
+            </p>
+            <div class="grid-2">
+                <a href="https://www.57357.org/ar/donate/" target="_blank" class="charity-box">
+                    <i class="fas fa-hospital" style="font-size: 2rem; color: #ef4444; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.9rem;">مستشفى 57357</div>
+                </a>
+                <a href="https://myf-egypt.org/" target="_blank" class="charity-box">
+                    <i class="fas fa-heartbeat" style="font-size: 2rem; color: #ef4444; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.9rem;">مجدي يعقوب للقلب</div>
+                </a>
+                <a href="https://dar-alorman.com/Projects/12/water" target="_blank" class="charity-box">
+                    <i class="fas fa-tint" style="font-size: 2rem; color: #3b82f6; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.9rem;">وصلة مياه (الأورمان)</div>
+                </a>
+                <a href="https://mersal-ngo.org/Donate" target="_blank" class="charity-box">
+                    <i class="fas fa-medkit" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; font-size: 0.9rem;">مؤسسة مرسال</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. رسالة من القرآن (جديد) -->
+        <div class="card">
+            <h2><i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة لك اليوم</h2>
+            <div class="ayah-box" id="randomAyahText">
+                "وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ"
+            </div>
+            <button class="action-btn" style="width:100%; background:rgba(139, 92, 246, 0.1); color:#8b5cf6; flex-direction:row; justify-content:center;" onclick="changeAyah()">
+                <i class="fas fa-sync-alt" style="color:#8b5cf6"></i> رسالة أخرى
+            </button>
+        </div>
+
+        <!-- 4. وثيقة الصدقة وألبوم النخلة -->
         <div class="card special-card">
             <h2 style="justify-content: center; color: var(--accent); font-size: 1.4rem;">
-                <i class="fas fa-certificate"></i> وثيقة الصدقة الجارية
+                <i class="fas fa-tree"></i> ألبوم النخلة ووثيقة الصدقة
             </h2>
+            <div class="date-badge"><i class="fas fa-calendar-alt"></i> غرة رمضان (19 فبراير 2026)</div>
             <div class="family-dedication">
                 <p style="font-size: 1rem; line-height: 1.8; font-weight: bold;">
                     هذا العمل الصالح مُقدم بفضل الله من:<br>
-                    <span style="color: var(--primary); font-size: 1.2rem;">الزوجة المخلصة، وجميع أبنائه وبناته</span><br>
-                    براً ووفاءً وحباً لروح والدهم الغالي.
+                    <span style="color: var(--primary); font-size: 1.2rem;">الزوجة المخلصة، وجميع أبنائه وبناته</span>
                 </p>
             </div>
             <img src="sak.jpg" alt="صك النخيل" class="media-box" onerror="this.style.display='none'">
-        </div>
-
-        <!-- 3. ألبوم النخلة -->
-        <div class="card special-card">
-            <h2 style="justify-content: center; color: var(--primary); font-size: 1.3rem;">
-                <i class="fas fa-tree"></i> ألبوم النخلة المباركة
-            </h2>
-            <div class="date-badge"><i class="fas fa-calendar-alt"></i> غرة رمضان (19 فبراير 2026)</div>
             <img src="tree.jpg" alt="نخلة الحاج محمد المملوك" class="media-box" onerror="this.style.display='none'">
             <video class="media-box" controls preload="metadata" style="background: #000;">
                 <source src="video.mp4" type="video/mp4">
             </video>
         </div>
 
-        <!-- 4. أدعية للمتوفي -->
+        <!-- 5. أدعية للمتوفي (تحديث بكتيب) -->
         <div class="card">
-            <h2><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية جامعة للمتوفي</h2>
-            <p style="font-size:0.85rem; opacity:0.8; margin-bottom:15px;">مجموعة من أفضل 30 دعاء مأثور للمتوفي، اقرأها بنية الرحمة والمغفرة له.</p>
-            <button class="action-btn" style="width:100%; background:var(--primary); color:white; flex-direction: row; justify-content: center; gap: 10px;" onclick="openDeadDuasModal()">
-                <i class="fas fa-book-reader" style="color:white; font-size: 1.2rem;"></i> قراءة الـ 30 دعاء
-            </button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h2 style="margin:0;"><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية جامعة للمتوفي</h2>
+            </div>
+            <div class="grid-2">
+                <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()">
+                    <i class="fas fa-book-reader" style="color:white; font-size: 1.2rem;"></i> قراءة 30 دعاء
+                </button>
+                <button class="action-btn" style="background:#3b82f6; color:white;" onclick="downloadDuaBooklet()">
+                    <i class="fas fa-download" style="color:white; font-size: 1.2rem;"></i> تحميل الكتيب
+                </button>
+            </div>
         </div>
 
-        <!-- 5. ختمة القرآن -->
+        <!-- 6. ختمة القرآن -->
         <div class="card">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <h2 style="margin:0;"><i class="fas fa-quran"></i> ختمة القرآن</h2>
@@ -168,7 +201,7 @@
             <div class="juz-grid" id="juzGrid"></div>
         </div>
 
-        <!-- 6. قراءة القرآن والمصحف -->
+        <!-- 7. قراءة القرآن -->
         <div class="card">
             <h2><i class="fas fa-book-open"></i> قراءة القرآن</h2>
             <button class="gift-btn" id="fatihaBtn" onclick="giftFatiha()" style="margin-bottom: 10px;">
@@ -180,50 +213,59 @@
                 <button class="action-btn" onclick="fetchSurah(56, 'سورة الواقعة')"><i class="fas fa-leaf" style="color:#22c55e"></i> الواقعة</button>
                 <button class="action-btn" onclick="fetchSurah(18, 'سورة الكهف')"><i class="fas fa-lightbulb" style="color:#eab308"></i> الكهف</button>
             </div>
-            
             <a href="https://quran.com/ar" target="_blank" class="action-btn" style="width:100%; margin-top:10px; background:var(--primary); color:white; flex-direction:row; justify-content:center; gap:10px; text-decoration:none;">
                 <i class="fas fa-book" style="color:white; font-size:1.2rem;"></i> تصفح المصحف كاملاً
             </a>
         </div>
 
-        <!-- 7. سجل الدعاء -->
+        <!-- 8. المسبحتين (جديد: مسبحة الصلاة على النبي) -->
+        <div class="card">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                <h2><i class="fas fa-fingerprint"></i> الأذكار ومسبحة النبي ﷺ</h2>
+                <button onclick="resetSebha()" style="background:none; border:none; color:#ef4444; font-weight:bold;">تصفير</button>
+            </div>
+            
+            <div class="grid-2" style="margin-bottom: 20px;">
+                <!-- مسبحة النبي -->
+                <div style="text-align: center;">
+                    <div class="sebha-circle prophet-circle" onclick="countProphet()">
+                        <span class="counter" id="prophetCounter">0</span>
+                    </div>
+                    <div style="font-weight:bold; color:#3b82f6; font-size: 0.9rem; margin-top: 5px;">الصلاة على النبي</div>
+                </div>
+                <!-- السبحة العادية -->
+                <div style="text-align: center;">
+                    <div class="sebha-circle" onclick="countSebha()">
+                        <span class="counter" id="counter">0</span>
+                    </div>
+                    <div id="zekrName" style="font-weight:bold; color:var(--primary); font-size: 0.9rem; margin-top: 5px;">أستغفر الله</div>
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:center; gap:5px; flex-wrap:wrap; margin-bottom:20px;">
+                <button onclick="setZekr('أستغفر الله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">أستغفر الله</button>
+                <button onclick="setZekr('الحمد لله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الحمد لله</button>
+                <button onclick="setZekr('لا حول ولا قوة إلا بالله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الحوقلة</button>
+            </div>
+
+            <div class="grid-2">
+                <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> الصباح</button>
+                <button class="action-btn" onclick="openAzkar('evening')"><i class="fas fa-moon" style="color:#6366f1"></i> المساء</button>
+            </div>
+        </div>
+
+        <!-- 9. سجل الدعاء -->
         <div class="card">
             <h2><i class="fas fa-pen-fancy"></i> سجل الدعاء والذكريات</h2>
-            <p style="font-size:0.85rem; opacity:0.8; margin-bottom:10px;">اكتب دعوة أو موقفاً طيباً تتذكره للوالد.</p>
-            <textarea id="duaInput" class="dua-input" rows="3" placeholder="اكتب دعائك هنا..."></textarea>
+            <textarea id="duaInput" class="dua-input" rows="3" placeholder="اكتب دعائك أو ذكراياتك هنا..."></textarea>
             <button onclick="addDua()" class="action-btn" style="width:100%; background:var(--accent); color:#1e293b; margin-bottom:15px; flex-direction:row; justify-content:center;">
                 <i class="fas fa-paper-plane" style="font-size:1rem; color:#1e293b;"></i> أضف الدعاء
             </button>
             <div class="dua-list" id="duaList"></div>
         </div>
 
-        <!-- 8. الأذكار والسبحة -->
-        <div class="card">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                <h2><i class="fas fa-fingerprint"></i> السبحة والأذكار</h2>
-                <button onclick="resetSebha()" style="background:none; border:none; color:#ef4444; font-weight:bold;">تصفير السبحة</button>
-            </div>
-            
-            <div class="sebha-circle" onclick="countSebha()">
-                <span class="counter" id="counter">0</span>
-                <span style="font-size:0.8rem; opacity:0.7">اضغط</span>
-            </div>
-            <div id="zekrName" style="text-align:center; font-weight:bold; color:var(--primary); margin:10px 0;">سبحان الله وبحمده</div>
-            <div style="display:flex; justify-content:center; gap:5px; flex-wrap:wrap; margin-bottom:20px;">
-                <button onclick="setZekr('أستغفر الله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">أستغفر الله</button>
-                <button onclick="setZekr('الحمد لله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الحمد لله</button>
-                <button onclick="setZekr('لا حول ولا قوة إلا بالله')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الحوقلة</button>
-                <button onclick="setZekr('اللهم صل على محمد ﷺ')" style="padding:5px 10px; border-radius:5px; border:1px solid #ddd; background:transparent; color:inherit; cursor:pointer;">الصلاة على النبي</button>
-            </div>
-
-            <div class="grid-2">
-                <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> أذكار الصباح</button>
-                <button class="action-btn" onclick="openAzkar('evening')"><i class="fas fa-moon" style="color:#6366f1"></i> أذكار المساء</button>
-            </div>
-        </div>
-
-        <!-- 9. كارت المشاركة -->
-        <div class="card">
+        <!-- 10. كارت المشاركة -->
+        <div class="card" style="margin-bottom: 30px;">
             <h2><i class="fas fa-image"></i> شارك دعاء (صورة)</h2>
             <div class="share-card" id="cardCapture">
                 <div style="font-family:'Amiri'; font-size:1.5rem; color:#f59e0b; margin-bottom:5px;">بسم الله الرحمن الرحيم</div>
@@ -234,34 +276,37 @@
                 </p>
                 <div style="margin-top:15px; font-size:0.8rem; opacity:0.7;">صدقة جارية مقدمة من أسرته</div>
             </div>
-            <button class="action-btn" style="width:100%; background:var(--accent); color:#1e293b; flex-direction:row; justify-content:center;" onclick="downloadImage()">
-                <i class="fas fa-download" style="color:#1e293b"></i> تحميل الصورة
+            <button class="action-btn" style="width:100%; background:var(--accent); color:#1e293b; flex-direction:row; justify-content:center;" onclick="downloadImage('cardCapture', 'Dua_Haj_Mohamed.png')">
+                <i class="fas fa-download" style="color:#1e293b"></i> تحميل الصورة للمشاركة
             </button>
         </div>
 
-        <!-- 10. عداد الحسنات الديجيتال -->
-        <div class="card" style="text-align: center; border-top: 4px solid var(--accent); padding-bottom: 30px;">
-            <h2 style="justify-content: center; color: var(--accent); font-size: 1.3rem;">
-                <i class="fas fa-users"></i> عداد الحسنات (الزوار)
-            </h2>
-            <div style="background: #0f172a; border-radius: 15px; padding: 15px; display: inline-block; border: 2px solid var(--primary); box-shadow: 0 5px 15px rgba(5, 150, 105, 0.2);">
-                <div style="color: var(--accent); font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">
-                    <i class="fas fa-chart-line"></i> زوار الموقع
-                </div>
-                <img src="https://profile-counter.glitch.me/moutaz32_sadaqa/count.svg" alt="عداد الزوار" style="height: 40px;">
-            </div>
-            <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 20px;">
-                اللهم اجعل كل زائر شاهداً له وشفيعاً يوم القيامة.
-            </p>
-        </div>
+    </div>
 
+    <!-- كتيب الدعاء المخفي للتحميل -->
+    <div id="bookletCapture" style="position:absolute; top:-9999px; left:-9999px; background:#1e293b; color:white; padding:40px; width:600px; border-radius:20px; text-align:center; direction:rtl; border:4px solid #f59e0b;">
+        <h1 style="font-family:'Amiri'; color:#f59e0b; margin-bottom:20px;">كتيب الدعاء</h1>
+        <h2 style="font-family:'Tajawal'; margin-bottom:30px;">صدقة جارية عن المهندس محمد المملوك</h2>
+        <div style="font-family:'Tajawal'; text-align:right; font-size:1.2rem; line-height:2;">
+            1. اللهم اغفر له وارحمه وعافه واعف عنه.<br>
+            2. اللهم اجعل قبره روضة من رياض الجنة.<br>
+            3. اللهم اغسله بالماء والثلج والبرد.<br>
+            4. اللهم أبدله داراً خيراً من داره.<br>
+            5. اللهم عامله بما أنت أهله ولا تعامله بما هو أهله.<br>
+            6. اللهم أدخله الجنة من غير مناقشة حساب.<br>
+            7. اللهم آنسه في وحدته وفي وحشته.<br>
+            8. اللهم اسقه من حوض نبيك شربة هنيئة.<br>
+            9. اللهم شفع فيه القرآن والصيام.<br>
+            10. اللهم اجمعنا به في الفردوس الأعلى.
+        </div>
+        <p style="margin-top:30px; color:#f59e0b; font-size:0.9rem;">نسألكم الدعاء له بالرحمة والمغفرة</p>
     </div>
 
     <!-- المشغل العائم -->
     <div class="floating-player">
         <div style="display:flex; align-items:center; gap:10px;">
             <div style="width:10px; height:10px; background:red; border-radius:50%; animation:blink 1s infinite;"></div>
-            <span style="font-weight:bold; color:var(--primary); font-size:0.9rem;">إذاعة القرآن</span>
+            <span style="font-weight:bold; color:var(--primary); font-size:0.9rem;">إذاعة القرآن الكريم</span>
         </div>
         <button class="play-toggle" onclick="toggleRadio()"><i class="fas fa-play" id="playIcon"></i></button>
         <audio id="radio" src="https://n0e.radiojar.com/8s5u5tpdtwzuv?rj-ttl=5&rj-tok=AAABjF_2tEIA2Bw1g4l5qf7mQw"></audio>
@@ -277,6 +322,22 @@
     </div>
 
     <script>
+        // آيات عشوائية
+        const ayahs = [
+            "وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ",
+            "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+            "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا * إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+            "وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ",
+            "وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ",
+            "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ",
+            "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا",
+            "سَيَجْعَلُ اللَّهُ بَعْدَ عُسْرٍ يُسْرًا"
+        ];
+        function changeAyah() {
+            const random = ayahs[Math.floor(Math.random() * ayahs.length)];
+            document.getElementById('randomAyahText').innerText = `"${random}"`;
+        }
+
         // الـ 30 دعاء للمتوفي
         const deadDuas = [
             "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله.",
@@ -324,7 +385,7 @@
 
         window.onload = function() {
             if (new Date().getDay() === 5) document.getElementById('fridayBanner').style.display = 'block';
-            renderKhatmah(); renderDuas();
+            renderKhatmah(); renderDuas(); changeAyah();
         };
 
         function toggleTheme() {
@@ -379,9 +440,15 @@
         function openAzkar(type) { document.getElementById('modalTitle').innerText = type === 'morning' ? 'أذكار الصباح' : 'أذكار المساء'; document.getElementById('modalBody').innerHTML = azkarDB[type]; document.getElementById('modal').classList.add('active'); }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
 
+        // سبحة الصلاة على النبي
+        let prophetCount = localStorage.getItem('prophet_count') || 0; document.getElementById('prophetCounter').innerText = prophetCount;
+        function countProphet() { prophetCount++; document.getElementById('prophetCounter').innerText = prophetCount; localStorage.setItem('prophet_count', prophetCount); if(navigator.vibrate) navigator.vibrate(15); }
+        
+        // السبحة العادية
         let count = localStorage.getItem('sebha_count') || 0; document.getElementById('counter').innerText = count;
         function countSebha() { count++; document.getElementById('counter').innerText = count; localStorage.setItem('sebha_count', count); if(navigator.vibrate) navigator.vibrate(10); }
-        function resetSebha() { if(confirm("تصفير العداد؟")) { count=0; document.getElementById('counter').innerText=0; localStorage.setItem('sebha_count',0); } }
+        
+        function resetSebha() { if(confirm("تصفير العدادات؟")) { count=0; prophetCount=0; document.getElementById('counter').innerText=0; document.getElementById('prophetCounter').innerText=0; localStorage.setItem('sebha_count',0); localStorage.setItem('prophet_count',0); } }
         function setZekr(txt) { document.getElementById('zekrName').innerText = txt; count=0; document.getElementById('counter').innerText=0; localStorage.setItem('sebha_count',0); }
 
         const radio = document.getElementById('radio'), icon = document.getElementById('playIcon');
@@ -393,12 +460,18 @@
             if(navigator.vibrate) navigator.vibrate(50);
         }
 
-        function downloadImage() {
-            html2canvas(document.getElementById("cardCapture"), {backgroundColor: "#1e293b"}).then(canvas => {
-                const link = document.createElement('a'); link.download = 'Dua_Haj_Mohamed.png'; link.href = canvas.toDataURL(); link.click();
+        // دالة مجمعة لتحميل أي صورة (كارت المشاركة أو الكتيب)
+        function downloadImage(elementId, fileName) {
+            html2canvas(document.getElementById(elementId), {backgroundColor: "#1e293b", scale: 2}).then(canvas => {
+                const link = document.createElement('a'); link.download = fileName; link.href = canvas.toDataURL(); link.click();
             });
+        }
+
+        function downloadDuaBooklet() {
+            downloadImage('bookletCapture', 'Dua_Booklet_Haj_Mohamed.png');
         }
     </script>
 </body>
 </html>
+
 
