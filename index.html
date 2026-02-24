@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="صدقة جارية على روح المهندس الحاج محمد المملوك.">
-    <meta name="theme-color" content="#1e293b">
+    <meta name="description" content="صدقة جارية على روح المهندس الحاج محمد المملوك. شاركنا الدعاء والختمة.">
+    <meta name="theme-color" content="#059669">
+    
+    <meta property="og:title" content="صدقة جارية | م. محمد المملوك">
+    <meta property="og:description" content="اللهم اغفر له وارحمه. شاركنا في الختمة الجماعية والدعاء.">
+    <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> <meta property="og:url" content="https://sadaqa-640e8.web.app">
+    
     <title>نور | م. محمد المملوك</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -12,17 +17,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        :root { --primary: #059669; --dark: #0f172a; --light: #f8fafc; --accent: #fbbf24; --glass: rgba(255, 255, 255, 0.98); --shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        :root { --primary: #059669; --dark: #0f172a; --light: #f8fafc; --accent: #fbbf24; --glass: rgba(255, 255, 255, 0.95); --shadow: 0 4px 20px rgba(0,0,0,0.08); }
         [data-theme="dark"] { --primary: #34d399; --dark: #020617; --light: #111827; --glass: rgba(30, 41, 59, 0.98); color: #fff; }
+        
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Tajawal', sans-serif; background: var(--light); color: [data-theme="dark"] ? #fff : #333; transition: 0.3s; padding-bottom: 120px; background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px); background-size: 20px 20px; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--light); color: #333; transition: 0.3s; padding-bottom: 120px; background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px); background-size: 20px 20px; overflow-x: hidden; }
+        [data-theme="dark"] body { color: #fff; }
+        
+        /* تأثيرات الحركة (جديد 10/10) */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
         
         header { background: linear-gradient(160deg, #064e3b, #065f46); color: white; padding: 50px 20px 80px; text-align: center; border-radius: 0 0 50px 50px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .theme-btn { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
-        .deceased-name { font-size: 2rem; font-weight: 900; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3; margin: 10px 0; color: #fbbf24; }
+        .theme-btn { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(5px); }
+        .deceased-name { font-size: 2rem; font-weight: 900; color: #fbbf24; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3; margin: 10px 0; }
         
         .container { max-width: 600px; margin: -50px auto 0; padding: 0 15px; position: relative; z-index: 10; }
-        .card { background: var(--glass); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: var(--shadow); border-top: 4px solid var(--primary); }
+        .card { background: var(--glass); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: var(--shadow); border-top: 4px solid var(--primary); backdrop-filter: blur(10px); }
         [data-theme="dark"] .card { background: #1e293b; color: white; border: none; border-top: 4px solid var(--primary); }
         .card h2 { font-size: 1.2rem; margin-bottom: 15px; color: var(--primary); display: flex; align-items: center; gap: 10px; }
         .special-card { border-top: 4px solid var(--accent) !important; box-shadow: 0 10px 25px rgba(251, 191, 36, 0.15); text-align: center; }
@@ -47,7 +59,8 @@
         [data-theme="dark"] .audio-player-box { background: rgba(52, 211, 153, 0.05); }
         audio { width: 100%; height: 40px; margin-top: 10px; outline: none; }
 
-        .sebha-circle { width: 130px; height: 130px; background: var(--light); border-radius: 50%; margin: 10px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px solid var(--primary); cursor: pointer; user-select: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .sebha-circle { width: 130px; height: 130px; background: var(--light); border-radius: 50%; margin: 10px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px solid var(--primary); cursor: pointer; user-select: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: transform 0.1s; }
+        .sebha-circle:active { transform: scale(0.95); }
         [data-theme="dark"] .sebha-circle { background: rgba(255,255,255,0.05); }
         .counter { font-size: 3rem; font-weight: 800; color: var(--primary); }
 
@@ -60,7 +73,7 @@
         .share-card { background: #1e293b; color: white; padding: 25px; border-radius: 15px; text-align: center; border: 2px solid var(--accent); margin-bottom: 15px; }
         .media-box { width: 100%; border-radius: 15px; margin-bottom: 15px; }
 
-        /* --- التصميم الجديد لمشغل الإذاعة --- */
+        /* Floating Player */
         .floating-player { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px); padding: 12px 20px; border-top: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; z-index: 100; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); transition: 0.3s; flex-wrap: wrap; gap: 10px; }
         [data-theme="dark"] .floating-player { background: rgba(30, 41, 59, 0.95); border-color: rgba(255,255,255,0.05); }
         .player-info { display: flex; align-items: center; gap: 10px; }
@@ -69,8 +82,6 @@
         .player-title { font-weight: bold; color: var(--primary); font-size: 1rem; }
         
         .player-controls { display: flex; align-items: center; gap: 15px; margin-right: auto; }
-        
-        /* شريط التحكم في الصوت */
         .volume-control { display: flex; align-items: center; gap: 8px; color: var(--primary); }
         .volume-control i { cursor: pointer; font-size: 1.1rem; width: 20px; text-align: center; }
         #volumeSlider { -webkit-appearance: none; width: 80px; height: 6px; background: rgba(0,0,0,0.1); border-radius: 5px; outline: none; transition: 0.2s; direction: ltr;}
@@ -80,15 +91,12 @@
         .play-toggle { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), #064e3b); color: white; border-radius: 50%; border: none; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); transition: 0.2s; }
         .play-toggle:active { transform: scale(0.9); }
 
-        @media (max-width: 400px) {
-            #volumeSlider { width: 60px; }
-            .player-title { font-size: 0.85rem; }
-        }
-        /* ------------------------------------- */
+        @media (max-width: 400px) { #volumeSlider { width: 60px; } .player-title { font-size: 0.85rem; } }
 
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; padding: 10px; overflow-y: auto; justify-content: center; align-items: flex-start; }
         .modal.active { display: flex; }
-        .modal-content { background: #fff; width: 100%; max-width: 600px; border-radius: 20px; padding: 20px; margin-top: 20px; position: relative; min-height: 50vh; }
+        .modal-content { background: #fff; width: 100%; max-width: 600px; border-radius: 20px; padding: 20px; margin-top: 20px; position: relative; min-height: 50vh; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         [data-theme="dark"] .modal-content { background: #1e293b; color: white; }
         .close-modal { position: sticky; top: 0; left: 0; background: #ef4444; color: white; width: 35px; height: 35px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; float: left; margin-bottom: 10px; z-index: 5; font-weight: bold;}
         
@@ -96,7 +104,6 @@
         .toast-notification.show { transform: translateX(-50%) translateY(0); }
         .daily-modal-content { background: linear-gradient(135deg, #064e3b, #0f172a); color: white; text-align: center; border: 4px solid var(--accent); border-radius: 25px; padding: 30px 20px; }
         
-        /* شريط الهدف للسبحة */
         .progress-bar-container { background: rgba(239, 68, 68, 0.1); border-radius: 12px; padding: 12px; margin-bottom: 20px; }
         .progress-text-row { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold; color: #ef4444; margin-bottom: 8px; }
         .progress-track { width: 100%; background: rgba(239, 68, 68, 0.2); height: 8px; border-radius: 4px; overflow: hidden; }
@@ -111,29 +118,27 @@
         <div style="opacity: 0.9;">صدقة جارية على روح المغفور له بإذن الله</div>
         <div class="deceased-name">المهندس الحاج<br>محمد المملوك</div>
         <p style="font-size:0.9rem; opacity:0.9;">اللهم اجعل قبره روضة من رياض الجنة</p>
-            <!-- عداد الزوار -->
         <div style="margin-top: 15px; font-size: 0.85rem; background: rgba(0,0,0,0.2); display: inline-block; padding: 5px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
-            <i class="fas fa-users" style="color: var(--accent); margin-left: 5px;"></i> عدد الزوار: <span id="visitorsCount" style="font-weight: bold; font-size: 1rem;">0</span>
+            <i class="fas fa-users" style="color: var(--accent); margin-left: 5px;"></i> عدد الزوار: <span id="visitorsCount" style="font-weight: bold; font-size: 1rem;">...</span>
         </div>
     </header>
 
 
     <div class="container">
 
-        <div class="card" style="text-align: center;">
+        <div class="card reveal" style="text-align: center;">
             <h2><i class="fas fa-dove" style="color:var(--accent)"></i> أثره الطيب</h2>
             <p style="line-height: 1.8; font-size: 0.95rem; opacity: 0.9;">"كان رحمه الله رجلاً طيب القلب، محباً للخير، واصلاً للرحم، يسعى في قضاء حوائج الناس. ترك خلفه سيرة عطرة وأسرة محبة تدعو له. نسأل الله أن يجمعنا به في مستقر رحمته."</p>
         </div>
 
-        <div class="card special-card">
+        <div class="card special-card reveal">
             <h2 style="justify-content: center; color: var(--accent);"><i class="fas fa-tree"></i> ألبوم صدقة النخلة</h2>
             <div style="background: rgba(5, 150, 105, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; font-weight: bold;">مُقدم بفضل الله من:<br><span style="color: var(--primary); font-size: 1.2rem;">الزوجة المخلصة، وجميع أبنائه وبناته</span></div>
             <img src="tree.jpg" alt="نخلة الحاج محمد المملوك" class="media-box" onerror="this.style.display='none'">
             <video class="media-box" controls preload="metadata" style="background: #000;" onerror="this.style.display='none'"><source src="video.mp4" type="video/mp4"></video>
         </div>
 
-        <!-- المصحف (خارجي) وزر الفاتحة -->
-        <div class="card" style="border-top-color: var(--primary);">
+        <div class="card reveal" style="border-top-color: var(--primary);">
             <h2 style="justify-content: center;"><i class="fas fa-book-open"></i> القرآن الكريم</h2>
             
             <button class="gift-btn" id="fatihaBtn" onclick="giftFatiha()">
@@ -151,7 +156,6 @@
                 <i class="fas fa-book" style="color:white;"></i> تصفح المصحف كاملاً
             </button>
 
-            <!-- صندوق الاستماع الصوتي -->
             <div class="audio-player-box">
                 <p style="font-weight:bold; font-size:0.9rem; margin-bottom:10px;"><i class="fas fa-headphones"></i> استمع للقرآن في الخلفية</p>
                 <div class="grid-2">
@@ -171,20 +175,18 @@
             </div>
         </div>
 
-        <!-- التحديث رقم 1: الختمة الجماعية الحية -->
-        <div class="card">
+        <div class="card reveal">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <h2 style="margin:0;"><i class="fas fa-quran"></i> الختمة الجماعية</h2>
                 <span style="background: var(--primary); color: white; padding: 5px 10px; border-radius: 10px; font-size: 0.8rem; font-weight: bold;">اكتملت: <span id="globalKhatmaCount">0</span> مرة</span>
             </div>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">اضغط على الجزء لحجزه وقراءته. التحديث يظهر للجميع لحظياً.</p>
             <div class="juz-grid" id="juzGrid">
-                <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">جاري الاتصال بالسيرفر...</div>
+                <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">جاري تحميل الأجزاء...</div>
             </div>
         </div>
 
-        <!-- المسبحة الفردية -->
-        <div class="card">
+        <div class="card reveal">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                 <h2><i class="fas fa-fingerprint"></i> مسبحة الأذكار</h2>
                 <button onclick="resetIndividualSebha()" style="background:none; border:none; color:#ef4444; font-weight:bold;">تصفير</button>
@@ -202,15 +204,13 @@
             </div>
         </div>
 
-        <!-- التحديث رقم 2: السبحة العالمية المليونية (مع شريط الهدف) -->
-        <div class="card">
+        <div class="card reveal">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                 <h2 style="color: #ef4444; margin:0;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
                 <span style="background: #ef4444; color: white; padding: 5px 10px; border-radius: 10px; font-size: 0.8rem;">إجمالي المصلين</span>
             </div>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">يجمع العداد تسبيحات كل الزوار حول العالم حالياً.</p>
             
-            <!-- شريط الهدف -->
             <div class="progress-bar-container">
                 <div class="progress-text-row">
                     <span id="targetGoalText">الهدف القادم: 10,000</span>
@@ -229,11 +229,10 @@
             </div>
         </div>
 
-        <!-- أدعية وأذكار -->
-        <div class="card">
+        <div class="card reveal">
             <h2 style="justify-content: space-between;"><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية وأذكار</h2>
             <div class="grid-2">
-                <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()"><i class="fas fa-book-reader" style="color:white;"></i> 30 دعاء كامل للمتوفي</button>
+                <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()"><i class="fas fa-book-reader" style="color:white;"></i> 30 دعاء للمتوفي</button>
                 <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> أذكار الصباح</button>
                 <button class="action-btn" onclick="openAzkar('evening')"><i class="fas fa-moon" style="color:#6366f1"></i> أذكار المساء</button>
                 <button class="action-btn" style="background:rgba(139, 92, 246, 0.1); color:#8b5cf6;" onclick="document.getElementById('randomAyahText').innerText='وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا'"><i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة قرآنية</button>
@@ -241,8 +240,7 @@
             <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
         </div>
 
-        <!-- سجل الدعاء (Firebase) -->
-        <div class="card">
+        <div class="card reveal">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <h2><i class="fas fa-pen-fancy"></i> سجل الدعاء العام</h2>
                 <span id="dbStatus" style="font-size:0.8rem; color:#10b981;"><i class="fas fa-cloud"></i> متصل بالسيرفر</span>
@@ -254,8 +252,7 @@
             <div class="dua-list" id="duaList"></div>
         </div>
 
-        <!-- كارت المشاركة -->
-        <div class="card" style="margin-bottom: 30px;">
+        <div class="card reveal" style="margin-bottom: 30px;">
             <h2><i class="fas fa-image"></i> شارك دعاء (صورة)</h2>
             <div class="share-card" id="cardCapture">
                 <div style="font-family:'Amiri'; font-size:1.5rem; color:#f59e0b; margin-bottom:5px;">بسم الله الرحمن الرحيم</div>
@@ -269,13 +266,11 @@
 
     </div>
 
-    <!-- الإذاعة في الخلفية (المشغل الجديد مع التحكم في الصوت) -->
     <div class="floating-player">
         <div class="player-info">
             <div class="live-indicator"></div>
             <span class="player-title">إذاعة القرآن الكريم</span>
         </div>
-        
         <div class="player-controls">
             <div class="volume-control">
                 <i class="fas fa-volume-up" id="volumeIcon" onclick="toggleMute()"></i>
@@ -286,14 +281,12 @@
         <audio id="radio" src="https://n0e.radiojar.com/8s5u5tpdtwzuv?rj-ttl=5&rj-tok=AAABjF_2tEIA2Bw1g4l5qf7mQw" preload="none"></audio>
     </div>
 
-    <!-- الإشعار المتكرر (كل 15 دقيقة) -->
     <div class="toast-notification" id="localToast">
         <i class="fas fa-praying-hands" style="color: var(--accent); font-size: 1.8rem;"></i>
         <div id="toastText" style="flex-grow: 1; font-size: 0.95rem; line-height: 1.5; font-weight: bold; text-align: right;">اللهم اغفر له وارحمه.</div>
         <button onclick="document.getElementById('localToast').classList.remove('show')" style="background:none; border:none; color:white; font-size:1.5rem;">&times;</button>
     </div>
 
-    <!-- النوافذ المنبثقة -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="close-modal" onclick="closeModal()">X</div>
@@ -302,7 +295,6 @@
         </div>
     </div>
 
-    <!-- نافذة دعاء الدخول -->
     <div id="dailyModal" class="modal">
         <div class="modal-content daily-modal-content">
             <i class="fas fa-praying-hands" style="font-size: 3rem; color: var(--accent); margin-bottom: 15px;"></i>
@@ -322,6 +314,21 @@
             if(navigator.vibrate) navigator.vibrate(50); 
         }
 
+        // Scroll Animation Logic (جديد)
+        window.addEventListener('scroll', reveal);
+        function reveal(){
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++){
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+                if(revealtop < windowheight - revealpoint){
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        setTimeout(reveal, 100); // Trigger once on load
+
         let indCount = localStorage.getItem('ind_count') || 0;
         document.getElementById('individualCounter').innerText = indCount;
         function incrementIndividualSebha() {
@@ -339,10 +346,9 @@
         }
         setTimeout(updateAudioPlayer, 1000); 
 
-        // --- أكواد المشغل الجديد (التحكم في الإذاعة والصوت) ---
+        // Radio & Audio Controls
         const radio = document.getElementById('radio'), icon = document.getElementById('playIcon');
-        const volSlider = document.getElementById('volumeSlider');
-        const volIcon = document.getElementById('volumeIcon');
+        const volSlider = document.getElementById('volumeSlider'), volIcon = document.getElementById('volumeIcon');
 
         function toggleRadio() { 
             if(radio.paused) {
@@ -351,42 +357,30 @@
             } else {
                 radio.pause();
                 icon.className="fas fa-play";
-                icon.style.marginRight = "-2px"; // ضبط أيقونة الـ play عشان تبقى في النص بالظبط
+                icon.style.marginRight = "-2px";
             }
         }
 
-        // تحديث مستوى الصوت لما تحرك الشريط
-        volSlider.addEventListener('input', (e) => {
-            radio.volume = e.target.value;
-            updateVolumeIcon(radio.volume);
-        });
-
-        // كتم وإرجاع الصوت لما تدوس على أيقونة السماعة
+        volSlider.addEventListener('input', (e) => { radio.volume = e.target.value; updateVolumeIcon(radio.volume); });
         let lastVolume = 1;
         function toggleMute() {
-            if (radio.volume > 0) {
-                lastVolume = radio.volume;
-                radio.volume = 0;
-                volSlider.value = 0;
-            } else {
-                radio.volume = lastVolume > 0 ? lastVolume : 1;
-                volSlider.value = radio.volume;
-            }
+            if (radio.volume > 0) { lastVolume = radio.volume; radio.volume = 0; volSlider.value = 0; } 
+            else { radio.volume = lastVolume > 0 ? lastVolume : 1; volSlider.value = radio.volume; }
             updateVolumeIcon(radio.volume);
         }
-
-        // تغيير شكل السماعة حسب قوة الصوت
         function updateVolumeIcon(vol) {
             if (vol == 0) volIcon.className = "fas fa-volume-mute";
             else if (vol < 0.5) volIcon.className = "fas fa-volume-down";
             else volIcon.className = "fas fa-volume-up";
         }
-        
-        // ضبط الصوت المبدئي
         radio.volume = volSlider.value;
-        // -----------------------------------------------------
 
-        const deadDuas = [
+        // Ensure Radio & Quran don't play together
+        const quranPlayer = document.getElementById('quranAudioPlayer');
+        quranPlayer.onplay = function() { radio.pause(); icon.className="fas fa-play"; };
+        radio.onplay = function() { quranPlayer.pause(); };
+
+                    const deadDuas = [
             "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
             "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وزوجاً خيراً من زوجه، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار.",
             "اللهم عامله بما أنت أهله، ولا تعامله بما هو أهله، واجزه عن الإحسان إحساناً وعن الإساءة عفواً وغفراناً.",
@@ -418,6 +412,7 @@
             "اللهم آته برحمتك ورضاك، وقهِ فتنة القبر وعذابه، وآته برحمتك الأمن من عذابك حتى تبعثه إلى جنتك.",
             "اللهم اجعل ذريته ستراً له من النار، واجعل دعاءنا له نوراً يصله في قبره، وارفع درجته في المهديين."
         ];
+
         
         function openDeadDuasModal() { 
             document.getElementById('modalTitle').innerText = 'أدعية للمتوفي'; 
@@ -458,7 +453,6 @@
         function downloadImage(elementId, fileName) { html2canvas(document.getElementById(elementId), {backgroundColor: "#1e293b"}).then(canvas => { const link = document.createElement('a'); link.download = fileName; link.href = canvas.toDataURL(); link.click(); }); }
     </script>
 
-    <!-- الفايربيس (يحتوي على العداد + شريط الهدف + الدعاء + الختمة العالمية) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -473,7 +467,7 @@
         });
         const db = getFirestore(app);
 
-        // --- 1. سجل الأدعية ---
+        // --- سجل الأدعية ---
         try {
             onSnapshot(collection(db, 'duas'), (snapshot) => {
                 const duas = []; snapshot.forEach((doc) => { duas.push({ id: doc.id, ...doc.data() }); });
@@ -490,7 +484,7 @@
             try { input.value = ''; await addDoc(collection(db, 'duas'), { text: text, timestamp: Date.now() }); } catch (e) { alert("خطأ بالإنترنت"); input.value = text; }
         }
 
-        // --- 2. السبحة العالمية + شريط الهدف ---
+        // --- السبحة العالمية + شريط الهدف ---
         const sebhaDocRef = doc(db, 'stats', 'global_sebha');
         const targetStep = 10000;
 
@@ -510,21 +504,25 @@
             else setDoc(sebhaDocRef, { count: 0 });
         });
 
-        let clickCount = 0; let timeout = null;
-        window.incrementGlobalSebha = function() {
+        // Safe & Fast Increment Logic (10/10)
+        window.incrementGlobalSebha = async function() {
             if(navigator.vibrate) navigator.vibrate(15);
-            clickCount++;
+            
+            // 1. Optimistic UI Update (Immediate)
             const counterElement = document.getElementById('globalSebhaCounter');
             let currentVal = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
             counterElement.innerText = (currentVal + 1).toLocaleString();
             
-            clearTimeout(timeout);
-            timeout = setTimeout(async () => {
-                if(clickCount > 0) { const toAdd = clickCount; clickCount = 0; try { await updateDoc(sebhaDocRef, { count: increment(toAdd) }); } catch (e) {} }
-            }, 1000);
+            // 2. Safe Database Update
+            try { 
+                await updateDoc(sebhaDocRef, { count: increment(1) }); 
+            } catch (e) { 
+                console.log("Error updating count");
+                counterElement.innerText = currentVal.toLocaleString(); // Revert on error
+            }
         }
 
-        // --- 3. الختمة الجماعية ---
+        // --- الختمة الجماعية ---
         const khatmaRef = doc(db, 'stats', 'global_khatma');
         const khatmaStatsRef = doc(db, 'stats', 'khatma_stats');
 
@@ -577,11 +575,9 @@
                 }, 1500);
             }
         });
-        // ==========================================
-        // --- 4. عداد الزوار المباشر ---
-        // ==========================================
-        const visitorsRef = doc(db, 'stats', 'visitors_count');
 
+        // --- عداد الزوار ---
+        const visitorsRef = doc(db, 'stats', 'visitors_count');
         onSnapshot(visitorsRef, (docSnap) => {
             if (docSnap.exists()) {
                 document.getElementById('visitorsCount').innerText = (docSnap.data().count || 0).toLocaleString();
@@ -593,16 +589,10 @@
         if (!sessionStorage.getItem('has_visited')) {
             sessionStorage.setItem('has_visited', 'true');
             setTimeout(async () => {
-                try {
-                    await updateDoc(visitorsRef, { count: increment(1) });
-                } catch (e) {
-                    console.log("خطأ في تحديث الزوار");
-                }
+                try { await updateDoc(visitorsRef, { count: increment(1) }); } catch (e) {}
             }, 2000);
         }
-        // ==========================================
 
     </script>
 </body>
 </html>
-
