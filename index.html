@@ -37,9 +37,9 @@
         .gift-btn:active { transform: scale(0.95); }
 
         .juz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 8px; margin-bottom: 15px; }
-        .juz-btn { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; text-align: center; font-weight: bold; cursor: pointer; }
+        .juz-btn { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; text-align: center; font-weight: bold; cursor: pointer; transition: 0.3s; }
         [data-theme="dark"] .juz-btn { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
-        .juz-btn.read { background: var(--primary); color: white; border-color: var(--primary); }
+        .juz-btn.read { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(5,150,105,0.3); }
         
         .quran-select { width: 100%; padding: 12px; font-size: 1rem; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); background: var(--light); color: inherit; font-family: 'Tajawal'; margin-bottom: 10px; font-weight: bold; }
         [data-theme="dark"] .quran-select { background: #0f172a; color: white; border-color: rgba(255,255,255,0.1); }
@@ -50,6 +50,10 @@
         .sebha-circle { width: 130px; height: 130px; background: var(--light); border-radius: 50%; margin: 10px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px solid var(--primary); cursor: pointer; user-select: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         [data-theme="dark"] .sebha-circle { background: rgba(255,255,255,0.05); }
         .counter { font-size: 3rem; font-weight: 800; color: var(--primary); }
+
+        .progress-container { width: 100%; background: #e2e8f0; border-radius: 10px; height: 12px; overflow: hidden; margin-top: 20px; position: relative; }
+        [data-theme="dark"] .progress-container { background: #334155; }
+        .progress-bar { height: 100%; background: var(--primary); transition: width 0.4s ease; border-radius: 10px; }
 
         .dua-input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 10px; font-family: inherit; resize: none; }
         [data-theme="dark"] .dua-input { background: #0f172a; color: white; border-color: #334155; }
@@ -86,15 +90,10 @@
 
     <div class="container">
 
-        <div class="card" style="text-align: center;">
-            <h2><i class="fas fa-dove" style="color:var(--accent)"></i> أثره الطيب</h2>
-            <p style="line-height: 1.8; font-size: 0.95rem; opacity: 0.9;">"كان رحمه الله رجلاً طيب القلب، محباً للخير، واصلاً للرحم، يسعى في قضاء حوائج الناس. ترك خلفه سيرة عطرة وأسرة محبة تدعو له. نسأل الله أن يجمعنا به في مستقر رحمته."</p>
-        </div>
-
+        <!-- ألبوم الصدقة -->
         <div class="card special-card">
             <h2 style="justify-content: center; color: var(--accent);"><i class="fas fa-tree"></i> ألبوم صدقة النخلة</h2>
             <div style="background: rgba(5, 150, 105, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; font-weight: bold;">مُقدم بفضل الله من:<br><span style="color: var(--primary); font-size: 1.2rem;">الزوجة المخلصة، وجميع أبنائه وبناته</span></div>
-            <!-- تمت إزالة صورة الصك والإبقاء على النخلة والفيديو فقط -->
             <img src="tree.jpg" alt="نخلة الحاج محمد المملوك" class="media-box" onerror="this.style.display='none'">
             <video class="media-box" controls preload="metadata" style="background: #000;" onerror="this.style.display='none'"><source src="video.mp4" type="video/mp4"></video>
         </div>
@@ -102,12 +101,10 @@
         <!-- المصحف (خارجي) وزر الفاتحة -->
         <div class="card" style="border-top-color: var(--primary);">
             <h2 style="justify-content: center;"><i class="fas fa-book-open"></i> القرآن الكريم</h2>
-            
             <button class="gift-btn" id="fatihaBtn" onclick="giftFatiha()">
                 <i class="fas fa-heart"></i> أهديت له الفاتحة
             </button>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:10px;">اضغط على السورة لقراءتها</p>
-
             <div class="grid-2" style="margin-bottom:10px;">
                 <button class="action-btn" onclick="window.open('https://quran.com/ar/36', '_blank')"><i class="fas fa-heart" style="color:#ef4444"></i> يس</button>
                 <button class="action-btn" onclick="window.open('https://quran.com/ar/67', '_blank')"><i class="fas fa-shield-alt" style="color:#3b82f6"></i> الملك</button>
@@ -138,12 +135,26 @@
             </div>
         </div>
 
+        <!-- الختمة الجماعية (مربوطة بالسيرفر) -->
         <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h2 style="margin:0;"><i class="fas fa-quran"></i> ختمة القرآن</h2>
-                <button onclick="resetKhatmah()" style="background:none; border:none; color:#ef4444; font-size:0.8rem; cursor:pointer;">تصفير الختمة</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <h2 style="margin:0;"><i class="fas fa-users"></i> الختمة الجماعية</h2>
+                <span id="khatmahCountText" style="background: var(--primary); color: white; padding: 5px 10px; border-radius: 10px; font-size: 0.85rem; font-weight:bold;">ختمات مكتملة: 0</span>
             </div>
-            <div class="juz-grid" id="juzGrid"></div>
+            <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">الأجزاء مشتركة بين جميع الزوار.. شاركنا ولو بجزء واحد.</p>
+            
+            <div id="khatmahContainer">
+                <div class="juz-grid" id="juzGrid"></div>
+                <!-- رسالة إتمام الختمة -->
+                <div id="khatmahCompleteBox" style="display:none; text-align:center; padding: 20px; background: rgba(5,150,105,0.1); border-radius: 15px; border: 2px dashed var(--primary);">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;"></i>
+                    <h3 style="color: var(--primary); font-family: 'Amiri'; margin-bottom: 10px; font-size: 1.5rem;">تمت الختمة بفضل الله!</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 15px; font-weight: bold;">اللهم اجعل ثوابها ونورها في ميزان حسنات الوالد.</p>
+                    <button onclick="window.startNewKhatmah()" class="action-btn" style="background: var(--primary); color: white; width: 100%; flex-direction:row; justify-content:center;">
+                        <i class="fas fa-redo-alt" style="color:white;"></i> ابدأ ختمة جديدة
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- المسبحة الفردية -->
@@ -160,23 +171,33 @@
             </div>
             <div style="display:flex; justify-content:center; gap:5px; flex-wrap:wrap;">
                 <button class="action-btn" style="padding:10px 15px;" onclick="setZekr('أستغفر الله')">استغفار</button>
-                <button class="action-btn" style="padding:10px 15px;" onclick="setZekr('الحمد لله')">الحمد لله </button>
+                <button class="action-btn" style="padding:10px 15px;" onclick="setZekr('الحمد لله')">حمد</button>
                 <button class="action-btn" style="padding:10px 15px;" onclick="setZekr('لا حول ولا قوة إلا بالله')">حوقلة</button>
             </div>
         </div>
 
-        <!-- السبحة العالمية المليونية -->
+        <!-- السبحة العالمية (مع شريط الهدف) -->
         <div class="card">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                 <h2 style="color: #ef4444; margin:0;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
                 <span style="background: #ef4444; color: white; padding: 5px 10px; border-radius: 10px; font-size: 0.8rem;">إجمالي المصلين</span>
             </div>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center;">يجمع العداد تسبيحات كل الزوار حول العالم حالياً.</p>
-            <div style="text-align: center; margin-bottom: 20px;">
+            
+            <div style="text-align: center; margin-bottom: 10px;">
                 <div class="sebha-circle" onclick="incrementGlobalSebha()" style="border-color:#ef4444; width:150px; height:150px;">
                     <span class="counter" id="globalSebhaCounter" style="color:#ef4444; font-size:3.5rem;">...</span>
                 </div>
                 <div style="font-weight:bold; color:#ef4444; font-size: 1.1rem; margin-top: 10px;">اللهم صلِ وسلم على نبينا محمد</div>
+            </div>
+
+            <!-- شريط الهدف -->
+            <div class="progress-container">
+                <div id="sebhaProgressBar" class="progress-bar" style="width: 0%;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.85rem; font-weight:bold;">
+                <span style="color:var(--primary);" id="sebhaProgressText">الهدف القادم: 10,000</span>
+                <span style="color:#ef4444;"><i class="fas fa-fire"></i> شارك للوصول للهدف</span>
             </div>
         </div>
 
@@ -192,7 +213,7 @@
             <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
         </div>
 
-        <!-- سجل الدعاء (Firebase) -->
+        <!-- سجل الدعاء -->
         <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <h2><i class="fas fa-pen-fancy"></i> سجل الدعاء العام</h2>
@@ -246,7 +267,6 @@
         </div>
     </div>
 
-    <!-- نافذة دعاء الدخول -->
     <div id="dailyModal" class="modal">
         <div class="modal-content daily-modal-content">
             <i class="fas fa-praying-hands" style="font-size: 3rem; color: var(--accent); margin-bottom: 15px;"></i>
@@ -275,12 +295,6 @@
         function resetIndividualSebha() { indCount = 0; document.getElementById('individualCounter').innerText = indCount; localStorage.setItem('ind_count', 0); }
         function setZekr(text) { document.getElementById('zekrName').innerText = text; resetIndividualSebha(); }
 
-        let readJuz = JSON.parse(localStorage.getItem('khatmah')) || [];
-        function renderKhatmah() { const grid = document.getElementById('juzGrid'); grid.innerHTML = ''; for(let i=1; i<=30; i++) { const btn = document.createElement('div'); btn.className = `juz-btn ${readJuz.includes(i) ? 'read' : ''}`; btn.innerText = i; btn.onclick = () => { readJuz.includes(i) ? readJuz = readJuz.filter(j => j !== i) : readJuz.push(i); localStorage.setItem('khatmah', JSON.stringify(readJuz)); renderKhatmah(); }; grid.appendChild(btn); } }
-        function resetKhatmah() { if(confirm("تصفير الختمة؟")) { readJuz = []; localStorage.setItem('khatmah', '[]'); renderKhatmah(); } }
-        renderKhatmah();
-
-        // تحديث مشغل الصوت للقرآن
         function updateAudioPlayer() {
             const reciter = document.getElementById('audioReciter').value;
             const surahNum = document.getElementById('audioSurah').value.padStart(3, '0');
@@ -292,14 +306,13 @@
         const radio = document.getElementById('radio'), icon = document.getElementById('playIcon');
         function toggleRadio() { radio.paused ? (radio.play(), icon.className="fas fa-pause") : (radio.pause(), icon.className="fas fa-play"); }
 
-        // 30 دعاء كامل ومفصل
         const deadDuas = [
-            "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
-            "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وزوجاً خيراً من زوجه، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار.",
+            "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد.",
+            "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار.",
             "اللهم عامله بما أنت أهله، ولا تعامله بما هو أهله، واجزه عن الإحسان إحساناً وعن الإساءة عفواً وغفراناً.",
             "اللهم إن كان محسناً فزد من حسناته، وإن كان مسيئاً فتجاوز عن سيئاته يا أرحم الراحمين.",
             "اللهم أدخله الجنة من غير مناقشة حساب ولا سابقة عذاب، وآنسه في وحدته وفي وحشته وفي غربته.",
-            "اللهم أنزله منزلاً مباركاً وأنت خير المنزلين، وأنزله منازل الصديقين والشهداء والصالحين، وحسن أولئك رفيقاً.",
+            "اللهم أنزله منزلاً مباركاً وأنت خير المنزلين، وأنزله منازل الصديقين والشهداء والصالحين.",
             "اللهم اجعل قبره روضة من رياض الجنة، ولا تجعله حفرة من حفر النار، وافسح له في قبره مد بصره.",
             "اللهم افرش قبره من فراش الجنة، وأعذه من عذاب القبر، وجافِ الأرض عن جنبيه.",
             "اللهم املأ قبره بالرضا والنور والفسحة والسرور، وقهِ فتنة القبر وعذاب النار.",
@@ -341,7 +354,6 @@
         }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
 
-        // دعاء الدخول 
         function checkDailyDua() {
             const today = new Date().toDateString(); 
             if (localStorage.getItem('daily_visit') !== today) {
@@ -352,26 +364,23 @@
         }
         setTimeout(checkDailyDua, 1000);
 
-        // الإشعار المتكرر كل 15 دقيقة
         function showPeriodicToast() {
             const toast = document.getElementById('localToast');
-            const toastText = document.getElementById('toastText');
-            toastText.innerText = deadDuas[Math.floor(Math.random() * deadDuas.length)];
+            document.getElementById('toastText').innerText = deadDuas[Math.floor(Math.random() * deadDuas.length)];
             toast.classList.add('show');
             if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
             setTimeout(() => { toast.classList.remove('show'); }, 8000);
         }
-        // يظهر أول مرة بعد 10 ثواني للتجربة، وبعدين كل 15 دقيقة (900000 ملي ثانية)
         setTimeout(showPeriodicToast, 10000);
         setInterval(showPeriodicToast, 15 * 60 * 1000);
 
         function downloadImage(elementId, fileName) { html2canvas(document.getElementById(elementId), {backgroundColor: "#1e293b"}).then(canvas => { const link = document.createElement('a'); link.download = fileName; link.href = canvas.toDataURL(); link.click(); }); }
     </script>
 
-    <!-- Firebase -->
+    <!-- Firebase (النسخة الحديثة والآمنة) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const app = initializeApp({
           apiKey: "AIzaSyAbzVBetgxuzIhf6gHhsqdK_CbkUERIgus",
@@ -383,6 +392,7 @@
         });
         const db = getFirestore(app);
 
+        // سجل الدعاء
         try {
             onSnapshot(collection(db, 'duas'), (snapshot) => {
                 const duas = []; snapshot.forEach((doc) => { duas.push({ id: doc.id, ...doc.data() }); });
@@ -399,10 +409,27 @@
             try { input.value = ''; await addDoc(collection(db, 'duas'), { text: text, timestamp: Date.now() }); } catch (e) { alert("خطأ بالإنترنت"); input.value = text; }
         }
 
+        // السبحة العالمية وشريط الهدف
         const sebhaDocRef = doc(db, 'stats', 'global_sebha');
+        function updateProgressUI(currentCount) {
+            let target = Math.ceil(currentCount / 10000) * 10000;
+            if (target === 0) target = 10000;
+            let progress = currentCount % 10000;
+            if (progress === 0 && currentCount > 0) progress = 10000;
+            
+            let percentage = (progress / 10000) * 100;
+            document.getElementById('sebhaProgressBar').style.width = percentage + '%';
+            document.getElementById('sebhaProgressText').innerText = `الهدف القادم: ${target.toLocaleString()} صلاة`;
+        }
+
         onSnapshot(sebhaDocRef, (docSnap) => {
-            if (docSnap.exists()) document.getElementById('globalSebhaCounter').innerText = docSnap.data().count.toLocaleString();
-            else setDoc(sebhaDocRef, { count: 0 });
+            if (docSnap.exists()) {
+                const count = docSnap.data().count;
+                document.getElementById('globalSebhaCounter').innerText = count.toLocaleString();
+                updateProgressUI(count);
+            } else {
+                setDoc(sebhaDocRef, { count: 0 });
+            }
         });
 
         let clickCount = 0; let timeout = null;
@@ -412,13 +439,66 @@
             const counterElement = document.getElementById('globalSebhaCounter');
             let currentVal = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
             counterElement.innerText = (currentVal + 1).toLocaleString();
+            updateProgressUI(currentVal + 1); // تحديث الشريط لحظياً للزائر
             clearTimeout(timeout);
             timeout = setTimeout(async () => {
                 if(clickCount > 0) { const toAdd = clickCount; clickCount = 0; try { await updateDoc(sebhaDocRef, { count: increment(toAdd) }); } catch (e) {} }
             }, 1000);
         }
+
+        // الختمة الجماعية (مربوطة بالسيرفر)
+        const khatmahDocRef = doc(db, 'stats', 'global_khatmah');
+        let currentKhatmahParts = [];
+        
+        onSnapshot(khatmahDocRef, (docSnap) => {
+            if (docSnap.exists()) {
+                currentKhatmahParts = docSnap.data().parts || [];
+                const completedCount = docSnap.data().completedCount || 0;
+                document.getElementById('khatmahCountText').innerText = `ختمات مكتملة: ${completedCount}`;
+                
+                if (currentKhatmahParts.length >= 30) {
+                    document.getElementById('juzGrid').style.display = 'none';
+                    document.getElementById('khatmahCompleteBox').style.display = 'block';
+                } else {
+                    document.getElementById('juzGrid').style.display = 'grid';
+                    document.getElementById('khatmahCompleteBox').style.display = 'none';
+                    renderGlobalKhatmah();
+                }
+            } else {
+                setDoc(khatmahDocRef, { parts: [], completedCount: 0 });
+            }
+        });
+
+        function renderGlobalKhatmah() {
+            const grid = document.getElementById('juzGrid');
+            grid.innerHTML = '';
+            for(let i=1; i<=30; i++) {
+                const btn = document.createElement('div');
+                const isRead = currentKhatmahParts.includes(i);
+                btn.className = `juz-btn ${isRead ? 'read' : ''}`;
+                btn.innerText = i;
+                btn.onclick = () => window.toggleJuz(i, isRead);
+                grid.appendChild(btn);
+            }
+        }
+
+        window.toggleJuz = async function(partNum, isRead) {
+            try {
+                if (isRead) {
+                    await updateDoc(khatmahDocRef, { parts: arrayRemove(partNum) });
+                } else {
+                    await updateDoc(khatmahDocRef, { parts: arrayUnion(partNum) });
+                }
+            } catch(e) { console.log(e); }
+        }
+
+        window.startNewKhatmah = async function() {
+            try {
+                await updateDoc(khatmahDocRef, { parts: [], completedCount: increment(1) });
+                document.getElementById('juzGrid').style.display = 'grid';
+                document.getElementById('khatmahCompleteBox').style.display = 'none';
+            } catch(e) { alert("تأكد من الاتصال بالإنترنت"); }
+        }
     </script>
 </body>
 </html>
-
-
