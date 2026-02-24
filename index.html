@@ -101,8 +101,9 @@
         <div class="card special-card">
             <h2 style="justify-content: center; color: var(--accent);"><i class="fas fa-tree"></i> ألبوم صدقة النخلة</h2>
             <div style="background: rgba(5, 150, 105, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; font-weight: bold;">مُقدم بفضل الله من:<br><span style="color: var(--primary); font-size: 1.2rem;">الزوجة المخلصة، وجميع أبنائه وبناته</span></div>
-            <img src="https://i.ibb.co/6Rcw3Lbd/IMG-20250212-WA0001.jpg" alt="نخلة الحاج محمد المملوك" class="media-box" onerror="this.style.display='none'">
-            <video class="media-box" controls preload="metadata" style="background: #000;" onerror="this.style.display='none'"><source src="https://up6.cc/2025/02/173981157140411.mp4" type="video/mp4"></video>
+            <!-- رجعتلك الأسامي الأصلية لملفات النخلة والفيديو بتاعتك tree.jpg و video.mp4 -->
+            <img src="tree.jpg" alt="نخلة الحاج محمد المملوك" class="media-box" onerror="this.style.display='none'">
+            <video class="media-box" controls preload="metadata" style="background: #000;" onerror="this.style.display='none'"><source src="video.mp4" type="video/mp4"></video>
         </div>
 
         <!-- المصحف (خارجي) وزر الفاتحة -->
@@ -310,7 +311,7 @@
         const radio = document.getElementById('radio'), icon = document.getElementById('playIcon');
         function toggleRadio() { radio.paused ? (radio.play(), icon.className="fas fa-pause") : (radio.pause(), icon.className="fas fa-play"); }
 
-        // هنا الـ 30 دعاء كاملين بالتمام والكمال
+        // الـ 30 دعاء كاملين
         const deadDuas = [
             "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
             "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وزوجاً خيراً من زوجه، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار.",
@@ -388,7 +389,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // إعدادات الفايربيس الأصلية بتاعتك
         const app = initializeApp({
           apiKey: "AIzaSyAbzVBetgxuzIhf6gHhsqdK_CbkUERIgus",
           authDomain: "sadaqa-640e8.firebaseapp.com",
@@ -425,7 +425,6 @@
                 const count = docSnap.data().count || 0;
                 document.getElementById('globalSebhaCounter').innerText = count.toLocaleString();
 
-                // تحديث شريط الهدف
                 let currentTarget = targetStep;
                 while (count >= currentTarget) currentTarget += targetStep;
                 document.getElementById('targetGoalText').innerText = `الهدف القادم: ${currentTarget.toLocaleString()}`;
@@ -451,17 +450,15 @@
             }, 1000);
         }
 
-        // --- 3. الختمة الجماعية (لايف بالسيرفر) ---
+        // --- 3. الختمة الجماعية ---
         const khatmaRef = doc(db, 'stats', 'global_khatma');
         const khatmaStatsRef = doc(db, 'stats', 'khatma_stats');
 
-        // جلب عدد الختمات
         onSnapshot(khatmaStatsRef, (docSnap) => {
             if(docSnap.exists()) document.getElementById('globalKhatmaCount').innerText = docSnap.data().completed || 0;
             else setDoc(khatmaStatsRef, { completed: 0 });
         });
 
-        // جلب الأجزاء
         onSnapshot(khatmaRef, (docSnap) => {
             let state = {};
             if(docSnap.exists()) {
@@ -496,7 +493,6 @@
                 grid.appendChild(btn);
             }
 
-            // لو الختمة كملت (الـ 30 جزء اتقرأوا)
             if(completedParts === 30) {
                 setTimeout(async () => {
                     alert('🎉 ما شاء الله! تمت الختمة الجماعية بنجاح. سيتم بدء ختمة جديدة.');
