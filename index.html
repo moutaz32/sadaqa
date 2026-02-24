@@ -11,7 +11,8 @@
     <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> <meta property="og:url" content="https://sadaqa-640e8.web.app">
     
     <title>نور | م. محمد المملوك</title>
-    
+    <link rel="manifest" href="https://moutaz32.github.io/sadaqa/manifest.json">
+
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -593,17 +594,19 @@
             }, 2000);
         }
 
-    </script>
     <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker Registered!', reg))
-        .catch(err => console.log('Service Worker Failed!', err));
+      navigator.serviceWorker.register('https://moutaz32.github.io/sadaqa/sw.js')
+        .then(reg => console.log('تم تشغيل المحرك بنجاح!', reg))
+        .catch(err => console.log('فشل تشغيل المحرك', err));
     });
   }
 </script>
 
+</script>
+
 </body>
 </html>
+
 
