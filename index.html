@@ -111,7 +111,12 @@
         <div style="opacity: 0.9;">صدقة جارية على روح المغفور له بإذن الله</div>
         <div class="deceased-name">المهندس الحاج<br>محمد المملوك</div>
         <p style="font-size:0.9rem; opacity:0.9;">اللهم اجعل قبره روضة من رياض الجنة</p>
+            <!-- عداد الزوار -->
+        <div style="margin-top: 15px; font-size: 0.85rem; background: rgba(0,0,0,0.2); display: inline-block; padding: 5px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+            <i class="fas fa-users" style="color: var(--accent); margin-left: 5px;"></i> عدد الزوار: <span id="visitorsCount" style="font-weight: bold; font-size: 1rem;">0</span>
+        </div>
     </header>
+
 
     <div class="container">
 
@@ -572,7 +577,32 @@
                 }, 1500);
             }
         });
+        // ==========================================
+        // --- 4. عداد الزوار المباشر ---
+        // ==========================================
+        const visitorsRef = doc(db, 'stats', 'visitors_count');
+
+        onSnapshot(visitorsRef, (docSnap) => {
+            if (docSnap.exists()) {
+                document.getElementById('visitorsCount').innerText = (docSnap.data().count || 0).toLocaleString();
+            } else {
+                setDoc(visitorsRef, { count: 0 });
+            }
+        });
+
+        if (!sessionStorage.getItem('has_visited')) {
+            sessionStorage.setItem('has_visited', 'true');
+            setTimeout(async () => {
+                try {
+                    await updateDoc(visitorsRef, { count: increment(1) });
+                } catch (e) {
+                    console.log("خطأ في تحديث الزوار");
+                }
+            }, 2000);
+        }
+        // ==========================================
 
     </script>
 </body>
 </html>
+
