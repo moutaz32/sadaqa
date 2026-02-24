@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#059669",
   "theme_color": "#059669",
-  "description": "صدقة جارية على روح المهندس الحاج محمد المملوك",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "https://img.icons8.com/color/192/quran.png",
