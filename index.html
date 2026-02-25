@@ -26,7 +26,7 @@
         body { font-family: 'Tajawal', sans-serif; background: var(--light); color: #333; transition: 0.3s; padding-bottom: 120px; background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px); background-size: 20px 20px; overflow-x: hidden; }
         [data-theme="dark"] body { color: #fff; }
         
-        /* تأثيرات الحركة المحسنة */
+        /* تأثيرات الحركة */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -239,12 +239,10 @@
                 <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()"><i class="fas fa-book-reader" style="color:white;"></i> 30 دعاء للمتوفي</button>
                 <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> أذكار الصباح</button>
                 <button class="action-btn" onclick="openAzkar('evening')"><i class="fas fa-moon" style="color:#6366f1"></i> أذكار المساء</button>
-                
                 <button class="action-btn" style="background:rgba(139, 92, 246, 0.1); color:#8b5cf6;" onclick="showRandomAyah()">
                     <i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة قرآنية
                 </button>
             </div>
-            
             <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
         </div>
 
@@ -640,8 +638,10 @@
             }
         });
 
-        // --- عداد الزوار ---
+        // --- عداد الزوار (تم التحديث: حساب الزوار الفريدين) ---
         const visitorsRef = doc(db, 'stats', 'visitors_count');
+        
+        // عرض العداد
         onSnapshot(visitorsRef, (docSnap) => {
             if (docSnap.exists()) {
                 document.getElementById('visitorsCount').innerText = (docSnap.data().count || 0).toLocaleString();
@@ -650,11 +650,10 @@
             }
         });
 
-        if (!sessionStorage.getItem('has_visited')) {
-            sessionStorage.setItem('has_visited', 'true');
-            setTimeout(async () => {
-                try { await updateDoc(visitorsRef, { count: increment(1) }); } catch (e) {}
-            }, 2000);
+        // منطق الزيادة (مرة واحدة لكل متصفح)
+        if(!localStorage.getItem('visited_sadaqa_permanent')) {
+            localStorage.setItem('visited_sadaqa_permanent', 'true');
+            setTimeout(() => updateDoc(visitorsRef, { count: increment(1) }).catch(() => setDoc(visitorsRef, {count: 1})), 2000);
         }
     </script>
     
