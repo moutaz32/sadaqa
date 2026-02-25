@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> 
     <meta property="og:url" content="https://sadaqa-640e8.web.app">
     
-    <title>صدقة جارية | م. محمد المملوك</title>
+    <title>صدقة جارية| م. محمد المملوك</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -431,11 +431,24 @@
             if(!radio.paused) toggleRadio();
         }
 
-        // --- إعداد قائمة الأدعية الصوتية ---
+        // --- إعداد قائمة الأدعية الصوتية (روابط مباشرة من Archive.org) ---
         const audioDuas = [
-            { title: "دعاء للمتوفي مؤثر - مشاري العفاسي", url: "https://server8.mp3quran.net/afs/R.mp3" }, // مثال
-            { title: "اللهم اغفر له - ماهر المعيقلي", url: "https://ia800201.us.archive.org/5/items/Doa_Maher_Al-Muaiqly/Doa_Maher_Al-Muaiqly_64kb.mp3" },
-            { title: "دعاء خاشع - إدريس أبكر", url: "https://ia801509.us.archive.org/16/items/Idrees_Abkar_Dua/001.mp3" }
+            { 
+                title: "دعاء للمتوفي مؤثر - مشاري العفاسي", 
+                url: "https://ia800300.us.archive.org/30/items/Duaa_Mishary_Rashid/001.mp3" 
+            },
+            { 
+                title: "اللهم اغفر له - ماهر المعيقلي", 
+                url: "https://ia800500.us.archive.org/30/items/Duaa_Maher_Al_Muaiqly/002.mp3" 
+            },
+            { 
+                title: "دعاء خاشع للميت - ناصر القطامي", 
+                url: "https://ia801402.us.archive.org/30/items/Duaa_Nasser_Al_Qatami/001.mp3" 
+            },
+            { 
+                title: "دعاء الرحمة - إدريس أبكر", 
+                url: "https://ia600900.us.archive.org/1/items/Duaa_Idriss_Abkar/001.mp3" 
+            }
         ];
 
         const audioListContainer = document.getElementById('audioDuaList');
@@ -454,7 +467,7 @@
                 } else {
                     stopAllAudio('dua');
                     duaPlayer.src = dua.url;
-                    duaPlayer.play();
+                    duaPlayer.play().catch(e => console.log('Audio Play Error:', e));
                     track.classList.add('playing');
                     document.getElementById(`trackIcon${index}`).innerHTML = '<i class="fas fa-pause"></i>';
                 }
@@ -825,4 +838,3 @@
     </script>
 </body>
 </html>
-
