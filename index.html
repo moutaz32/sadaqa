@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> 
     <meta property="og:url" content="https://sadaqa-640e8.web.app">
     
-    <title>نور | م. محمد المملوك</title>
+    <title>صدقة جارية | م. محمد المملوك</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -544,40 +544,76 @@
             }
         }
 
-        // --- السبحة العالمية + شريط الهدف ---
+        // ==================================================
+        // --- السبحة العالمية (النظام الذكي لمنع التداخل) ---
+        // ==================================================
         const sebhaDocRef = doc(db, 'stats', 'global_sebha');
         const targetStep = 10000;
 
-        onSnapshot(sebhaDocRef, (docSnap) => {
-            if (docSnap.exists()) {
-                const count = docSnap.data().count || 0;
-                document.getElementById('globalSebhaCounter').innerText = count.toLocaleString();
+        let serverCount = 0;     // الرقم اللي متخزن في الفايربيس
+        let unsavedClicks = 0;   // الضغطات السريعة اللي لسه ماتبعتتش
 
-                let currentTarget = targetStep;
-                while (count >= currentTarget) currentTarget += targetStep;
+        // دالة لتحديث الشاشة فوراً للزائر
+        function updateSebhaUI() {
+            const totalCount = serverCount + unsavedClicks;
+            
+            document.getElementById('globalSebhaCounter').innerText = totalCount.toLocaleString();
+
+            let currentTarget = targetStep;
+            while (totalCount >= currentTarget) currentTarget += targetStep;
+            
+            // التأكد إن العنصر موجود قبل ما نحدثه عشان مايحصلش خطأ
+            if(document.getElementById('targetGoalText')) {
                 document.getElementById('targetGoalText').innerText = `الهدف القادم: ${currentTarget.toLocaleString()}`;
-                let percent = (count / currentTarget) * 100;
-                if(percent > 100) percent = 100;
+                
+                let percent = (totalCount / currentTarget) * 100;
+                if (percent > 100) percent = 100;
                 document.getElementById('sebhaProgressBar').style.width = percent + '%';
                 document.getElementById('targetPercentText').innerText = Math.floor(percent) + '%';
             }
-            else setDoc(sebhaDocRef, { count: 0 });
+        }
+
+        // 1. الاستماع للسيرفر (بيجيب الرقم الحقيقي من الداتا بيز)
+        onSnapshot(sebhaDocRef, (docSnap) => {
+            if (docSnap.exists()) {
+                serverCount = docSnap.data().count || 0;
+            } else {
+                setDoc(sebhaDocRef, { count: 0 });
+                serverCount = 0;
+            }
+            updateSebhaUI(); 
         });
 
-        // Fast Increment Logic
-        window.incrementGlobalSebha = async function() {
+        // 2. لما الزائر يضغط (تحديث الشاشة محلياً بسرعة البرق)
+        window.incrementGlobalSebha = function() {
             if(navigator.vibrate) navigator.vibrate(15);
-            
-            const counterElement = document.getElementById('globalSebhaCounter');
-            let currentVal = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
-            counterElement.innerText = (currentVal + 1).toLocaleString();
-            
-            try { 
-                await updateDoc(sebhaDocRef, { count: increment(1) }); 
-            } catch (e) { 
-                console.log("Error updating count");
-            }
+            unsavedClicks++; 
+            updateSebhaUI(); 
         }
+
+        // 3. كل ثانيتين نبعت الضغطات المتجمعة للسيرفر بهدوء
+        setInterval(async () => {
+            if (unsavedClicks > 0) {
+                const clicksToSend = unsavedClicks; 
+                unsavedClicks = 0; 
+                
+                try {
+                    await updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
+                } catch (e) {
+                    unsavedClicks += clicksToSend; // لو النت فصل نرجعهم تاني
+                }
+            }
+        }, 2000); 
+
+        // 4. حماية إضافية: لو الزائر قفل الصفحة فجأة، نبعت الضغطات فوراً
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && unsavedClicks > 0) {
+                const clicksToSend = unsavedClicks;
+                unsavedClicks = 0;
+                updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
+            }
+        });
+        // ==================================================
 
         // --- الختمة الجماعية ---
         const khatmaRef = doc(db, 'stats', 'global_khatma');
@@ -638,10 +674,9 @@
             }
         });
 
-        // --- عداد الزوار (تم التحديث: حساب الزوار الفريدين) ---
+        // --- عداد الزوار (النسخة الدائمة - localStorage) ---
         const visitorsRef = doc(db, 'stats', 'visitors_count');
         
-        // عرض العداد
         onSnapshot(visitorsRef, (docSnap) => {
             if (docSnap.exists()) {
                 document.getElementById('visitorsCount').innerText = (docSnap.data().count || 0).toLocaleString();
@@ -650,7 +685,6 @@
             }
         });
 
-        // منطق الزيادة (مرة واحدة لكل متصفح)
         if(!localStorage.getItem('visited_sadaqa_permanent')) {
             localStorage.setItem('visited_sadaqa_permanent', 'true');
             setTimeout(() => updateDoc(visitorsRef, { count: increment(1) }).catch(() => setDoc(visitorsRef, {count: 1})), 2000);
