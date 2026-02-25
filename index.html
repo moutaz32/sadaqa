@@ -8,7 +8,8 @@
     
     <meta property="og:title" content="صدقة جارية | م. محمد المملوك">
     <meta property="og:description" content="اللهم اغفر له وارحمه. شاركنا في الختمة الجماعية والدعاء.">
-    <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> <meta property="og:url" content="https://sadaqa-640e8.web.app">
+    <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> 
+    <meta property="og:url" content="https://sadaqa-640e8.web.app">
     
     <title>نور | م. محمد المملوك</title>
     
@@ -25,7 +26,7 @@
         body { font-family: 'Tajawal', sans-serif; background: var(--light); color: #333; transition: 0.3s; padding-bottom: 120px; background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px); background-size: 20px 20px; overflow-x: hidden; }
         [data-theme="dark"] body { color: #fff; }
         
-        /* تأثيرات الحركة (جديد 10/10) */
+        /* تأثيرات الحركة المحسنة */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -109,6 +110,9 @@
         .progress-track { width: 100%; background: rgba(239, 68, 68, 0.2); height: 8px; border-radius: 4px; overflow: hidden; }
         .progress-fill { height: 100%; background: #ef4444; transition: width 0.5s ease-out; width: 0%; }
         [data-theme="dark"] .progress-bar-container { background: rgba(239, 68, 68, 0.05); }
+
+        /* تأثير الانتقال للنصوص */
+        #randomAyahText { transition: opacity 0.3s ease-in-out; }
     </style>
 </head>
 <body>
@@ -235,8 +239,12 @@
                 <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()"><i class="fas fa-book-reader" style="color:white;"></i> 30 دعاء للمتوفي</button>
                 <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> أذكار الصباح</button>
                 <button class="action-btn" onclick="openAzkar('evening')"><i class="fas fa-moon" style="color:#6366f1"></i> أذكار المساء</button>
-                <button class="action-btn" style="background:rgba(139, 92, 246, 0.1); color:#8b5cf6;" onclick="document.getElementById('randomAyahText').innerText='وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا'"><i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة قرآنية</button>
+                
+                <button class="action-btn" style="background:rgba(139, 92, 246, 0.1); color:#8b5cf6;" onclick="showRandomAyah()">
+                    <i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة قرآنية
+                </button>
             </div>
+            
             <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
         </div>
 
@@ -314,20 +322,17 @@
             if(navigator.vibrate) navigator.vibrate(50); 
         }
 
-        // Scroll Animation Logic (جديد)
-        window.addEventListener('scroll', reveal);
-        function reveal(){
-            var reveals = document.querySelectorAll('.reveal');
-            for(var i = 0; i < reveals.length; i++){
-                var windowheight = window.innerHeight;
-                var revealtop = reveals[i].getBoundingClientRect().top;
-                var revealpoint = 150;
-                if(revealtop < windowheight - revealpoint){
-                    reveals[i].classList.add('active');
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
                 }
-            }
-        }
-        setTimeout(reveal, 100); // Trigger once on load
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
 
         let indCount = localStorage.getItem('ind_count') || 0;
         document.getElementById('individualCounter').innerText = indCount;
@@ -351,7 +356,9 @@
         const volSlider = document.getElementById('volumeSlider'), volIcon = document.getElementById('volumeIcon');
 
         function toggleRadio() { 
+            const quranPlayer = document.getElementById('quranAudioPlayer');
             if(radio.paused) {
+                if(!quranPlayer.paused) quranPlayer.pause(); 
                 radio.play();
                 icon.className="fas fa-pause";
             } else {
@@ -375,12 +382,59 @@
         }
         radio.volume = volSlider.value;
 
-        // Ensure Radio & Quran don't play together
         const quranPlayer = document.getElementById('quranAudioPlayer');
         quranPlayer.onplay = function() { radio.pause(); icon.className="fas fa-play"; };
-        radio.onplay = function() { quranPlayer.pause(); };
+        
+        function pauseRadioForModal() {
+            if(!radio.paused) toggleRadio();
+        }
 
-                    const deadDuas = [
+        // --- 30 رسالة قرآنية ---
+        const quranMessages = [
+            "وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَى",
+            "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا، إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+            "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+            "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا",
+            "قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَى أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ",
+            "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
+            "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
+            "وَبَشِّرِ الصَّابِرِينَ",
+            "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+            "فَدَعَا رَبَّهُ أَنِّي مَغْلُوبٌ فانتَصِرْ",
+            "لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
+            "عَسَى اللَّهُ أَن يَأْتِيَنِي بِهِمْ جَمِيعًا",
+            "وَأُفَوِّضُ أَمْرِي إِلَى اللَّهِ ۚ إِنَّ اللَّهَ بَصِيرٌ بِالْعِبَادِ",
+            "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى",
+            "وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ",
+            "وَكَفَىٰ بِاللَّهِ وَكِيلًا",
+            "سَيَجْعَلُ اللَّهُ بَعْدَ عُسْرٍ يُسْرًا",
+            "وَتَوَكَّلْ عَلَى الْحَيِّ الَّذِي لَا يَمُوتُ",
+            "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
+            "فَنَادَىٰ فِي الظُّلُمَاتِ أَن لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
+            "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا",
+            "وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ",
+            "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ",
+            "وَاللَّهُ يَعْلَمُ وَأَنتُمْ لَا تَعْلَمُونَ",
+            "قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا",
+            "وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ الْوَرِيدِ",
+            "فَصَبْرٌ جَمِيلٌ ۖ وَاللَّهُ الْمُسْتَعَانُ",
+            "إِنَّ رَبِّي لَطِيفٌ لِّمَا يَشَاءُ",
+            "وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ",
+            "وَمَا كَانَ رَبُّكَ نَسِيًّا"
+        ];
+
+        function showRandomAyah() {
+            const ayahDiv = document.getElementById('randomAyahText');
+            ayahDiv.style.opacity = '0'; // إخفاء النص بتأثير ناعم
+            setTimeout(() => {
+                const randomMsg = quranMessages[Math.floor(Math.random() * quranMessages.length)];
+                ayahDiv.innerText = `"${randomMsg}"`;
+                ayahDiv.style.opacity = '1'; // إظهار النص
+            }, 300);
+            if(navigator.vibrate) navigator.vibrate(20);
+        }
+
+        const deadDuas = [
             "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
             "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وزوجاً خيراً من زوجه، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار.",
             "اللهم عامله بما أنت أهله، ولا تعامله بما هو أهله، واجزه عن الإحسان إحساناً وعن الإساءة عفواً وغفراناً.",
@@ -413,8 +467,8 @@
             "اللهم اجعل ذريته ستراً له من النار، واجعل دعاءنا له نوراً يصله في قبره، وارفع درجته في المهديين."
         ];
 
-        
         function openDeadDuasModal() { 
+            pauseRadioForModal();
             document.getElementById('modalTitle').innerText = 'أدعية للمتوفي'; 
             let content = '<div style="text-align:right;">'; 
             deadDuas.forEach((dua, idx) => { content += `<div class="dua-item" style="border-right-color:#059669; margin-bottom:15px;"><strong>${idx + 1}.</strong> ${dua}</div>`; }); 
@@ -423,6 +477,7 @@
         }
 
         function openAzkar(type) { 
+            pauseRadioForModal();
             document.getElementById('modalTitle').innerText = type === 'morning' ? 'أذكار الصباح' : 'أذكار المساء'; 
             document.getElementById('modalBody').innerHTML = '<div style="text-align:right; font-size:1.2rem; line-height:2;">1. آية الكرسي.<br>2. سورة الإخلاص والمعوذتين (3 مرات).<br>3. ' + (type === 'morning' ? 'أصبحنا وأصبح الملك لله.' : 'أمسينا وأمسى الملك لله.') + '</div>'; 
             document.getElementById('modal').classList.add('active'); 
@@ -479,9 +534,16 @@
         } catch(e) {}
 
         window.addGlobalDua = async function() {
-            const input = document.getElementById('duaInput'); const text = input.value.trim();
+            const input = document.getElementById('duaInput'); 
+            const text = input.value.trim();
             if (text === '') return;
-            try { input.value = ''; await addDoc(collection(db, 'duas'), { text: text, timestamp: Date.now() }); } catch (e) { alert("خطأ بالإنترنت"); input.value = text; }
+            try { 
+                input.value = ''; 
+                await addDoc(collection(db, 'duas'), { text: text, timestamp: Date.now() }); 
+            } catch (e) { 
+                alert("يرجى التحقق من اتصال الإنترنت"); 
+                input.value = text; 
+            }
         }
 
         // --- السبحة العالمية + شريط الهدف ---
@@ -504,21 +566,18 @@
             else setDoc(sebhaDocRef, { count: 0 });
         });
 
-        // Safe & Fast Increment Logic (10/10)
+        // Fast Increment Logic
         window.incrementGlobalSebha = async function() {
             if(navigator.vibrate) navigator.vibrate(15);
             
-            // 1. Optimistic UI Update (Immediate)
             const counterElement = document.getElementById('globalSebhaCounter');
             let currentVal = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
             counterElement.innerText = (currentVal + 1).toLocaleString();
             
-            // 2. Safe Database Update
             try { 
                 await updateDoc(sebhaDocRef, { count: increment(1) }); 
             } catch (e) { 
                 console.log("Error updating count");
-                counterElement.innerText = currentVal.toLocaleString(); // Revert on error
             }
         }
 
@@ -560,19 +619,24 @@
                         }
                     };
                 } else {
-                    btn.onclick = () => alert('هذا الجزء تم حجزه أو قراءته من شخص آخر. جزاكم الله خيراً.');
+                    btn.onclick = () => alert('هذا الجزء تم قراءته مسبقاً. تقبل الله من الجميع.');
                 }
                 grid.appendChild(btn);
             }
 
             if(completedParts === 30) {
-                setTimeout(async () => {
-                    alert('🎉 ما شاء الله! تمت الختمة الجماعية بنجاح. سيتم بدء ختمة جديدة.');
-                    await updateDoc(khatmaStatsRef, { completed: increment(1) });
-                    let resetState = {};
-                    for(let i=1; i<=30; i++) resetState[`juz${i}`] = false;
-                    await setDoc(khatmaRef, resetState);
-                }, 1500);
+                 setTimeout(async () => {
+                     const currentSnap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.getDoc(khatmaRef));
+                     let isFull = true;
+                     for(let k=1; k<=30; k++) if(!currentSnap.data()[`juz${k}`]) isFull=false;
+                     
+                     if(isFull) {
+                        await updateDoc(khatmaStatsRef, { completed: increment(1) });
+                        let resetState = {};
+                        for(let i=1; i<=30; i++) resetState[`juz${i}`] = false;
+                        await setDoc(khatmaRef, resetState);
+                     }
+                }, 5000); 
             }
         });
 
@@ -592,17 +656,16 @@
                 try { await updateDoc(visitorsRef, { count: increment(1) }); } catch (e) {}
             }, 2000);
         }
-
     </script>
+    
     <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker Registered!', reg))
-        .catch(err => console.log('Service Worker Failed!', err));
-    });
-  }
-</script>
-
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW Registered'))
+                    .catch(err => console.log('SW Error', err));
+            });
+        }
+    </script>
 </body>
-                </html> 
+</html>
