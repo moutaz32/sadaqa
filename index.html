@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> 
     <meta property="og:url" content="https://sadaqa-640e8.web.app">
     
-    <title>صدقة جارية| م. محمد المملوك</title>
+    <title>نور | م. محمد المملوك</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -189,7 +189,7 @@
             <h2 style="justify-content: space-between;"><i class="fas fa-microphone-alt" style="color:#8b5cf6"></i> أدعية صوتية مختارة</h2>
             <div id="audioDuaList">
                 </div>
-            <audio id="duaPlayer" style="display:none;"></audio>
+            <audio id="duaPlayer" style="display:none;" preload="none"></audio>
         </div>
 
         <div class="card reveal">
@@ -222,11 +222,8 @@
         </div>
 
         <div class="card reveal">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                <h2 style="color: #ef4444; margin:0;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
-                <span style="background: #ef4444; color: white; padding: 5px 10px; border-radius: 10px; font-size: 0.8rem;">إجمالي المصلين</span>
-            </div>
-            <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">يجمع العداد تسبيحات كل الزوار حول العالم حالياً.</p>
+            <h2 style="color: #ef4444; margin:0;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
+            <p style="font-size:0.85rem; opacity:0.8; margin-top:5px;">يجمع العداد تسبيحات كل الزوار حول العالم حالياً.</p>
             
             <div class="progress-bar-container">
                 <div class="progress-text-row">
@@ -431,27 +428,29 @@
             if(!radio.paused) toggleRadio();
         }
 
-        // --- إعداد قائمة الأدعية الصوتية (روابط مباشرة من Archive.org) ---
+        // --- إعداد قائمة الأدعية الصوتية (روابط مباشرة ومضمونة من Archive Gateway) ---
         const audioDuas = [
             { 
                 title: "دعاء للمتوفي مؤثر - مشاري العفاسي", 
-                url: "https://ia800300.us.archive.org/30/items/Duaa_Mishary_Rashid/001.mp3" 
-            },
-            { 
-                title: "اللهم اغفر له - ماهر المعيقلي", 
-                url: "https://ia800500.us.archive.org/30/items/Duaa_Maher_Al_Muaiqly/002.mp3" 
-            },
-            { 
-                title: "دعاء خاشع للميت - ناصر القطامي", 
-                url: "https://ia801402.us.archive.org/30/items/Duaa_Nasser_Al_Qatami/001.mp3" 
+                url: "https://archive.org/download/MisharyRashidDuaa/001.mp3" 
             },
             { 
                 title: "دعاء الرحمة - إدريس أبكر", 
-                url: "https://ia600900.us.archive.org/1/items/Duaa_Idriss_Abkar/001.mp3" 
+                url: "https://archive.org/download/Duaa_Idriss_Abkar/001.mp3" 
+            },
+            { 
+                title: "دعاء ختم القرآن - السديس (شامل)", 
+                url: "https://archive.org/download/Duaa_Al-Sudais/001.mp3" 
+            },
+            {
+                title: "اللهم اغفر له - ماهر المعيقلي",
+                url: "https://archive.org/download/Maher-Al-Muaiqly-Duaa/002.mp3"
             }
         ];
 
         const audioListContainer = document.getElementById('audioDuaList');
+        audioListContainer.innerHTML = ''; 
+
         audioDuas.forEach((dua, index) => {
             const track = document.createElement('div');
             track.className = 'audio-track';
@@ -459,17 +458,30 @@
                 <div style="font-weight:bold; font-size:0.9rem;">${dua.title}</div>
                 <div class="track-icon" id="trackIcon${index}"><i class="fas fa-play"></i></div>
             `;
+            
             track.onclick = () => {
-                if(duaPlayer.src === dua.url && !duaPlayer.paused) {
+                if(duaPlayer.src !== dua.url) {
+                    stopAllAudio('dua'); 
+                    duaPlayer.src = dua.url;
+                    duaPlayer.load(); // أمر مهم جداً لتجهيز الملف
+                }
+
+                if(duaPlayer.paused) {
+                    const playPromise = duaPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            track.classList.add('playing');
+                            document.getElementById(`trackIcon${index}`).innerHTML = '<i class="fas fa-pause"></i>';
+                        })
+                        .catch(error => {
+                            console.error("Audio Play Error:", error);
+                            alert("جاري تحميل الملف الصوتي.. يرجى الانتظار قليلاً أو التحقق من الإنترنت.");
+                        });
+                    }
+                } else {
                     duaPlayer.pause();
                     track.classList.remove('playing');
                     document.getElementById(`trackIcon${index}`).innerHTML = '<i class="fas fa-play"></i>';
-                } else {
-                    stopAllAudio('dua');
-                    duaPlayer.src = dua.url;
-                    duaPlayer.play().catch(e => console.log('Audio Play Error:', e));
-                    track.classList.add('playing');
-                    document.getElementById(`trackIcon${index}`).innerHTML = '<i class="fas fa-pause"></i>';
                 }
             };
             audioListContainer.appendChild(track);
