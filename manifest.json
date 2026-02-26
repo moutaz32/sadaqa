@@ -1,10 +1,11 @@
 {
-  "name": "نور | م. محمد المملوك",
-  "short_name": "صدقة جارية",
-  "start_url": ".",
+  "name": "صدقة جارية | م. محمد المملوك",
+  "short_name": "صدقة الوالد",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#059669",
+  "background_color": "#f8fafc",
   "theme_color": "#059669",
+  "description": "صدقة جارية على روح المهندس الحاج محمد المملوك. شاركنا الدعاء والختمة.",
   "orientation": "portrait",
   "icons": [
     {
