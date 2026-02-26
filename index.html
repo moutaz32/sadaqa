@@ -178,15 +178,13 @@
             </div>
         </div>
         
-        <!-- كود الدعاء الصوتي للمتوفي -->
+        <!-- الدعاء الصوتي -->
         <div class="card reveal">
             <h2 style="justify-content: space-between;"><i class="fas fa-microphone-alt" style="color:#8b5cf6"></i> دعاء صوتي للمتوفي</h2>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">دعاء خاشع لروح الوالد رحمه الله</p>
-            
             <button id="singleDuaBtn" class="gift-btn" style="background: #8b5cf6; color: white;" onclick="toggleSingleDua()">
                 <i class="fas fa-play" id="singleDuaIcon"></i> تشغيل الدعاء
             </button>
-            
             <audio id="singleDuaAudio" src="dua.mp3" preload="none"></audio>
         </div>
 
@@ -198,6 +196,25 @@
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">اضغط على الجزء لحجزه وقراءته. التحديث يظهر للجميع لحظياً.</p>
             <div class="juz-grid" id="juzGrid">
                 <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">جاري تحميل الأجزاء...</div>
+            </div>
+        </div>
+
+        <!-- إضافة 1: ثواب سورة الإخلاص -->
+        <div class="card reveal" style="border-top-color: #10b981; text-align: center;">
+            <h2 style="justify-content: center; color: #10b981;"><i class="fas fa-gem"></i> ثواب ختمة في ثوانٍ</h2>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">قال رسول الله ﷺ عن سورة الإخلاص: "والذي نفسي بيده إنها لتعدل ثلث القرآن". اقرأها 3 مرات واهدي ثوابها للوالد.</p>
+            
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary);">
+                بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>
+                قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
+            </div>
+            
+            <button onclick="window.incrementIkhlas(event)" style="background: #10b981; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
+                <i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد
+            </button>
+            
+            <div style="margin-top: 15px; font-size: 0.85rem; color: #555;">
+                عدد الختمات المهداة من السورة: <strong id="ikhlasCount" style="color: #10b981; font-size: 1.1rem;">0</strong>
             </div>
         </div>
 
@@ -253,8 +270,22 @@
             </div>
             <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
         </div>
+
+        <!-- إضافة 2: حديث اليوم -->
+        <div class="card reveal" style="border-top-color: #3b82f6;">
+            <h2 style="color: #3b82f6;"><i class="fas fa-book-reader"></i> حديث اليوم</h2>
+            <div style="background: rgba(59, 130, 246, 0.05); padding: 20px; border-radius: 15px; border: 1px dashed #3b82f6; text-align: center; position: relative;">
+                <i class="fas fa-quote-right" style="position: absolute; top: 10px; right: 15px; color: rgba(59, 130, 246, 0.2); font-size: 2rem;"></i>
+                <div id="randomHadith" style="font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.8; color: var(--text-main); font-weight: bold; margin-bottom: 10px; transition: 0.3s;">
+                    <!-- سيتم إدراج الحديث هنا -->
+                </div>
+                <div id="hadithSource" style="font-size: 0.85rem; color: #666; font-style: italic; transition: 0.3s;"></div>
+            </div>
+            <button onclick="showRandomHadith()" style="background: none; border: none; color: #3b82f6; margin-top: 10px; font-weight: bold; cursor: pointer; width: 100%; text-align: left; font-size: 0.85rem;">
+                <i class="fas fa-sync-alt"></i> حديث آخر
+            </button>
+        </div>
         
-        <!-- كارت أسماء الله الحسنى والدعاء المخصص (الكارت الجديد الفخم) -->
         <div class="card reveal" style="border-top-color: #8b5cf6;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <h2 style="color: #8b5cf6; margin:0;"><i class="fas fa-star-and-crescent"></i> أسماء الله الحسنى</h2>
@@ -300,6 +331,11 @@
                 <i class="fas fa-download" style="color:#1e293b"></i> تحميل الصورة للمشاركة
             </button>
         </div>
+
+        <!-- إضافة 3: زرار المشاركة على الواتساب -->
+        <button onclick="shareOnWhatsApp()" style="background: #25d366; color: white; border: none; padding: 15px; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); transition: transform 0.2s;">
+            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> شارك الموقع واكسب أجر كل من يقرأ
+        </button>
 
     </div>
 
@@ -582,6 +618,44 @@
 
         function downloadImage(elementId, fileName) { html2canvas(document.getElementById(elementId), {backgroundColor: "#1e293b"}).then(canvas => { const link = document.createElement('a'); link.download = fileName; link.href = canvas.toDataURL(); link.click(); }); }
         
+        // --- أحاديث نبوية ---
+        const ahadith = [
+            { text: "إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له.", source: "رواه مسلم" },
+            { text: "كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن: سبحان الله وبحمده، سبحان الله العظيم.", source: "متفق عليه" },
+            { text: "من دَلَّ على خيرٍ فله مثلُ أجرِ فاعِلِه.", source: "رواه مسلم" },
+            { text: "الدعاء ينفع مما نزل ومما لم ينزل، فعليكم عباد الله بالدعاء.", source: "رواه الترمذي" },
+            { text: "البخيل من ذُكرت عنده فلم يُصلِّ عليَّ ﷺ.", source: "رواه الترمذي" },
+            { text: "صنائع المعروف تقي مصارع السوء.", source: "رواه الطبراني" },
+            { text: "ما نقصت صدقة من مال، وما زاد الله عبداً بعفو إلا عزاً.", source: "رواه مسلم" }
+        ];
+
+        function showRandomHadith() {
+            const index = Math.floor(Math.random() * ahadith.length);
+            const hadithEl = document.getElementById('randomHadith');
+            const sourceEl = document.getElementById('hadithSource');
+            
+            hadithEl.style.opacity = 0;
+            sourceEl.style.opacity = 0;
+            
+            setTimeout(() => {
+                hadithEl.innerText = `« ${ahadith[index].text} »`;
+                sourceEl.innerText = `[ ${ahadith[index].source} ]`;
+                hadithEl.style.opacity = 1;
+                sourceEl.style.opacity = 1;
+            }, 300);
+            
+            if(navigator.vibrate) navigator.vibrate(10);
+        }
+        setTimeout(showRandomHadith, 600);
+
+        // --- زر المشاركة الذكي ---
+        function shareOnWhatsApp() {
+            const siteUrl = "https://sadaqa-640e8.web.app"; 
+            const message = `السلام عليكم ورحمة الله وبركاته 🤍\nبندعوكم للمشاركة في الختمة القرآنية وحملة الصلاة على النبي عن روح (المهندس محمد المملوك) رحمه الله.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
         // --- أسماء الله الحسنى بالدعاء المخصص (99 اسم) ---
         const allahNames = [
             { name: "الرَّحْمَنُ", meaning: "الذي وسعت رحمته كل شيء", dua: "اللهم يا رحمن، ارحم عبدك محمد المملوك برحمتك التي وسعت كل شيء، واغمره بفيض عطائك." },
@@ -874,6 +948,35 @@
                 }, 5000); 
             }
         });
+        
+        // --- عداد سورة الإخلاص ---
+        const ikhlasRef = doc(db, 'stats', 'ikhlas_khatma');
+        onSnapshot(ikhlasRef, (docSnap) => {
+            if (docSnap.exists()) {
+                document.getElementById('ikhlasCount').innerText = (docSnap.data().count || 0).toLocaleString();
+            } else {
+                setDoc(ikhlasRef, { count: 0 });
+            }
+        });
+
+        window.incrementIkhlas = async function(event) {
+            if(navigator.vibrate) navigator.vibrate(20);
+            
+            const btn = event.currentTarget;
+            btn.innerHTML = '<i class="fas fa-heart"></i> تقبل الله منك';
+            btn.style.background = '#059669';
+            
+            try { 
+                await updateDoc(ikhlasRef, { count: increment(1) }); 
+            } catch (e) { 
+                await setDoc(ikhlasRef, { count: 1 });
+            }
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد';
+                btn.style.background = '#10b981';
+            }, 3000);
+        }
 
         // --- عداد الزوار (النسخة الدائمة - localStorage) ---
         const visitorsRef = doc(db, 'stats', 'visitors_count');
