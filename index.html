@@ -130,9 +130,24 @@
         </div>
     </header>
 
-
     <div class="container">
         
+        <!-- كارت نفحات رمضان المبارك (في قمة الموقع) -->
+        <div class="card reveal" style="border-top-color: #f59e0b; background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(255, 255, 255, 0));">
+            <h2 style="justify-content: center; color: #f59e0b;"><i class="fas fa-moon"></i> نفحات رمضان المبارك</h2>
+            <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
+                للصائم عند فطره دعوة لا تُرد.. اذكر الوالد (رحمه الله) بدعوة خالصة قبل إفطارك، وفي صلاة التراويح.
+            </p>
+            
+            <div style="background: rgba(245, 158, 11, 0.1); padding: 15px; border-radius: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary); text-align: center; border: 1px dashed #f59e0b;">
+                "اللهم إنك عفوٌ كريمٌ تحب العفو فاعفُ عن عبدك محمد المملوك، واغفر له وارحمه، واعتقه من النار في هذا الشهر الفضيل"
+            </div>
+            
+            <button onclick="this.innerHTML='<i class=\'fas fa-check\'></i> تقبل الله دعاءك وصيامك'; this.style.background='#059669'; this.style.color='white'; if(navigator.vibrate) navigator.vibrate(50);" style="background: #f59e0b; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
+                <i class="fas fa-hands-holding"></i> أهديته دعوة صيامي اليوم
+            </button>
+        </div>
+
         <!-- كارت نفحات يوم الجمعة (يظهر يوم الجمعة فقط) -->
         <div id="fridayCard" class="card reveal" style="display: none; border-top-color: #f59e0b; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0));">
             <h2 style="justify-content: center; color: #f59e0b;"><i class="fas fa-mosque"></i> نفحات يوم الجمعة</h2>
@@ -198,7 +213,7 @@
             </div>
         </div>
         
-        <!-- الدعاء الصوتي (تم إعادة المسار لـ dua.mp3 كما طلبت) -->
+        <!-- الدعاء الصوتي -->
         <div class="card reveal">
             <h2 style="justify-content: space-between;"><i class="fas fa-microphone-alt" style="color:#8b5cf6"></i> دعاء صوتي للمتوفي</h2>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">دعاء خاشع لروح الوالد رحمه الله</p>
@@ -1015,6 +1030,7 @@
             const btn = event.currentTarget;
             btn.innerHTML = '<i class="fas fa-heart"></i> تقبل الله منك';
             btn.style.background = '#059669';
+            btn.style.color = 'white';
             
             try { 
                 await updateDoc(ikhlasRef, { count: increment(1) }); 
