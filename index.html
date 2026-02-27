@@ -130,8 +130,12 @@
         </div>
     </header>
 
+
     <div class="container">
         
+        <!-- ======================= -->
+        <!-- 1. قسم المواسم (رمضان والجمعة) -->
+        <!-- ======================= -->
         <!-- كارت نفحات رمضان المبارك (في قمة الموقع) -->
         <div class="card reveal" style="border-top-color: #f59e0b; background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(255, 255, 255, 0));">
             <h2 style="justify-content: center; color: #f59e0b;"><i class="fas fa-moon"></i> نفحات رمضان المبارك</h2>
@@ -164,18 +168,52 @@
             </div>
         </div>
 
-        <div class="card reveal" style="text-align: center;">
-            <h2><i class="fas fa-dove" style="color:var(--accent)"></i> أثره الطيب</h2>
-            <p style="line-height: 1.8; font-size: 0.95rem; opacity: 0.9;">"كان رحمه الله رجلاً طيب القلب، محباً للخير، واصلاً للرحم، يسعى في قضاء حوائج الناس. ترك خلفه سيرة عطرة وأسرة محبة تدعو له. نسأل الله أن يجمعنا به في مستقر رحمته."</p>
+        <!-- ======================= -->
+        <!-- 2. أسرع ثواب (الإخلاص والصلاة على النبي) -->
+        <!-- ======================= -->
+        <div class="card reveal" style="border-top-color: #10b981; text-align: center;">
+            <h2 style="justify-content: center; color: #10b981;"><i class="fas fa-gem"></i> ثواب ختمة في ثوانٍ</h2>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">قال رسول الله ﷺ عن سورة الإخلاص: "والذي نفسي بيده إنها لتعدل ثلث القرآن". اقرأها 3 مرات واهدي ثوابها للوالد.</p>
+            
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary);">
+                بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>
+                قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
+            </div>
+            
+            <button onclick="window.incrementIkhlas(event)" style="background: #10b981; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
+                <i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد
+            </button>
+            
+            <div style="margin-top: 15px; font-size: 0.85rem; color: #555;">
+                عدد الختمات المهداة من السورة: <strong id="ikhlasCount" style="color: #10b981; font-size: 1.1rem;">0</strong>
+            </div>
         </div>
 
-        <div class="card special-card reveal">
-            <h2 style="justify-content: center; color: var(--accent);"><i class="fas fa-tree"></i> ألبوم صدقة النخلة</h2>
-            <div style="background: rgba(5, 150, 105, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; font-weight: bold;">مُقدم بفضل الله من:<br><span style="color: var(--primary); font-size: 1.2rem;">الزوجة المخلصة، وجميع أبنائه وبناته</span></div>
-            <img src="tree.jpg" alt="نخلة الحاج محمد المملوك" class="media-box" onerror="this.style.display='none'">
-            <video class="media-box" controls preload="metadata" style="background: #000;" onerror="this.style.display='none'"><source src="video.mp4" type="video/mp4"></video>
+        <div class="card reveal">
+            <h2 style="color: #ef4444; margin:0;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
+            <p style="font-size:0.85rem; opacity:0.8; margin-top:5px; text-align:center;">يجمع العداد تسبيحات كل الزوار حول العالم حالياً.</p>
+            
+            <div class="progress-bar-container">
+                <div class="progress-text-row">
+                    <span id="targetGoalText">الهدف القادم: 10,000</span>
+                    <span id="targetPercentText">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div id="sebhaProgressBar" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div class="sebha-circle" onclick="incrementGlobalSebha()" style="border-color:#ef4444; width:150px; height:150px;">
+                    <span class="counter" id="globalSebhaCounter" style="color:#ef4444; font-size:3.5rem;">0</span>
+                </div>
+                <div style="font-weight:bold; color:#ef4444; font-size: 1.1rem; margin-top: 10px;">اللهم صلِ وسلم على نبينا محمد</div>
+            </div>
         </div>
 
+        <!-- ======================= -->
+        <!-- 3. العبادات الأساسية -->
+        <!-- ======================= -->
         <div class="card reveal" style="border-top-color: var(--primary);">
             <h2 style="justify-content: center;"><i class="fas fa-book-open"></i> القرآن الكريم</h2>
             
@@ -213,7 +251,7 @@
             </div>
         </div>
         
-        <!-- الدعاء الصوتي -->
+        <!-- الدعاء الصوتي (يقرأ من dua.mp3) -->
         <div class="card reveal">
             <h2 style="justify-content: space-between;"><i class="fas fa-microphone-alt" style="color:#8b5cf6"></i> دعاء صوتي للمتوفي</h2>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">دعاء خاشع لروح الوالد رحمه الله</p>
@@ -231,25 +269,6 @@
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">اضغط على الجزء لحجزه وقراءته. التحديث يظهر للجميع لحظياً.</p>
             <div class="juz-grid" id="juzGrid">
                 <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">جاري تحميل الأجزاء...</div>
-            </div>
-        </div>
-
-        <!-- ثواب سورة الإخلاص -->
-        <div class="card reveal" style="border-top-color: #10b981; text-align: center;">
-            <h2 style="justify-content: center; color: #10b981;"><i class="fas fa-gem"></i> ثواب ختمة في ثوانٍ</h2>
-            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">قال رسول الله ﷺ عن سورة الإخلاص: "والذي نفسي بيده إنها لتعدل ثلث القرآن". اقرأها 3 مرات واهدي ثوابها للوالد.</p>
-            
-            <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary);">
-                بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>
-                قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
-            </div>
-            
-            <button onclick="window.incrementIkhlas(event)" style="background: #10b981; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
-                <i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد
-            </button>
-            
-            <div style="margin-top: 15px; font-size: 0.85rem; color: #555;">
-                عدد الختمات المهداة من السورة: <strong id="ikhlasCount" style="color: #10b981; font-size: 1.1rem;">0</strong>
             </div>
         </div>
 
@@ -271,55 +290,9 @@
             </div>
         </div>
 
-        <div class="card reveal">
-            <h2 style="color: #ef4444; margin:0;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
-            <p style="font-size:0.85rem; opacity:0.8; margin-top:5px; text-align:center;">يجمع العداد تسبيحات كل الزوار حول العالم حالياً.</p>
-            
-            <div class="progress-bar-container">
-                <div class="progress-text-row">
-                    <span id="targetGoalText">الهدف القادم: 10,000</span>
-                    <span id="targetPercentText">0%</span>
-                </div>
-                <div class="progress-track">
-                    <div id="sebhaProgressBar" class="progress-fill"></div>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-bottom: 20px;">
-                <div class="sebha-circle" onclick="incrementGlobalSebha()" style="border-color:#ef4444; width:150px; height:150px;">
-                    <span class="counter" id="globalSebhaCounter" style="color:#ef4444; font-size:3.5rem;">0</span>
-                </div>
-                <div style="font-weight:bold; color:#ef4444; font-size: 1.1rem; margin-top: 10px;">اللهم صلِ وسلم على نبينا محمد</div>
-            </div>
-        </div>
-
-        <div class="card reveal">
-            <h2 style="justify-content: space-between;"><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية وأذكار</h2>
-            <div class="grid-2">
-                <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()"><i class="fas fa-book-reader" style="color:white;"></i> 30 دعاء للمتوفي</button>
-                <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> أذكار الصباح</button>
-                <button class="action-btn" onclick="openAzkar('evening')"><i class="fas fa-moon" style="color:#6366f1"></i> أذكار المساء</button>
-                <button class="action-btn" style="background:rgba(139, 92, 246, 0.1); color:#8b5cf6;" onclick="showRandomAyah()">
-                    <i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة قرآنية
-                </button>
-            </div>
-            <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
-        </div>
-
-        <!-- حديث اليوم -->
-        <div class="card reveal" style="border-top-color: #3b82f6;">
-            <h2 style="color: #3b82f6;"><i class="fas fa-book-reader"></i> حديث اليوم</h2>
-            <div style="background: rgba(59, 130, 246, 0.05); padding: 20px; border-radius: 15px; border: 1px dashed #3b82f6; text-align: center; position: relative;">
-                <i class="fas fa-quote-right" style="position: absolute; top: 10px; right: 15px; color: rgba(59, 130, 246, 0.2); font-size: 2rem;"></i>
-                <div id="randomHadith" style="font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.8; color: var(--text-main); font-weight: bold; margin-bottom: 10px; transition: 0.3s;">
-                </div>
-                <div id="hadithSource" style="font-size: 0.85rem; color: #666; font-style: italic; transition: 0.3s;"></div>
-            </div>
-            <button onclick="showRandomHadith()" style="background: none; border: none; color: #3b82f6; margin-top: 10px; font-weight: bold; cursor: pointer; width: 100%; text-align: left; font-size: 0.85rem;">
-                <i class="fas fa-sync-alt"></i> حديث آخر
-            </button>
-        </div>
-        
+        <!-- ======================= -->
+        <!-- 4. الغذاء الروحي -->
+        <!-- ======================= -->
         <div class="card reveal" style="border-top-color: #8b5cf6;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <h2 style="color: #8b5cf6; margin:0;"><i class="fas fa-star-and-crescent"></i> أسماء الله الحسنى</h2>
@@ -342,6 +315,50 @@
             </div>
         </div>
 
+        <div class="card reveal" style="border-top-color: #3b82f6;">
+            <h2 style="color: #3b82f6;"><i class="fas fa-book-reader"></i> حديث اليوم</h2>
+            <div style="background: rgba(59, 130, 246, 0.05); padding: 20px; border-radius: 15px; border: 1px dashed #3b82f6; text-align: center; position: relative;">
+                <i class="fas fa-quote-right" style="position: absolute; top: 10px; right: 15px; color: rgba(59, 130, 246, 0.2); font-size: 2rem;"></i>
+                <div id="randomHadith" style="font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.8; color: var(--text-main); font-weight: bold; margin-bottom: 10px; transition: 0.3s;">
+                </div>
+                <div id="hadithSource" style="font-size: 0.85rem; color: #666; font-style: italic; transition: 0.3s;"></div>
+            </div>
+            <button onclick="showRandomHadith()" style="background: none; border: none; color: #3b82f6; margin-top: 10px; font-weight: bold; cursor: pointer; width: 100%; text-align: left; font-size: 0.85rem;">
+                <i class="fas fa-sync-alt"></i> حديث آخر
+            </button>
+        </div>
+
+        <div class="card reveal">
+            <h2 style="justify-content: space-between;"><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية وأذكار</h2>
+            <div class="grid-2">
+                <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()"><i class="fas fa-book-reader" style="color:white;"></i> 30 دعاء للمتوفي</button>
+                <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> أذكار الصباح</button>
+                <button class="action-btn" onclick="openAzkar('evening')"><i class="fas fa-moon" style="color:#6366f1"></i> أذكار المساء</button>
+                <button class="action-btn" style="background:rgba(139, 92, 246, 0.1); color:#8b5cf6;" onclick="showRandomAyah()">
+                    <i class="fas fa-envelope-open-text" style="color:#8b5cf6"></i> رسالة قرآنية
+                </button>
+            </div>
+            <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
+        </div>
+
+        <!-- ======================= -->
+        <!-- 5. الجانب العاطفي والمواساة -->
+        <!-- ======================= -->
+        <div class="card reveal" style="text-align: center;">
+            <h2><i class="fas fa-dove" style="color:var(--accent)"></i> أثره الطيب</h2>
+            <p style="line-height: 1.8; font-size: 0.95rem; opacity: 0.9;">"كان رحمه الله رجلاً طيب القلب، محباً للخير، واصلاً للرحم، يسعى في قضاء حوائج الناس. ترك خلفه سيرة عطرة وأسرة محبة تدعو له. نسأل الله أن يجمعنا به في مستقر رحمته."</p>
+        </div>
+
+        <div class="card special-card reveal">
+            <h2 style="justify-content: center; color: var(--accent);"><i class="fas fa-tree"></i> ألبوم صدقة النخلة</h2>
+            <div style="background: rgba(5, 150, 105, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; font-weight: bold;">مُقدم بفضل الله من:<br><span style="color: var(--primary); font-size: 1.2rem;">الزوجة المخلصة، وجميع أبنائه وبناته</span></div>
+            <img src="tree.jpg" alt="نخلة الحاج محمد المملوك" class="media-box" onerror="this.style.display='none'">
+            <video class="media-box" controls preload="metadata" style="background: #000;" onerror="this.style.display='none'"><source src="video.mp4" type="video/mp4"></video>
+        </div>
+
+        <!-- ======================= -->
+        <!-- 6. المشاركة والمجتمع -->
+        <!-- ======================= -->
         <div class="card reveal">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <h2><i class="fas fa-pen-fancy"></i> سجل الدعاء العام</h2>
@@ -378,6 +395,7 @@
 
     </div>
 
+    <!-- المشغل العائم للراديو -->
     <div class="floating-player">
         <div class="player-info">
             <div class="live-indicator"></div>
