@@ -199,6 +199,29 @@
             </div>
         </div>
 
+        <!-- إضافة كارت سورة الملك الجديد -->
+        <div class="card reveal" style="border-top-color: #3b82f6; text-align: center;">
+            <h2 style="justify-content: center; color: #3b82f6;"><i class="fas fa-shield-alt"></i> وِرد الوالد (سورة الملك)</h2>
+            <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.9; margin-bottom: 15px;">
+                "هي المَانِعَةُ، المُنجِيَةُ مِن عَذَابِ القَبْرِ".<br>
+                <span style="font-size: 0.85rem; color: #666; font-weight: bold;">كان رحمه الله يواظب على قراءتها وتحصين بيته بها كل ليلة.. اقرأها بنية حفظك، ونوراً في قبره.</span>
+            </p>
+            
+            <div class="grid-2" style="margin-bottom: 15px;">
+                <button class="action-btn" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;" onclick="window.open('https://quran.com/ar/67', '_blank')">
+                    <i class="fas fa-book-open"></i> اقرأ السورة
+                </button>
+                <button class="action-btn" style="background: #3b82f6; color: white;" onclick="window.incrementMulk(event)">
+                    <i class="fas fa-check-circle" style="color: white;"></i> قرأتها بنية الوالد
+                </button>
+            </div>
+            
+            <div style="font-size: 0.85rem; color: #555;">
+                أُنير القبر بفضل قراءتها: <strong id="mulkCount" style="color: #3b82f6; font-size: 1.1rem;">0</strong> مرة
+            </div>
+        </div>
+        <!-- نهاية كارت سورة الملك -->
+
         <div class="card reveal">
             <h2 style="color: #ef4444; margin:0;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
             
@@ -1078,6 +1101,36 @@
             setTimeout(() => {
                 btn.innerHTML = '<i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد';
                 btn.style.background = '#10b981';
+            }, 3000);
+        }
+
+        // --- عداد سورة الملك (الجديد) ---
+        const mulkRef = doc(db, 'stats', 'mulk_khatma');
+        onSnapshot(mulkRef, (docSnap) => {
+            if (docSnap.exists()) {
+                document.getElementById('mulkCount').innerText = (docSnap.data().count || 0).toLocaleString();
+            } else {
+                setDoc(mulkRef, { count: 0 });
+            }
+        });
+
+        window.incrementMulk = async function(event) {
+            if(navigator.vibrate) navigator.vibrate(20);
+            
+            const btn = event.currentTarget;
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-heart" style="color:white;"></i> تقبل الله';
+            btn.style.background = '#059669'; 
+            
+            try { 
+                await updateDoc(mulkRef, { count: increment(1) }); 
+            } catch (e) { 
+                await setDoc(mulkRef, { count: 1 });
+            }
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+                btn.style.background = '#3b82f6'; 
             }, 3000);
         }
 
