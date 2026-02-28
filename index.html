@@ -126,6 +126,12 @@
         [data-theme="dark"] .progress-bar-container { background: rgba(239, 68, 68, 0.05); }
 
         #randomAyahText { transition: opacity 0.3s ease-in-out; }
+
+        /* تنسيقات نافذة الروح الخاصة */
+        .ruh-title { color: #14b8a6; font-family: 'Amiri', serif; margin-bottom: 8px; font-weight: bold; font-size: 1.3rem; border-bottom: 1px dashed rgba(20, 184, 166, 0.3); padding-bottom: 5px; display: inline-block;}
+        .ruh-paragraph { margin-bottom: 20px; line-height: 1.8; color: #444; font-size: 1.05rem;}
+        [data-theme="dark"] .ruh-title { color: #2dd4bf; border-bottom-color: rgba(45, 212, 191, 0.3);}
+        [data-theme="dark"] .ruh-paragraph { color: #cbd5e1; }
     </style>
 </head>
 <body>
@@ -384,6 +390,17 @@
         </div>
 
         <!-- ======================= -->
+        <!-- كارت ملخص كتاب الروح (الجديد) -->
+        <!-- ======================= -->
+        <div class="card reveal" style="border-top-color: #14b8a6;">
+            <h2 style="justify-content: center; color: #14b8a6;"><i class="fas fa-feather-alt"></i> رسائل طمأنينة (كتاب الروح)</h2>
+            <p style="font-size:0.9rem; opacity:0.8; text-align:center; margin-bottom:15px;">نفائس من الإمام ابن القيم عن حال الأرواح بعد الموت، وكيف تصلهم هداياكم وتفرحهم.</p>
+            <button class="action-btn" style="width:100%; background:rgba(20, 184, 166, 0.1); color:#14b8a6; flex-direction:row; justify-content:center;" onclick="openRuhModal()">
+                <i class="fas fa-book-open" style="color:#14b8a6"></i> اقرأ لِتَطْمَئِن
+            </button>
+        </div>
+
+        <!-- ======================= -->
         <!-- 5. الجانب العاطفي والمواساة -->
         <!-- ======================= -->
         <div class="card reveal" style="text-align: center;">
@@ -464,6 +481,36 @@
             <div class="close-modal" onclick="closeModal()">X</div>
             <h2 id="modalTitle" style="text-align:center; color:var(--primary); margin-bottom:15px; font-family:'Amiri'; font-size:2rem;"></h2>
             <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- نافذة ملخص كتاب الروح الموسعة (الجديدة) -->
+    <div id="ruhModal" class="modal">
+        <div class="modal-content" style="max-width: 650px;">
+            <div class="close-modal" onclick="closeRuhModal()">X</div>
+            <h2 style="text-align:center; color:#14b8a6; margin-bottom:20px; font-family:'Amiri'; font-size:1.8rem;"><i class="fas fa-dove"></i> طمأنينة القلوب من كتاب "الروح"</h2>
+            <div style="text-align:right; font-size:1.05rem; font-family:'Tajawal'; padding: 5px;">
+                <p style="margin-bottom: 15px; line-height: 1.8; opacity: 0.9;">يخبرنا الإمام ابن القيم (رحمه الله) بكلمات تثلج الصدور عن حال أرواح أحبابنا بعد الموت، وكيف يشعرون بنا:</p>
+
+                <h3 class="ruh-title">١. الأرواح تتزاور وتلتقي:</h3>
+                <p class="ruh-paragraph">أرواح المؤمنين في البرزخ في نعيم، تتلاقى وتتزاور وتتذاكر ما كان بينها في الدنيا. وعندما تصعد روح مؤمن جديد، تستقبله الأرواح كما يُستقبل الغائب العائد، ويسألونه عن أحوال أهلهم وأحبابهم في الدنيا.</p>
+
+                <h3 class="ruh-title">٢. الميت يعلم بأخبار أهله ويفرح بها:</h3>
+                <p class="ruh-paragraph">تُعرض أعمال الأحياء على أقاربهم من الأموات، فإذا رأوا خيراً من أهلهم فرحوا واستبشروا وحمدوا الله، وإذا رأوا غير ذلك دعوا لهم قائلين: "اللهم اهدهم كما هديتنا".</p>
+
+                <h3 class="ruh-title">٣. هدايا الأحياء تُنير القبور:</h3>
+                <p class="ruh-paragraph">أعظم ما يصل للميت هو (الدعاء، الصدقة، قراءة القرآن، والحج والعمرة). يخبرنا ابن القيم أن هذه الأعمال تصل إليهم على أطباق من نور، ويُقال للميت: <strong style="color: var(--accent);">"هذه هدية فلان لك"</strong>، فيفرح بها أعظم مما يفرح الحي بالهدية في الدنيا، ويتسع بها قبره وينير.</p>
+
+                <h3 class="ruh-title">٤. سماع السلام والشعور بالزائر:</h3>
+                <p class="ruh-paragraph">إذا زار الحي قبر شخص كان يعرفه في الدنيا وسلّم عليه، فإن الله يرد على الميت روحه ليرد عليه السلام ويعرفه ويستأنس بوجوده، ولذلك شُرع لنا إلقاء السلام على أهل القبور.</p>
+
+                <h3 class="ruh-title">٥. مستقر الأرواح المطمئنة:</h3>
+                <p class="ruh-paragraph">أرواح المؤمنين المتقين تكون كطير يعلق (يأكل) من شجر الجنة، وتأوي إلى قناديل معلقة تحت العرش تنعم فيها برحمة الله ورضوانه إلى يوم يبعثون.</p>
+
+                <div style="text-align: center; margin-top: 25px; font-weight: bold; color: var(--accent); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 12px; border: 1px dashed var(--accent); line-height: 1.6;">
+                    "لا تبخلوا على الوالد بهدايا الدعاء والصدقات.. فهي تصله الآن باسمكم وتملأ قبره نوراً وسروراً."
+                </div>
+            </div>
         </div>
     </div>
 
@@ -718,7 +765,17 @@
             document.getElementById('modalBody').innerHTML = '<div style="text-align:right; font-size:1.2rem; line-height:2;">1. آية الكرسي.<br>2. سورة الإخلاص والمعوذتين (3 مرات).<br>3. ' + (type === 'morning' ? 'أصبحنا وأصبح الملك لله.' : 'أمسينا وأمسى الملك لله.') + '</div>'; 
             document.getElementById('modal').classList.add('active'); 
         }
+        
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
+
+        // دوال نافذة كتاب الروح الجديدة
+        function openRuhModal() {
+            pauseRadioForModal();
+            document.getElementById('ruhModal').classList.add('active');
+        }
+        function closeRuhModal() {
+            document.getElementById('ruhModal').classList.remove('active');
+        }
 
         function checkDailyDua() {
             const today = new Date().toDateString(); 
@@ -950,26 +1007,19 @@
             }
         }
 
-        // ==================================================
-        // --- السبحة العالمية (النظام الذكي لمنع التداخل) ---
-        // ==================================================
+        // --- السبحة العالمية ---
         const sebhaDocRef = doc(db, 'stats', 'global_sebha');
         const targetStep = 10000;
-
-        let serverCount = 0;     
-        let unsavedClicks = 0;   
+        let serverCount = 0; let unsavedClicks = 0;   
 
         function updateSebhaUI() {
             const totalCount = serverCount + unsavedClicks;
-            
             document.getElementById('globalSebhaCounter').innerText = totalCount.toLocaleString();
-
             let currentTarget = targetStep;
             while (totalCount >= currentTarget) currentTarget += targetStep;
             
             if(document.getElementById('targetGoalText')) {
                 document.getElementById('targetGoalText').innerText = `الهدف القادم: ${currentTarget.toLocaleString()}`;
-                
                 let percent = (totalCount / currentTarget) * 100;
                 if (percent > 100) percent = 100;
                 document.getElementById('sebhaProgressBar').style.width = percent + '%';
@@ -978,42 +1028,27 @@
         }
 
         onSnapshot(sebhaDocRef, (docSnap) => {
-            if (docSnap.exists()) {
-                serverCount = docSnap.data().count || 0;
-            } else {
-                setDoc(sebhaDocRef, { count: 0 });
-                serverCount = 0;
-            }
+            if (docSnap.exists()) { serverCount = docSnap.data().count || 0; } else { setDoc(sebhaDocRef, { count: 0 }); serverCount = 0; }
             updateSebhaUI(); 
         });
 
         window.incrementGlobalSebha = function() {
             if(navigator.vibrate) navigator.vibrate(15);
-            unsavedClicks++; 
-            updateSebhaUI(); 
+            unsavedClicks++; updateSebhaUI(); 
         }
 
         setInterval(async () => {
             if (unsavedClicks > 0) {
-                const clicksToSend = unsavedClicks; 
-                unsavedClicks = 0; 
-                
-                try {
-                    await updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
-                } catch (e) {
-                    unsavedClicks += clicksToSend; 
-                }
+                const clicksToSend = unsavedClicks; unsavedClicks = 0; 
+                try { await updateDoc(sebhaDocRef, { count: increment(clicksToSend) }); } catch (e) { unsavedClicks += clicksToSend; }
             }
         }, 2000); 
 
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden' && unsavedClicks > 0) {
-                const clicksToSend = unsavedClicks;
-                unsavedClicks = 0;
-                updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
+                const clicksToSend = unsavedClicks; unsavedClicks = 0; updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
             }
         });
-        // ==================================================
 
         // --- الختمة الجماعية ---
         const khatmaRef = doc(db, 'stats', 'global_khatma');
@@ -1026,123 +1061,54 @@
 
         onSnapshot(khatmaRef, (docSnap) => {
             let state = {};
-            if(docSnap.exists()) {
-                state = docSnap.data();
-            } else {
-                for(let i=1; i<=30; i++) state[`juz${i}`] = false;
-                setDoc(khatmaRef, state);
-                return;
-            }
-
-            const grid = document.getElementById('juzGrid');
-            grid.innerHTML = '';
-            let completedParts = 0;
-
+            if(docSnap.exists()) { state = docSnap.data(); } else { for(let i=1; i<=30; i++) state[`juz${i}`] = false; setDoc(khatmaRef, state); return; }
+            const grid = document.getElementById('juzGrid'); grid.innerHTML = ''; let completedParts = 0;
             for(let i=1; i<=30; i++) {
-                const isRead = state[`juz${i}`];
-                if(isRead) completedParts++;
-
-                const btn = document.createElement('div');
-                btn.className = `juz-btn ${isRead ? 'read' : ''}`;
-                btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
-                
-                if(!isRead) {
-                    btn.onclick = async () => {
-                        if(confirm(`هل تنوي قراءة الجزء رقم ${i} بنية الصدقة؟ سيتم حجزه باسمك.`)) {
-                            try { await updateDoc(khatmaRef, { [`juz${i}`]: true }); } catch(e) { alert('خطأ بالاتصال'); }
-                        }
-                    };
-                } else {
-                    btn.onclick = () => alert('هذا الجزء تم قراءته مسبقاً. تقبل الله من الجميع.');
-                }
+                const isRead = state[`juz${i}`]; if(isRead) completedParts++;
+                const btn = document.createElement('div'); btn.className = `juz-btn ${isRead ? 'read' : ''}`; btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
+                if(!isRead) { btn.onclick = async () => { if(confirm(`هل تنوي قراءة الجزء رقم ${i} بنية الصدقة؟ سيتم حجزه باسمك.`)) { try { await updateDoc(khatmaRef, { [`juz${i}`]: true }); } catch(e) { alert('خطأ بالاتصال'); } } }; } else { btn.onclick = () => alert('هذا الجزء تم قراءته مسبقاً. تقبل الله من الجميع.'); }
                 grid.appendChild(btn);
             }
-
             if(completedParts === 30) {
                  setTimeout(async () => {
                      const currentSnap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.getDoc(khatmaRef));
-                     let isFull = true;
-                     for(let k=1; k<=30; k++) if(!currentSnap.data()[`juz${k}`]) isFull=false;
-                     
-                     if(isFull) {
-                        await updateDoc(khatmaStatsRef, { completed: increment(1) });
-                        let resetState = {};
-                        for(let i=1; i<=30; i++) resetState[`juz${i}`] = false;
-                        await setDoc(khatmaRef, resetState);
-                     }
+                     let isFull = true; for(let k=1; k<=30; k++) if(!currentSnap.data()[`juz${k}`]) isFull=false;
+                     if(isFull) { await updateDoc(khatmaStatsRef, { completed: increment(1) }); let resetState = {}; for(let i=1; i<=30; i++) resetState[`juz${i}`] = false; await setDoc(khatmaRef, resetState); }
                 }, 5000); 
             }
         });
         
-        // --- عداد سورة الإخلاص ---
+        // --- عداد الإخلاص ---
         const ikhlasRef = doc(db, 'stats', 'ikhlas_khatma');
         onSnapshot(ikhlasRef, (docSnap) => {
-            if (docSnap.exists()) {
-                document.getElementById('ikhlasCount').innerText = (docSnap.data().count || 0).toLocaleString();
-            } else {
-                setDoc(ikhlasRef, { count: 0 });
-            }
+            if (docSnap.exists()) { document.getElementById('ikhlasCount').innerText = (docSnap.data().count || 0).toLocaleString(); } else { setDoc(ikhlasRef, { count: 0 }); }
         });
 
         window.incrementIkhlas = async function(event) {
             if(navigator.vibrate) navigator.vibrate(20);
-            
-            const btn = event.currentTarget;
-            btn.innerHTML = '<i class="fas fa-heart"></i> تقبل الله منك';
-            btn.style.background = '#059669';
-            btn.style.color = 'white';
-            
-            try { 
-                await updateDoc(ikhlasRef, { count: increment(1) }); 
-            } catch (e) { 
-                await setDoc(ikhlasRef, { count: 1 });
-            }
-            
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد';
-                btn.style.background = '#10b981';
-            }, 3000);
+            const btn = event.currentTarget; btn.innerHTML = '<i class="fas fa-heart"></i> تقبل الله منك'; btn.style.background = '#059669'; btn.style.color = 'white';
+            try { await updateDoc(ikhlasRef, { count: increment(1) }); } catch (e) { await setDoc(ikhlasRef, { count: 1 }); }
+            setTimeout(() => { btn.innerHTML = '<i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد'; btn.style.background = '#10b981'; }, 3000);
         }
 
         // --- عداد سورة الملك (الجديد) ---
         const mulkRef = doc(db, 'stats', 'mulk_khatma');
         onSnapshot(mulkRef, (docSnap) => {
-            if (docSnap.exists()) {
-                document.getElementById('mulkCount').innerText = (docSnap.data().count || 0).toLocaleString();
-            } else {
-                setDoc(mulkRef, { count: 0 });
-            }
+            if (docSnap.exists()) { document.getElementById('mulkCount').innerText = (docSnap.data().count || 0).toLocaleString(); } else { setDoc(mulkRef, { count: 0 }); }
         });
 
         window.incrementMulk = async function(event) {
             if(navigator.vibrate) navigator.vibrate(20);
-            
-            const btn = event.currentTarget;
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-heart" style="color:white;"></i> تقبل الله';
-            btn.style.background = '#059669'; 
-            
-            try { 
-                await updateDoc(mulkRef, { count: increment(1) }); 
-            } catch (e) { 
-                await setDoc(mulkRef, { count: 1 });
-            }
-            
-            setTimeout(() => {
-                btn.innerHTML = originalHtml;
-                btn.style.background = '#3b82f6'; 
-            }, 3000);
+            const btn = event.currentTarget; const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-heart" style="color:white;"></i> تقبل الله'; btn.style.background = '#059669'; 
+            try { await updateDoc(mulkRef, { count: increment(1) }); } catch (e) { await setDoc(mulkRef, { count: 1 }); }
+            setTimeout(() => { btn.innerHTML = originalHtml; btn.style.background = '#3b82f6'; }, 3000);
         }
 
-        // --- عداد الزوار (النسخة الدائمة - localStorage) ---
+        // --- عداد الزوار ---
         const visitorsRef = doc(db, 'stats', 'visitors_count');
-        
         onSnapshot(visitorsRef, (docSnap) => {
-            if (docSnap.exists()) {
-                document.getElementById('visitorsCount').innerText = (docSnap.data().count || 0).toLocaleString();
-            } else {
-                setDoc(visitorsRef, { count: 0 });
-            }
+            if (docSnap.exists()) { document.getElementById('visitorsCount').innerText = (docSnap.data().count || 0).toLocaleString(); } else { setDoc(visitorsRef, { count: 0 }); }
         });
 
         if(!localStorage.getItem('visited_sadaqa_permanent')) {
@@ -1152,13 +1118,7 @@
     </script>
     
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('SW Registered'))
-                    .catch(err => console.log('SW Error', err));
-            });
-        }
+        if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').then(reg => console.log('SW Registered')).catch(err => console.log('SW Error', err)); }); }
     </script>
 </body>
 </html>
