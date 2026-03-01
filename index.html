@@ -288,6 +288,8 @@
                         <option value="ar.alafasy">الشيخ العفاسي</option>
                         <option value="ar.abdulbasitmurattal">الشيخ عبد الباسط</option>
                         <option value="ar.minshawi">الشيخ المنشاوي</option>
+                        <!-- تمت إضافة الشيخ خالد الجليل هنا بنجاح -->
+                        <option value="ar.khalidaljalil">الشيخ خالد الجليل</option>
                     </select>
                     <select id="audioSurah" class="quran-select" style="margin-bottom:0;" onchange="updateAudioPlayer()">
                         <option value="36">سورة يس</option>
@@ -591,10 +593,17 @@
         function resetIndividualSebha() { indCount = 0; document.getElementById('individualCounter').innerText = indCount; localStorage.setItem('ind_count', 0); }
         function setZekr(text) { document.getElementById('zekrName').innerText = text; resetIndividualSebha(); }
 
+        // --- تحديث كود مشغل القرآن لإضافة خالد الجليل ---
         function updateAudioPlayer() {
             const reciter = document.getElementById('audioReciter').value;
             const surahNum = document.getElementById('audioSurah').value.padStart(3, '0');
-            let baseUrl = reciter === 'ar.alafasy' ? "https://server8.mp3quran.net/afs/" : reciter === 'ar.abdulbasitmurattal' ? "https://server7.mp3quran.net/basit/" : "https://server10.mp3quran.net/minsh/";
+            let baseUrl = "";
+            
+            if (reciter === 'ar.alafasy') baseUrl = "https://server8.mp3quran.net/afs/";
+            else if (reciter === 'ar.khalidaljalil') baseUrl = "https://server10.mp3quran.net/jleel/";
+            else if (reciter === 'ar.abdulbasitmurattal') baseUrl = "https://server7.mp3quran.net/basit/";
+            else baseUrl = "https://server10.mp3quran.net/minsh/";
+            
             document.getElementById('quranAudioPlayer').src = `${baseUrl}${surahNum}.mp3`;
         }
         setTimeout(updateAudioPlayer, 1000); 
