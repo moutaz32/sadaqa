@@ -39,7 +39,6 @@
         
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; }
-        /* إضافة position: relative; لاحتواء تأثيرات النور */
         body { font-family: 'Tajawal', sans-serif; background: var(--light); color: #333; transition: 0.3s; padding-bottom: 120px; background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px); background-size: 20px 20px; overflow-x: hidden; position: relative; }
         [data-theme="dark"] body { color: #fff; }
         
@@ -438,6 +437,12 @@
 
         <div class="card reveal">
             <h2 style="justify-content: space-between;"><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية وأذكار</h2>
+            
+            <!-- إضافة زر أدعية رمضان الجديد هنا -->
+            <button class="action-btn" style="width:100%; background:linear-gradient(135deg, #f59e0b, #d97706); color:white; margin-bottom:10px; flex-direction:row; justify-content:center; border: 2px solid #fcd34d; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);" onclick="openRamadanDuasModal()">
+                <i class="fas fa-moon" style="color:white; margin-left: 8px;"></i> أدعية رمضان للمتوفي
+            </button>
+
             <div class="grid-2">
                 <button class="action-btn" style="background:var(--primary); color:white;" onclick="openDeadDuasModal()"><i class="fas fa-book-reader" style="color:white;"></i> 30 دعاء للمتوفي</button>
                 <button class="action-btn" onclick="openAzkar('morning')"><i class="fas fa-sun" style="color:#f59e0b"></i> أذكار الصباح</button>
@@ -834,11 +839,39 @@
             "اللهم اجعل ذريته ستراً له من النار، واجعل دعاءنا له نوراً يصله في قبره، وارفع درجته في المهديين."
         ];
 
+        // --- أدعية رمضان الجديدة ---
+        const ramadanDuas = [
+            "اللهم في هذا الشهر الكريم، اجعل المهندس محمد المملوك ممن غفرت لهم وعتقت رقابهم من النار.",
+            "اللهم إننا في شهر الرحمة، فارحمه برحمتك التي وسعت كل شيء، واغفر له ذنوبه كلها.",
+            "اللهم بحق صيامنا وقيامنا في رمضان، اجعل قبره روضة من رياض الجنة ولا تجعله حفرة من حفر النار.",
+            "اللهم في هذه الأيام المباركة، أنزل على قبره ضياءً ونوراً وفسحة وسروراً وجازه بالحسنات إحساناً.",
+            "اللهم اجعله في رمضان من الفائزين برضوانك، والناجين من عذابك، والمبشرين بجنات النعيم.",
+            "اللهم اجعل رمضانه في الجنة أجمل، واجعله على سرر متقابلين مع النبيين والشهداء والصالحين.",
+            "اللهم بحق ليلة القدر وما فيها من بركات، اكتب له عفواً ومغفرة لا يشقى بعدها أبداً.",
+            "اللهم أطعمه من ثمار الجنة، واسقه من حوض نبيك محمد ﷺ شربة هنيئة مريئة لا يظمأ بعدها أبداً.",
+            "اللهم في أيام العتق من النيران، اعتق رقبة عبدك محمد المملوك من النار وحرم جسده عليها.",
+            "اللهم اجعل دعاءنا له في هذه الأيام الفضيلة مستجاباً، واجعله في أعلى عليين مع عبادك المقربين.",
+            "اللهم كما بلغتنا رمضان، بلغه سلامنا ودعاءنا، واجعل أعمالنا الصالحة نوراً يصله في قبره.",
+            "اللهم تقبل منه ما قدم من صيام وقيام في حياته، واجعلها شفيعة له يوم يلقاك.",
+            "اللهم يا حنان يا منان في هذا الشهر العظيم، جازه عن مرضه وصبره خير الجزاء وارفع درجته في المهديين.",
+            "اللهم اجعله ممن يقال لهم 'كلوا واشربوا هنيئاً بما أسلفتم في الأيام الخالية' يا أرحم الراحمين.",
+            "اللهم أظله تحت ظل عرشك يوم لا ظل إلا ظلك، واجعله ممن ينادون من باب الريان ليدخلوا الجنة بسلام."
+        ];
+
         function openDeadDuasModal() { 
             pauseRadioForModal();
             document.getElementById('modalTitle').innerText = 'أدعية للمتوفي'; 
             let content = '<div style="text-align:right;">'; 
             deadDuas.forEach((dua, idx) => { content += `<div class="dua-item" style="border-right-color:#059669; margin-bottom:15px;"><strong>${idx + 1}.</strong> ${dua}</div>`; }); 
+            document.getElementById('modalBody').innerHTML = content + '</div>'; 
+            document.getElementById('modal').classList.add('active'); 
+        }
+
+        function openRamadanDuasModal() { 
+            pauseRadioForModal();
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-moon" style="color:#f59e0b; margin-left:10px;"></i> أدعية رمضان للمتوفي'; 
+            let content = '<div style="text-align:right;">'; 
+            ramadanDuas.forEach((dua, idx) => { content += `<div class="dua-item" style="border-right-color:#f59e0b; background: rgba(245, 158, 11, 0.05); margin-bottom:15px; font-weight:bold;"><strong>${idx + 1}.</strong> ${dua}</div>`; }); 
             document.getElementById('modalBody').innerHTML = content + '</div>'; 
             document.getElementById('modal').classList.add('active'); 
         }
@@ -864,7 +897,9 @@
         function checkDailyDua() {
             const today = new Date().toDateString(); 
             if (localStorage.getItem('daily_visit') !== today) {
-                document.getElementById('dailyDuaText').innerText = `"${deadDuas[Math.floor(Math.random() * deadDuas.length)]}"`;
+                // دمج الأدعية الرمضانية مع العادية عشان تظهر للمستخدمين كل يوم بشكل عشوائي
+                const allDuasForToast = [...deadDuas, ...ramadanDuas];
+                document.getElementById('dailyDuaText').innerText = `"${allDuasForToast[Math.floor(Math.random() * allDuasForToast.length)]}"`;
                 document.getElementById('dailyModal').classList.add('active');
                 localStorage.setItem('daily_visit', today);
             }
@@ -874,7 +909,8 @@
         function showPeriodicToast() {
             const toast = document.getElementById('localToast');
             const toastText = document.getElementById('toastText');
-            toastText.innerText = deadDuas[Math.floor(Math.random() * deadDuas.length)];
+            const allDuasForToast = [...deadDuas, ...ramadanDuas];
+            toastText.innerText = allDuasForToast[Math.floor(Math.random() * allDuasForToast.length)];
             toast.classList.add('show');
             if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
             setTimeout(() => { toast.classList.remove('show'); }, 8000);
@@ -996,7 +1032,7 @@
             { name: "الْمُقْتَدِرُ", meaning: "المبالغ في القدرة", dua: "اللهم يا مقتدر، اقدر له الخير حيث كان، واجعل الجنة مأواه ومستقره." },
             { name: "الْمُقَدِّمُ", meaning: "الذي يقدم من يشاء", dua: "اللهم يا مقدم، قدمه في زمرة السابقين والمقربين في جنات النعيم." },
             { name: "الْمُؤَخِّرُ", meaning: "الذي يؤخر من يشاء", dua: "اللهم أخر عنه كل عذاب، وأبعده عن النار كما باعدت بين المشرق والمغرب." },
-            { name: "الْأَوَّلُ", meaning: "الذي ليس قبله شيء", dua: "اللهم يا أول، اجعله من أوائل من يشربون من حوض نبيك محمد ﷺ شربة لا يظمأ بعدها أبداً." },
+            { name: "الْأَوَّلُ", meaning: "الذي ليس قبله شيء", dua: "اللهم يا أول، اجعله من اوائل من يشربون من حوض نبيك محمد ﷺ شربة لا يظمأ بعدها أبداً." },
             { name: "الْآخِرُ", meaning: "الذي ليس بعده شيء", dua: "اللهم يا آخر، اجعل آخر عهده بالدنيا رضاك عنه، وأول عهده بالآخرة نعيم جنانك." },
             { name: "الظَّاهِرُ", meaning: "المتجلي بآياته", dua: "اللهم أظهر له مقعده من الجنة غدوة وعشياً، واجعله مستبشراً بما أعددت له." },
             { name: "الْبَاطِنُ", meaning: "المطلع على السرائر", dua: "اللهم يا باطن، أنت أعلم بما في باطنه من حب لك، فاجعله في رياض الجنة ينعم." },
