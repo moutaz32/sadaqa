@@ -214,7 +214,7 @@
             </button>
         </div>
 
-        <!-- 2. كروت العشر الأواخر (العفو، التحدي، ثواب 84 سنة) -->
+        <!-- 2. كروت العشر الأواخر (العفو، التحدي) -->
         
         <!-- عداد العفو العالمي للعشر الأواخر -->
         <div class="card reveal gold-card">
@@ -222,7 +222,7 @@
             <p style="font-size:0.85rem; opacity:0.8; margin-bottom:10px; text-align:center;">أعظم دعاء في ليالي القدر كما علمنا النبي ﷺ.</p>
             <div style="background: rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 15px; margin: 15px 0; text-align: center; border: 1px dashed #f59e0b;">
                 <p style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #d97706; font-weight: bold; line-height: 1.8; margin: 0;">
-                    "اللهم إنك عفوٌ تُحب العفو فاعفُ عن الحج محمد المملوك"
+                    "اللهم إنك عفوٌ تُحب العفو فاعفُ عن المهندس محمد المملوك"
                 </p>
             </div>
             <div style="text-align: center; margin-bottom: 10px;">
@@ -230,20 +230,6 @@
                     <span class="counter" id="globalAfwCounter" style="color:#f59e0b;">0</span>
                 </div>
                 <div style="font-weight:bold; color:#f59e0b; font-size: 1rem; margin-top: 10px;">اضغط هنا لاحتساب دعوة العفو</div>
-            </div>
-        </div>
-
-        <!-- كارت ثواب 84 سنة -->
-        <div class="card reveal" style="border-top-color: #8b5cf6;">
-            <h2 style="justify-content: center; color: #8b5cf6;"><i class="fas fa-gem"></i> ثواب 84 عاماً (أسرع أعمال)</h2>
-            <p style="text-align: center; font-size: 0.9rem; margin-bottom: 15px; opacity: 0.9;">أعمال بسيطة لو صادفت ليلة القدر كُتبت لك وللوالد كأنكم فعلتموها 84 عاماً متواصلة!</p>
-            <div class="grid-2">
-                <button class="action-btn" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.3);" onclick="Swal.fire('تقبل الله!', 'كُتبت لكما كقراءة القرآن كاملاً لمدة 84 عاماً بإذن الله.', 'success')">
-                    <i class="fas fa-book-open"></i> الإخلاص 3 مرات
-                </button>
-                <button class="action-btn" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);" onclick="Swal.fire('تقبل الله!', 'كُتب لكما كاستغفار متواصل لمدة 84 عاماً بإذن الله.', 'success')">
-                    <i class="fas fa-seedling"></i> استغفار 10 مرات
-                </button>
             </div>
         </div>
 
@@ -302,6 +288,23 @@
             </div>
         </div>
 
+        <!-- 5. أسرع ثواب (كارت سورة الإخلاص بالعداد) -->
+        <div class="card reveal" style="border-top-color: #10b981; text-align: center;">
+            <h2 style="justify-content: center; color: #10b981;"><i class="fas fa-gem"></i> ثواب 84 عاماً (سورة الإخلاص)</h2>
+            <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 15px; font-weight: bold; color: #059669;">في ليالي القدر، قراءتها 3 مرات تُعادل ثواب ختم القرآن لـ 84 عاماً متواصلة!</p>
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary);">
+                بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>
+                قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
+            </div>
+            <button onclick="window.incrementIkhlas(event)" style="background: #10b981; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
+                <i class="fas fa-check-circle"></i> أتممت القراءة 3 مرات للوالد
+            </button>
+            <div style="margin-top: 15px; font-size: 0.85rem; color: #555;">
+                عدد الختمات المهداة من السورة: <strong id="ikhlasCount" style="color: #10b981; font-size: 1.1rem;">0</strong>
+            </div>
+        </div>
+
+        <!-- 6. كارت سورة الملك -->
         <div class="card reveal" style="border-top-color: #3b82f6; text-align: center;">
             <h2 style="justify-content: center; color: #3b82f6;"><i class="fas fa-shield-alt"></i> وِرد الوالد (سورة الملك)</h2>
             <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.9; margin-bottom: 15px;">
@@ -313,7 +316,7 @@
                     <i class="fas fa-book-open"></i> اقرأ السورة
                 </button>
                 <button class="action-btn" style="background: #3b82f6; color: white;" onclick="window.incrementMulk(event)">
-                    <i class="fas fa-check-circle" style="color: white;"></i> قرأتها بنية الوالد
+                    <i class="fas fa-check-circle" style="color: white;"></i> أتممت القراءة للوالد
                 </button>
             </div>
             <div style="font-size: 0.85rem; color: #555;">
@@ -321,7 +324,7 @@
             </div>
         </div>
 
-        <!-- 5. حملة الصلاة على النبي -->
+        <!-- 7. حملة الصلاة على النبي -->
         <div class="card reveal">
             <h2 style="color: #ef4444; margin:0; cursor:pointer; user-select:none;" id="secretAdminBtn"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
             <div style="background: rgba(239, 68, 68, 0.08); border-radius: 12px; padding: 12px; margin: 15px 0; text-align: center; border: 1px dashed #ef4444;">
@@ -349,7 +352,7 @@
             </div>
         </div>
 
-        <!-- 6. القرآن الكريم -->
+        <!-- 8. القرآن الكريم -->
         <div class="card reveal" style="border-top-color: var(--primary);">
             <h2 style="justify-content: center;"><i class="fas fa-book-open"></i> القرآن الكريم</h2>
             <button class="gift-btn" id="fatihaBtn" onclick="giftFatiha()">
@@ -386,7 +389,7 @@
             </div>
         </div>
 
-        <!-- 7. الدعاء الصوتي وسجل الدعاء -->
+        <!-- 9. الدعاء الصوتي وسجل الدعاء -->
         <div class="card reveal">
             <h2 style="justify-content: space-between;"><i class="fas fa-microphone-alt" style="color:#8b5cf6"></i> دعاء صوتي للمتوفي</h2>
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">دعاء خاشع لروح الوالد رحمه الله</p>
@@ -408,7 +411,7 @@
             <div class="dua-list" id="duaList"></div>
         </div>
 
-        <!-- 8. أدعية وأذكار -->
+        <!-- 10. أدعية وأذكار -->
         <div class="card reveal">
             <h2 style="justify-content: space-between;"><i class="fas fa-praying-hands" style="color:#3b82f6"></i> أدعية وأذكار</h2>
             <button class="action-btn" style="width:100%; background:linear-gradient(135deg, #f59e0b, #d97706); color:white; margin-bottom:10px; flex-direction:row; justify-content:center; border: 2px solid #fcd34d; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);" onclick="openRamadanDuasModal()">
@@ -425,7 +428,7 @@
             <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:10px; border:2px dashed var(--accent); border-radius:10px; font-family:'Amiri'; font-size:1.3rem;">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
         </div>
 
-        <!-- 9. مسبحة الأذكار الفردية -->
+        <!-- 11. مسبحة الأذكار الفردية -->
         <div class="card reveal">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                 <h2><i class="fas fa-fingerprint"></i> مسبحة الأذكار</h2>
@@ -444,7 +447,7 @@
             </div>
         </div>
 
-        <!-- 10. الغذاء الروحي -->
+        <!-- 12. الغذاء الروحي -->
         <div class="card reveal" style="border-top-color: #8b5cf6;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <h2 style="color: #8b5cf6; margin:0;"><i class="fas fa-star-and-crescent"></i> أسماء الله الحسنى</h2>
@@ -485,7 +488,7 @@
             </button>
         </div>
 
-        <!-- 11. أثره الطيب وألبوم النخلة -->
+        <!-- 13. أثره الطيب وألبوم النخلة -->
         <div class="card reveal" style="text-align: center;">
             <h2><i class="fas fa-dove" style="color:var(--accent)"></i> أثره الطيب</h2>
             <p style="line-height: 1.8; font-size: 0.95rem; opacity: 0.9;">"كان رحمه الله رجلاً طيب القلب، محباً للخير، واصلاً للرحم، يسعى في قضاء حوائج الناس. ترك خلفه سيرة عطرة وأسرة محبة تدعو له. نسأل الله أن يجمعنا به في مستقر رحمته."</p>
@@ -498,7 +501,7 @@
             <video class="media-box" controls preload="metadata" style="background: #000;" onerror="this.style.display='none'"><source src="video.mp4" type="video/mp4"></video>
         </div>
 
-        <!-- 12. المشاركة -->
+        <!-- 14. المشاركة -->
         <div class="card reveal" style="margin-bottom: 20px;">
             <h2><i class="fas fa-image"></i> شارك دعاء (صورة)</h2>
             <div class="share-card" id="cardCapture">
@@ -1019,7 +1022,7 @@
 
         function shareOnWhatsApp() { 
             const siteUrl = "https://moutaz32.github.io/sadaqa/"; 
-            const message = `السلام عليكم ورحمة الله وبركاته 🤍\nبندعوكم للمشاركة في نفحات العشر الأواخر وحملة دعاء العفو والصلاة على النبي عن روح (المهندس محمد المملوك) رحمه الله.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
+            const message = `السلام عليكم ورحمة الله وبركاته 🤍\nبندعوكم للمشاركة في نفحات العشر الأواخر وحملة دعاء العفو والصلاة على النبي عن روح (الحج محمد المملوك) رحمه الله.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
             const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`; 
             window.open(whatsappUrl, '_blank'); 
         }
@@ -1358,7 +1361,7 @@
                                     await updateDoc(khatmaRef, { [`juz${i}`]: true });
                                     Swal.fire({ 
                                         title: 'تقبل الله منك! 🤍', 
-                                        html: `تم تسجيل الجزء <b>${i}</b> باسمك<br>في ميزان حسنات المهندس محمد المملوك إن شاء الله.`, 
+                                        html: `تم تسجيل الجزء <b>${i}</b> باسمك<br>في ميزان حسنات الحج محمد المملوك إن شاء الله.`, 
                                         icon: 'success', 
                                         confirmButtonText: 'آمين', 
                                         confirmButtonColor: '#059669' 
@@ -1400,19 +1403,30 @@
             } 
         });
 
+        // دالة سورة الإخلاص مع الدعاء المنبثق
         window.incrementIkhlas = async function(event) { 
             if(navigator.vibrate) navigator.vibrate(20); 
             const btn = event.currentTarget; 
             btn.innerHTML = '<i class="fas fa-heart"></i> تقبل الله منك'; 
             btn.style.background = '#059669'; 
             btn.style.color = 'white'; 
+            
+            // إظهار دعاء سورة الإخلاص
+            Swal.fire({
+                title: 'تقبل الله منك 🤍',
+                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: #0f172a;">"اللهم بحق سورة الإخلاص التي تعدل ثلث القرآن، ابْنِ لعبدك الحج محمد المملوك قصراً في الجنة، واجعلها نوراً له في قبره."</div>',
+                icon: 'success',
+                confirmButtonText: 'آمين يارب',
+                confirmButtonColor: '#10b981'
+            });
+
             try { 
                 await updateDoc(ikhlasRef, { count: increment(1) }); 
             } catch (e) { 
                 await setDoc(ikhlasRef, { count: 1 }); 
             } 
             setTimeout(() => { 
-                btn.innerHTML = '<i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد'; 
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> أتممت القراءة 3 مرات للوالد'; 
                 btn.style.background = '#10b981'; 
             }, 3000); 
         }
@@ -1426,12 +1440,23 @@
             } 
         });
 
+        // دالة سورة الملك مع الدعاء المنبثق
         window.incrementMulk = async function(event) { 
             if(navigator.vibrate) navigator.vibrate(20); 
             const btn = event.currentTarget; 
             const originalHtml = btn.innerHTML; 
             btn.innerHTML = '<i class="fas fa-heart" style="color:white;"></i> تقبل الله'; 
             btn.style.background = '#059669'; 
+            
+            // إظهار دعاء سورة الملك
+            Swal.fire({
+                title: 'بُوركت قراءتك 🤍',
+                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: #0f172a;">"اللهم اجعل سورة الملك المانعة المنجية حصناً للحج محمد المملوك من عذاب القبر، وشفيعة له حتى تدخله الجنة."</div>',
+                icon: 'success',
+                confirmButtonText: 'آمين يارب',
+                confirmButtonColor: '#3b82f6'
+            });
+
             try { 
                 await updateDoc(mulkRef, { count: increment(1) }); 
             } catch (e) { 
@@ -1470,4 +1495,4 @@
         }
     </script>
 </body>
-            </html> 
+</html>
