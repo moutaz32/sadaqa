@@ -179,7 +179,7 @@
         
         <!-- 1. كروت المواسم والنفحات والعشر الأواخر -->
         
-        <!-- كارت ليلة القدر الذهبي (يظهر بالليل في العشر الأواخر) -->
+        <!-- كارت ليلة القدر الذهبي (يظهر بالليل في الليالي الوترية) -->
         <div id="qadrCard" class="card reveal gold-card" style="display: none;">
             <h2 style="justify-content: center;" class="gold-text"><i class="fas fa-crown"></i> ليلة القدر (خير من ألف شهر)</h2>
             <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
@@ -222,7 +222,7 @@
             <p style="font-size:0.85rem; opacity:0.8; margin-bottom:10px; text-align:center;">أعظم دعاء في ليالي القدر كما علمنا النبي ﷺ.</p>
             <div style="background: rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 15px; margin: 15px 0; text-align: center; border: 1px dashed #f59e0b;">
                 <p style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #d97706; font-weight: bold; line-height: 1.8; margin: 0;">
-                    "اللهم إنك عفوٌ تُحب العفو فاعفُ عن المهندس محمد المملوك"
+                    "اللهم إنك عفوٌ تُحب العفو فاعفُ عن الحج محمد المملوك"
                 </p>
             </div>
             <div style="text-align: center; margin-bottom: 10px;">
@@ -603,12 +603,40 @@
         }
         checkNightPrayer();
 
-        // دالة ظهور كارت ليلة القدر (مفعل طول الليل في العشر الأواخر)
+        // -----------------------------------------------------
+        // الدالة الذكية لظهور كارت ليلة القدر في الليالي الوترية 
+        // بناءً على تاريخ 1 رمضان الفعلي المعطى من الإدمن
+        // -----------------------------------------------------
         function checkQadrNight() {
-            const hour = new Date().getHours();
-            // الكارت يظهر من المغرب (نفترض 18:00) لحد الفجر (5:00)
-            if (hour >= 18 || hour < 5) {
+            // ضبط تاريخ 1 رمضان يدوياً (19 فبراير 2026) عشان نتخطى مشكلة النتيجة
+            // الشهور في الجافاسكريبت تبدأ من 0، لذلك فبراير هو 1
+            const ramadanStart = new Date(2026, 1, 19); 
+            const now = new Date();
+            
+            // تصفير الساعات عشان الحسابات تكون دقيقة
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            
+            const diffTime = today.getTime() - ramadanStart.getTime();
+            let currentRamadanDay = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            
+            const hour = now.getHours();
+            
+            // في الإسلام، الليلة تبدأ من المغرب (هنفترض الساعة 17:00 / 5 مساءً)
+            // يعني لو إحنا بعد 5 مساءً، إحنا كده دخلنا في الليلة بتاعت اليوم اللي بعده
+            if (hour >= 17) {
+                currentRamadanDay += 1;
+            }
+            
+            // الليالي الوترية المستهدفة في العشر الأواخر
+            const isOddNight = [21, 23, 25, 27, 29].includes(currentRamadanDay);
+            
+            // الكارت يظهر بالليل فقط (من 5 مساءً لـ 5 فجراً)
+            const isNightTime = hour >= 17 || hour < 5;
+            
+            if (isNightTime && isOddNight) {
                 document.getElementById('qadrCard').style.display = 'block';
+            } else {
+                document.getElementById('qadrCard').style.display = 'none';
             }
         }
         checkQadrNight();
@@ -660,7 +688,7 @@
             
             Swal.fire({
                 title: 'تُقُبِّلَ عملك 🤍',
-                text: 'تم تسجيل ثواب هذا الورد في صحيفة المهندس محمد المملوك بفضلك، بارك الله فيك.',
+                text: 'تم تسجيل ثواب هذا الورد في صحيفة الحج محمد المملوك بفضلك، بارك الله فيك.',
                 icon: 'success',
                 confirmButtonColor: '#06b6d4',
                 confirmButtonText: 'الحمد لله'
@@ -1317,7 +1345,7 @@
                     btn.onclick = async () => { 
                         Swal.fire({
                             title: `حجز الجزء رقم ${i}`,
-                            text: "هل تنوي قراءة هذا الجزء بنية الصدقة الجارية عن المهندس محمد المملوك؟",
+                            text: "هل تنوي قراءة هذا الجزء بنية الصدقة الجارية عن الحج محمد المملوك؟",
                             icon: 'question',
                             showCancelButton: true,
                             confirmButtonColor: '#059669',
@@ -1442,4 +1470,4 @@
         }
     </script>
 </body>
-</html>
+            </html> 
