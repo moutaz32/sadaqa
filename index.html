@@ -57,6 +57,12 @@
         .card h2 { font-size: 1.2rem; margin-bottom: 15px; color: var(--primary); display: flex; align-items: center; gap: 10px; }
         .special-card { border-top: 4px solid var(--accent) !important; box-shadow: 0 10px 25px rgba(251, 191, 36, 0.15); text-align: center; }
         
+        /* تأثيرات كروت العشر الأواخر الذهبية */
+        .gold-card { border-top: 4px solid #f59e0b !important; background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(255, 255, 255, 0)) !important; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15) !important;}
+        [data-theme="dark"] .gold-card { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), #1e293b) !important; border-top: 4px solid #fbbf24 !important;}
+        .gold-text { color: #f59e0b !important; }
+        [data-theme="dark"] .gold-text { color: #fbbf24 !important; }
+
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .action-btn { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: bold; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.95rem; border: none; transition: 0.2s; text-decoration: none;}
         [data-theme="dark"] .action-btn { background: rgba(255,255,255,0.05); color: white; }
@@ -171,11 +177,24 @@
 
     <div class="container">
         
-        <!-- 1. كروت المواسم والنفحات -->
+        <!-- 1. كروت المواسم والنفحات والعشر الأواخر -->
+        
+        <!-- كارت ليلة القدر الذهبي (يظهر بالليل في العشر الأواخر) -->
+        <div id="qadrCard" class="card reveal gold-card" style="display: none;">
+            <h2 style="justify-content: center;" class="gold-text"><i class="fas fa-crown"></i> ليلة القدر (خير من ألف شهر)</h2>
+            <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
+                قد تكون هذه الليلة هي ليلة القدر! دعوة واحدة للوالد الآن تُعادل 84 عاماً من الدعاء المتواصل.
+            </p>
+            <button onclick="this.innerHTML='<i class=\'fas fa-check-double\'></i> دعوت له بالعفو والمغفرة'; this.style.background='#059669'; this.style.color='white'; if(navigator.vibrate) navigator.vibrate(50); Swal.fire('تُقُبِّل دعاؤك', 'نسأل الله أن تصادف دعواتك ساعة إجابة وليلة قدر.', 'success');" style="background: #f59e0b; color: #fff; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
+                <i class="fas fa-hands-praying"></i> دعوت له الآن من قلبي
+            </button>
+        </div>
+
+        <!-- كارت التهجد والعتق (معدل للعشر الأواخر) -->
         <div id="nightPrayerCard" class="card reveal" style="display: none; border-top-color: #8b5cf6; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(15, 23, 42, 0.8)); color: white;">
-            <h2 style="justify-content: center; color: #c4b5fd; margin-bottom: 5px;"><i class="fas fa-star-and-crescent"></i> نفحات جوف الليل</h2>
+            <h2 style="justify-content: center; color: #c4b5fd; margin-bottom: 5px;"><i class="fas fa-star-and-crescent"></i> نفحات التهجد والعتق</h2>
             <p style="text-align: center; font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; color: #e2e8f0;">
-                أنت الآن في وقت نزول الرحمات واستجابة الدعوات (الثلث الأخير من الليل)، ونحن في أيام العتق من النيران.. صَلِّ ركعتين لله، واذكر الوالد بدعوة خالصة في سجودك.
+                نحن الآن في ليالي العتق من النيران (الثلث الأخير من الليل).. اذكر الوالد في صلاة التهجد ليُكتب من العُتقاء الفائزين بالجنة.
             </p>
             <button onclick="this.innerHTML='<i class=\'fas fa-check-double\'></i> تقبل الله قيامك ودعاءك'; this.style.background='#10b981'; this.style.color='white'; if(navigator.vibrate) navigator.vibrate(50);" style="background: #8b5cf6; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);">
                 <i class="fas fa-pray"></i> صليت ركعتين ودعوت له
@@ -195,6 +214,51 @@
             </button>
         </div>
 
+        <!-- 2. كروت العشر الأواخر (العفو، التحدي، ثواب 84 سنة) -->
+        
+        <!-- عداد العفو العالمي للعشر الأواخر -->
+        <div class="card reveal gold-card">
+            <h2 style="justify-content: center;" class="gold-text"><i class="fas fa-hands-holding-circle"></i> حملة المليون عفو (العشر الأواخر)</h2>
+            <p style="font-size:0.85rem; opacity:0.8; margin-bottom:10px; text-align:center;">أعظم دعاء في ليالي القدر كما علمنا النبي ﷺ.</p>
+            <div style="background: rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 15px; margin: 15px 0; text-align: center; border: 1px dashed #f59e0b;">
+                <p style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #d97706; font-weight: bold; line-height: 1.8; margin: 0;">
+                    "اللهم إنك عفوٌ تُحب العفو فاعفُ عن المهندس محمد المملوك"
+                </p>
+            </div>
+            <div style="text-align: center; margin-bottom: 10px;">
+                <div class="sebha-circle" onclick="incrementGlobalAfw()" style="border-color:#f59e0b; background: rgba(245, 158, 11, 0.05);">
+                    <span class="counter" id="globalAfwCounter" style="color:#f59e0b;">0</span>
+                </div>
+                <div style="font-weight:bold; color:#f59e0b; font-size: 1rem; margin-top: 10px;">اضغط هنا لاحتساب دعوة العفو</div>
+            </div>
+        </div>
+
+        <!-- كارت ثواب 84 سنة -->
+        <div class="card reveal" style="border-top-color: #8b5cf6;">
+            <h2 style="justify-content: center; color: #8b5cf6;"><i class="fas fa-gem"></i> ثواب 84 عاماً (أسرع أعمال)</h2>
+            <p style="text-align: center; font-size: 0.9rem; margin-bottom: 15px; opacity: 0.9;">أعمال بسيطة لو صادفت ليلة القدر كُتبت لك وللوالد كأنكم فعلتموها 84 عاماً متواصلة!</p>
+            <div class="grid-2">
+                <button class="action-btn" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.3);" onclick="Swal.fire('تقبل الله!', 'كُتبت لكما كقراءة القرآن كاملاً لمدة 84 عاماً بإذن الله.', 'success')">
+                    <i class="fas fa-book-open"></i> الإخلاص 3 مرات
+                </button>
+                <button class="action-btn" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);" onclick="Swal.fire('تقبل الله!', 'كُتب لكما كاستغفار متواصل لمدة 84 عاماً بإذن الله.', 'success')">
+                    <i class="fas fa-seedling"></i> استغفار 10 مرات
+                </button>
+            </div>
+        </div>
+
+        <!-- تحدي صدقة العشر -->
+        <div class="card reveal" style="border-top-color: #ec4899;">
+            <h2 style="justify-content: center; color: #ec4899;"><i class="fas fa-hand-holding-dollar"></i> تحدي صدقة العشر الأواخر</h2>
+            <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px; opacity: 0.9;">
+                تصدق كل يوم بأي شيء (مبلغ بسيط، إطعام صائم، أو حتى سقي طائر) بنية الوالد.. لتضمن أن تقع صدقتك في ليلة القدر.
+            </p>
+            <button onclick="this.innerHTML='<i class=\'fas fa-check\'></i> تصدقت اليوم بنية الوالد'; this.style.background='#059669'; this.style.color='white'; Swal.fire('بوركت يداك', 'صدقة في ليلة القدر خير من صدقة ألف شهر.', 'success');" style="background: #ec4899; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; width: 100%; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);">
+                <i class="fas fa-coins"></i> تصدقت اليوم بنية الوالد
+            </button>
+        </div>
+
+
         <div id="fridayCard" class="card reveal" style="display: none; border-top-color: #f59e0b; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0));">
             <h2 style="justify-content: center; color: #f59e0b;"><i class="fas fa-mosque"></i> نفحات يوم الجمعة</h2>
             <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
@@ -210,7 +274,7 @@
             </div>
         </div>
 
-        <!-- 2. كارت الورد اليومي -->
+        <!-- 3. كارت الورد اليومي -->
         <div class="card reveal" style="border-top-color: #06b6d4;">
             <h2 style="justify-content: space-between; color: #06b6d4; margin-bottom: 10px;">
                 <span><i class="fas fa-calendar-day"></i> وِرْد اليوم (تحدي الخير)</span>
@@ -226,7 +290,7 @@
             </button>
         </div>
 
-        <!-- 3. الختمة الجماعية -->
+        <!-- 4. الختمة الجماعية -->
         <div class="card reveal">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <h2 style="margin:0;"><i class="fas fa-quran"></i> الختمة الجماعية</h2>
@@ -235,22 +299,6 @@
             <p style="font-size:0.85rem; opacity:0.8; text-align:center; margin-bottom:15px;">اضغط على الجزء لحجزه وقراءته. التحديث يظهر للجميع لحظياً.</p>
             <div class="juz-grid" id="juzGrid">
                 <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">جاري تحميل الأجزاء...</div>
-            </div>
-        </div>
-
-        <!-- 4. أسرع ثواب (الإخلاص والملك) -->
-        <div class="card reveal" style="border-top-color: #10b981; text-align: center;">
-            <h2 style="justify-content: center; color: #10b981;"><i class="fas fa-gem"></i> ثواب ختمة في ثوانٍ</h2>
-            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">قال رسول الله ﷺ عن سورة الإخلاص: "والذي نفسي بيده إنها لتعدل ثلث القرآن".</p>
-            <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary);">
-                بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>
-                قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
-            </div>
-            <button onclick="window.incrementIkhlas(event)" style="background: #10b981; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
-                <i class="fas fa-check-circle"></i> قرأتها 3 مرات بنية الوالد
-            </button>
-            <div style="margin-top: 15px; font-size: 0.85rem; color: #555;">
-                عدد الختمات المهداة من السورة: <strong id="ikhlasCount" style="color: #10b981; font-size: 1.1rem;">0</strong>
             </div>
         </div>
 
@@ -536,7 +584,6 @@
         </div>
     </div>
 
-    <!-- السكربتات الخاصة بالواجهة والأدعية الكاملة 100% -->
     <script>
         function toggleTheme() { 
             const body = document.body; 
@@ -556,10 +603,20 @@
         }
         checkNightPrayer();
 
+        // دالة ظهور كارت ليلة القدر (مفعل طول الليل في العشر الأواخر)
+        function checkQadrNight() {
+            const hour = new Date().getHours();
+            // الكارت يظهر من المغرب (نفترض 18:00) لحد الفجر (5:00)
+            if (hour >= 18 || hour < 5) {
+                document.getElementById('qadrCard').style.display = 'block';
+            }
+        }
+        checkQadrNight();
+
         const dailyWirds = [
             { title: "قراءة سورة الدخان", desc: "اقرأ سورة الدخان الليلة، واجعل ثوابها للمهندس محمد المملوك لعل الله يكتبه من المعتوقين من النار." },
             { title: "الاستغفار 100 مرة", desc: "استغفر الله مائة مرة بنية أن يغفر الله له ويرفع درجاته في الجنة." },
-            { title: "الصلاة على النبي ﷺ", desc: "صلِّ على النبي 100 مرة بنية أن يرزقه الله شفاعته وشربة هنيئة من حوضه." },
+            { title: "الصلاة على النبي ﷺ", desc: "صلِّ على النبي 100 مرة بنية أن يرزقه الله شفاعته وشربة هنيئة من حوضه." },
             { title: "سورة الملك", desc: "اقرأ سورة الملك المنجية، واجعل ثوابها إضاءة وسعة في قبر الوالد." },
             { title: "صدقة السر (الماء)", desc: "ضع طبقاً من الماء للطيور، أو اسقِ قطة، وانوِ ثواب هذا العمل للمغفور له." },
             { title: "آية الكرسي وأواخر البقرة", desc: "اقرأها الآن، وادعُ له بعدها بالرحمة والمغفرة وأن يجعله الله في حفظه." },
@@ -602,7 +659,7 @@
             localStorage.setItem('wird_done_date', new Date().toDateString());
             
             Swal.fire({
-                title: 'تُقُبِّلَ عملك 🤍',
+                title: 'تُقُبِّلَ عملك 🤍',
                 text: 'تم تسجيل ثواب هذا الورد في صحيفة المهندس محمد المملوك بفضلك، بارك الله فيك.',
                 icon: 'success',
                 confirmButtonColor: '#06b6d4',
@@ -748,7 +805,6 @@
         }
         singleDuaAudio.onended = function() { singleDuaIcon.className = "fas fa-play"; singleDuaBtn.style.background = "#8b5cf6"; };
 
-        // القائمة الكاملة للرسائل القرآنية (30 رسالة)
         const quranMessages = [
             "وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَى",
             "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا، إِنَّ مَعَ الْعُسْرِ يُسْرًا",
@@ -792,7 +848,6 @@
             if(navigator.vibrate) navigator.vibrate(20);
         }
 
-        // القائمة الكاملة لأدعية المتوفي (30 دعاء)
         const deadDuas = [
             "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
             "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وزوجاً خيراً من زوجه، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار.",
@@ -826,7 +881,6 @@
             "اللهم اجعل ذريته ستراً له من النار، واجعل دعاءنا له نوراً يصله في قبره، وارفع درجته في المهديين."
         ];
 
-        // القائمة الكاملة لأدعية رمضان (15 دعاء)
         const ramadanDuas = [
             "اللهم في هذا الشهر الكريم، اجعل المهندس محمد المملوك ممن غفرت لهم وعتقت رقابهم من النار.",
             "اللهم إننا في شهر الرحمة، فارحمه برحمتك التي وسعت كل شيء، واغفر له ذنوبه كلها.",
@@ -937,12 +991,11 @@
 
         function shareOnWhatsApp() { 
             const siteUrl = "https://moutaz32.github.io/sadaqa/"; 
-            const message = `السلام عليكم ورحمة الله وبركاته 🤍\nبندعوكم للمشاركة في الختمة القرآنية وحملة الصلاة على النبي عن روح (المهندس محمد المملوك) رحمه الله.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
+            const message = `السلام عليكم ورحمة الله وبركاته 🤍\nبندعوكم للمشاركة في نفحات العشر الأواخر وحملة دعاء العفو والصلاة على النبي عن روح (المهندس محمد المملوك) رحمه الله.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
             const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`; 
             window.open(whatsappUrl, '_blank'); 
         }
 
-        // القائمة الكاملة لأسماء الله الحسنى (99 اسم بالدعاء)
         const allahNames = [
             { name: "الرَّحْمَنُ", meaning: "الذي وسعت رحمته كل شيء", dua: "اللهم يا رحمن، ارحم عبدك محمد المملوك برحمتك التي وسعت كل شيء، واغمره بفيض عطائك." },
             { name: "الرَّحِيمُ", meaning: "الموصل رحمته للمؤمنين", dua: "اللهم يا رحيم، ارحم ضعفه وغربته، وكن به رحيماً يا أرحم الراحمين." },
@@ -1110,7 +1163,7 @@
             }
         }
 
-        // السبحة العالمية
+        // السبحة العالمية (الصلاة على النبي)
         const sebhaDocRef = doc(db, 'stats', 'global_sebha');
         const targetStep = 10000;
         let serverCount = 0; 
@@ -1147,6 +1200,33 @@
             updateSebhaUI(); 
         }
 
+        // عداد العفو (للعشر الأواخر)
+        const afwDocRef = doc(db, 'stats', 'global_afw');
+        let serverAfwCount = 0; 
+        let unsavedAfwClicks = 0;   
+
+        function updateAfwUI() {
+            const totalAfwCount = serverAfwCount + unsavedAfwClicks;
+            document.getElementById('globalAfwCounter').innerText = totalAfwCount.toLocaleString();
+        }
+
+        onSnapshot(afwDocRef, (docSnap) => {
+            if (docSnap.exists()) { 
+                serverAfwCount = docSnap.data().count || 0; 
+            } else { 
+                setDoc(afwDocRef, { count: 0 }); 
+                serverAfwCount = 0; 
+            }
+            updateAfwUI(); 
+        });
+
+        window.incrementGlobalAfw = function() {
+            if(navigator.vibrate) navigator.vibrate(15);
+            unsavedAfwClicks++; 
+            updateAfwUI(); 
+        }
+
+        // إرسال الكليكات للسيرفر كل ثانيتين
         setInterval(async () => {
             if (unsavedClicks > 0) {
                 const clicksToSend = unsavedClicks; 
@@ -1157,13 +1237,29 @@
                     unsavedClicks += clicksToSend; 
                 }
             }
+            if (unsavedAfwClicks > 0) {
+                const afwClicksToSend = unsavedAfwClicks; 
+                unsavedAfwClicks = 0; 
+                try { 
+                    await updateDoc(afwDocRef, { count: increment(afwClicksToSend) }); 
+                } catch (e) { 
+                    unsavedAfwClicks += afwClicksToSend; 
+                }
+            }
         }, 2000); 
 
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden' && unsavedClicks > 0) {
-                const clicksToSend = unsavedClicks; 
-                unsavedClicks = 0; 
-                updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
+            if (document.visibilityState === 'hidden') {
+                if (unsavedClicks > 0) {
+                    const clicksToSend = unsavedClicks; 
+                    unsavedClicks = 0; 
+                    updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
+                }
+                if (unsavedAfwClicks > 0) {
+                    const afwClicksToSend = unsavedAfwClicks; 
+                    unsavedAfwClicks = 0; 
+                    updateDoc(afwDocRef, { count: increment(afwClicksToSend) });
+                }
             }
         });
         
