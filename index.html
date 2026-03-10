@@ -12,10 +12,10 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="صدقة جارية على روح المهندس الحاج محمد المملوك. شاركنا الدعاء والختمة.">
+    <meta name="description" content="صدقة جارية على روح الحاج محمد المملوك. شاركنا الدعاء والختمة.">
     <meta name="theme-color" content="#059669">
     
-    <meta property="og:title" content="صدقة جارية | م. محمد المملوك">
+    <meta property="og:title" content="صدقة جارية | الحاج محمد المملوك">
     <meta property="og:description" content="اللهم اغفر له وارحمه. شاركنا في الختمة الجماعية والدعاء.">
     <meta property="og:image" content="https://img.icons8.com/color/480/quran.png"> 
     <meta property="og:url" content="https://moutaz32.github.io/sadaqa/">
@@ -24,7 +24,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/quran.png">
     
-    <title>صدقة جارية | م. محمد المملوك</title>
+    <title>صدقة جارية | الحاج محمد المملوك</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -49,7 +49,7 @@
         
         header { background: linear-gradient(160deg, #064e3b, #065f46); color: white; padding: 50px 20px 80px; text-align: center; border-radius: 0 0 50px 50px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 10; }
         .theme-btn { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(5px); }
-        .deceased-name { font-size: 2rem; font-weight: 900; color: #fbbf24; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3; margin: 10px 0; }
+        .deceased-name { font-size: 2.2rem; font-weight: 900; color: #fbbf24; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3; margin: 10px 0; }
         
         .container { max-width: 600px; margin: -50px auto 0; padding: 0 15px; position: relative; z-index: 10; }
         .card { background: var(--glass); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: var(--shadow); border-top: 4px solid var(--primary); backdrop-filter: blur(10px); }
@@ -62,6 +62,26 @@
         [data-theme="dark"] .gold-card { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), #1e293b) !important; border-top: 4px solid #fbbf24 !important;}
         .gold-text { color: #f59e0b !important; }
         [data-theme="dark"] .gold-text { color: #fbbf24 !important; }
+
+        /* ستايل خيمة الاعتكاف (الجديد) */
+        .itikaf-btn { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fbbf24; border: 2px solid #fbbf24; padding: 15px; border-radius: 20px; font-weight: bold; font-size: 1.2rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.5); text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; animation: pulseGlow 2s infinite; }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
+        
+        .itikaf-overlay { position: fixed; inset: 0; background: #020617; z-index: 9999; display: none; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; opacity: 0; transition: opacity 0.5s; color: white; }
+        .itikaf-overlay.active { display: flex; opacity: 1; }
+        .close-itikaf { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px 20px; border-radius: 20px; font-family: 'Tajawal'; font-size: 1rem; cursor: pointer; z-index: 10; backdrop-filter: blur(5px); }
+        .itikaf-content { max-width: 500px; width: 100%; margin-top: 60px; text-align: center; animation: slideUp 0.5s ease-out; }
+        .itikaf-title { font-family: 'Amiri'; font-size: 2.5rem; color: #fbbf24; margin-bottom: 10px; text-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+        .itikaf-subtitle { font-size: 1rem; color: #94a3b8; margin-bottom: 30px; }
+        
+        .itikaf-dua-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(251, 191, 36, 0.2); padding: 25px; border-radius: 20px; margin-bottom: 25px; }
+        .itikaf-dua-text { font-family: 'Amiri'; font-size: 1.4rem; line-height: 1.9; color: #e2e8f0; margin-bottom: 15px; }
+        
+        .itikaf-counter-box { background: rgba(255,255,255,0.05); border: 2px solid #fbbf24; border-radius: 20px; padding: 20px; margin-bottom: 15px; cursor: pointer; user-select: none; transition: 0.1s; }
+        .itikaf-counter-box:active { transform: scale(0.96); background: rgba(255,255,255,0.1); }
+        .itikaf-counter-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; color: #fbbf24; }
+        .itikaf-number { font-size: 3rem; font-weight: 900; font-family: sans-serif; color: white; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        .itikaf-hint { font-size: 0.8rem; color: #64748b; margin-top: 5px; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .action-btn { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: bold; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.95rem; border: none; transition: 0.2s; text-decoration: none;}
@@ -164,10 +184,40 @@
         createParticles();
     </script>
 
+    <!-- واجهة خيمة الاعتكاف (تظهر عند الضغط) -->
+    <div id="itikafModal" class="itikaf-overlay">
+        <button class="close-itikaf" onclick="closeItikaf()"><i class="fas fa-times"></i> الخروج من الخلوة</button>
+        <div class="itikaf-content">
+            <h1 class="itikaf-title"><i class="fas fa-moon"></i> خلوة العشر الأواخر</h1>
+            <p class="itikaf-subtitle">أنت الآن في معية الله.. بعيداً عن ضجيج الدنيا، اذكر الوالد واذكر نفسك.</p>
+
+            <div class="itikaf-dua-box">
+                <div style="color: #fbbf24; font-weight: bold; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-pray"></i> دعاء لك وللوالد</div>
+                <p class="itikaf-dua-text">"اللهم إنك عفوٌ تحب العفو فاعفُ عني وعن عبدك الحاج محمد المملوك. اللهم أَعتق رقابنا من النار، واغفر لنا ذنوبنا، واجمعنا به في الفردوس الأعلى بلا حساب ولا سابقة عذاب."</p>
+                <button onclick="this.innerHTML='<i class=\'fas fa-check\'></i> آمين يا رب العالمين'; this.style.color='#10b981'; this.style.borderColor='#10b981';" style="background: transparent; border: 1px solid #fbbf24; color: #fbbf24; padding: 8px 20px; border-radius: 15px; font-family: 'Tajawal'; cursor: pointer; transition: 0.3s;">أَمِّن بقلبك</button>
+            </div>
+
+            <!-- عداد العفو في الخيمة -->
+            <div class="itikaf-counter-box" onclick="incrementGlobalAfw()" style="border-color: #fbbf24;">
+                <div class="itikaf-counter-title" style="color: #fbbf24;">اللهم إنك عفو تحب العفو فاعفُ عنه</div>
+                <div class="itikaf-number" id="itikafAfwCounter" style="color: #fbbf24;">0</div>
+                <div class="itikaf-hint">اضغط للتسبيح وإرسال الدعوة</div>
+            </div>
+
+            <!-- الصلاة على النبي في الخيمة -->
+            <div class="itikaf-counter-box" onclick="incrementGlobalSebha()" style="border-color: #ef4444;">
+                <div class="itikaf-counter-title" style="color: #ef4444;">اللهم صلِ وسلم على نبينا محمد</div>
+                <div class="itikaf-number" id="itikafSebhaCounter" style="color: #ef4444;">0</div>
+                <div class="itikaf-hint">اضغط للتسبيح والصلاة</div>
+            </div>
+            
+        </div>
+    </div>
+
     <header>
         <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
         <div style="opacity: 0.9;">صدقة جارية على روح المغفور له بإذن الله</div>
-        <div class="deceased-name">المهندس الحاج<br>محمد المملوك</div>
+        <div class="deceased-name">الحاج<br>محمد المملوك</div>
         <p style="font-size:0.9rem; opacity:0.9;">اللهم اجعل قبره روضة من رياض الجنة</p>
         <div style="margin-top: 15px; font-size: 0.85rem; background: rgba(0,0,0,0.2); display: inline-block; padding: 5px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
             <i class="fas fa-users" style="color: var(--accent); margin-left: 5px;"></i> عدد الزوار: <span id="visitorsCount" style="font-weight: bold; font-size: 1rem;">...</span>
@@ -176,6 +226,11 @@
 
 
     <div class="container">
+
+        <!-- زر الدخول لخيمة الاعتكاف -->
+        <button class="itikaf-btn" onclick="openItikaf()">
+            <i class="fas fa-tent" style="margin-left: 5px; font-size: 1.3rem;"></i> ادخل خيمة الاعتكاف الرقمية (خلوة الدعاء)
+        </button>
         
         <!-- 1. كروت المواسم والنفحات والعشر الأواخر -->
         
@@ -207,14 +262,14 @@
                 للصائم عند فطره دعوة لا تُرد.. اذكر الوالد (رحمه الله) بدعوة خالصة قبل إفطارك، وفي صلاة التراويح.
             </p>
             <div style="background: rgba(245, 158, 11, 0.1); padding: 15px; border-radius: 15px; font-family: 'Amiri', serif; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary); text-align: center; border: 1px dashed #f59e0b;">
-                "اللهم إنك عفوٌ كريمٌ تحب العفو فاعفُ عن عبدك محمد المملوك، واغفر له وارحمه، واعتقه من النار في هذا الشهر الفضيل"
+                "اللهم إنك عفوٌ كريمٌ تحب العفو فاعفُ عن عبدك الحاج محمد المملوك، واغفر له وارحمه، واعتقه من النار في هذا الشهر الفضيل"
             </div>
             <button onclick="this.innerHTML='<i class=\'fas fa-check\'></i> تقبل الله دعاءك وصيامك'; this.style.background='#059669'; this.style.color='white'; if(navigator.vibrate) navigator.vibrate(50);" style="background: #f59e0b; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
                 <i class="fas fa-hands-holding"></i> أهديته دعوة صيامي اليوم
             </button>
         </div>
 
-        <!-- 2. كروت العشر الأواخر (العفو، التحدي) -->
+        <!-- 2. كروت العشر الأواخر (العفو، التحدي، ثواب 84 سنة) -->
         
         <!-- عداد العفو العالمي للعشر الأواخر -->
         <div class="card reveal gold-card">
@@ -222,7 +277,7 @@
             <p style="font-size:0.85rem; opacity:0.8; margin-bottom:10px; text-align:center;">أعظم دعاء في ليالي القدر كما علمنا النبي ﷺ.</p>
             <div style="background: rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 15px; margin: 15px 0; text-align: center; border: 1px dashed #f59e0b;">
                 <p style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #d97706; font-weight: bold; line-height: 1.8; margin: 0;">
-                    "اللهم إنك عفوٌ تُحب العفو فاعفُ عن المهندس محمد المملوك"
+                    "اللهم إنك عفوٌ تُحب العفو فاعفُ عن الحاج محمد المملوك"
                 </p>
             </div>
             <div style="text-align: center; margin-bottom: 10px;">
@@ -230,6 +285,20 @@
                     <span class="counter" id="globalAfwCounter" style="color:#f59e0b;">0</span>
                 </div>
                 <div style="font-weight:bold; color:#f59e0b; font-size: 1rem; margin-top: 10px;">اضغط هنا لاحتساب دعوة العفو</div>
+            </div>
+        </div>
+
+        <!-- كارت ثواب 84 سنة -->
+        <div class="card reveal" style="border-top-color: #8b5cf6;">
+            <h2 style="justify-content: center; color: #8b5cf6;"><i class="fas fa-gem"></i> ثواب 84 عاماً (أسرع أعمال)</h2>
+            <p style="text-align: center; font-size: 0.9rem; margin-bottom: 15px; opacity: 0.9;">أعمال بسيطة لو صادفت ليلة القدر كُتبت لك وللوالد كأنكم فعلتموها 84 عاماً متواصلة!</p>
+            <div class="grid-2">
+                <button class="action-btn" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.3);" onclick="Swal.fire('تقبل الله!', 'كُتبت لكما كقراءة القرآن كاملاً لمدة 84 عاماً بإذن الله.', 'success')">
+                    <i class="fas fa-book-open"></i> الإخلاص 3 مرات
+                </button>
+                <button class="action-btn" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);" onclick="Swal.fire('تقبل الله!', 'كُتب لكما كاستغفار متواصل لمدة 84 عاماً بإذن الله.', 'success')">
+                    <i class="fas fa-seedling"></i> استغفار 10 مرات
+                </button>
             </div>
         </div>
 
@@ -459,7 +528,7 @@
                 <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(5, 150, 105, 0.05)); padding: 15px; border-radius: 15px; border: 1px dashed #8b5cf6; position:relative; overflow:hidden;">
                     <i class="fas fa-quote-right" style="position:absolute; top:10px; right:10px; opacity:0.1; font-size:2rem;"></i>
                     <div id="godDua" style="font-family: 'Amiri'; font-size: 1.2rem; color: #1e293b; margin-bottom: 10px; font-weight:bold; line-height:1.8; transition:0.3s;">
-                        اللهم يا رحمن، ارحم عبدك محمد المملوك برحمتك التي وسعت كل شيء، واغمره بفيض عطائك.
+                        اللهم يا رحمن، ارحم عبدك الحاج محمد المملوك برحمتك التي وسعت كل شيء، واغمره بفيض عطائك.
                     </div>
                     <button onclick="this.innerHTML='<i class=\'fas fa-check\'></i> تقبل الله'; this.style.background='#059669'; if(navigator.vibrate) navigator.vibrate(50);" style="background: #8b5cf6; color: white; border: none; padding: 8px 25px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; transition:0.3s; box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);">
                         <i class="fas fa-heart"></i> آمين يا رب
@@ -506,7 +575,7 @@
             <h2><i class="fas fa-image"></i> شارك دعاء (صورة)</h2>
             <div class="share-card" id="cardCapture">
                 <div style="font-family:'Amiri'; font-size:1.5rem; color:#f59e0b; margin-bottom:5px;">بسم الله الرحمن الرحيم</div>
-                <p style="font-size:1.1rem; line-height:1.8;">"اللهم اغفر لعبدك<br><span style="color:#f59e0b; font-weight:bold; font-size:1.4rem;">المهندس الحاج<br>محمد المملوك بن خديجة</span><br>وآنس وحشته وارحم غربته<br>واجعل قبره روضة من رياض الجنة"</p>
+                <p style="font-size:1.1rem; line-height:1.8;">"اللهم اغفر لعبدك<br><span style="color:#f59e0b; font-weight:bold; font-size:1.4rem;">الحاج<br>محمد المملوك بن خديجة</span><br>وآنس وحشته وارحم غربته<br>واجعل قبره روضة من رياض الجنة"</p>
                 <div style="margin-top:15px; font-size:0.8rem; opacity:0.7;">صدقة جارية مقدمة من أسرته</div>
             </div>
             <button class="action-btn" style="width:100%; background:var(--accent); color:#1e293b; flex-direction:row; justify-content:center;" onclick="downloadImage('cardCapture', 'Dua_Haj_Mohamed.png')">
@@ -592,6 +661,23 @@
             const body = document.body; 
             body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); 
         }
+
+        // دوال خيمة الاعتكاف
+        function openItikaf() {
+            document.getElementById('itikafModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // منع النزول والطلوع في الشاشة الخلفية
+            // تشغيل الراديو أوتوماتيك بصوت هادي لو مش شغال
+            const radio = document.getElementById('radio');
+            if(radio.paused) {
+                radio.volume = 0.3; // صوت هادي للاعتكاف
+                document.getElementById('volumeSlider').value = 0.3;
+                toggleRadio();
+            }
+        }
+        function closeItikaf() {
+            document.getElementById('itikafModal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // إرجاع حركة الشاشة
+        }
         
         function checkFriday() {
             if (new Date().getDay() === 5) document.getElementById('fridayCard').style.display = 'block';
@@ -608,32 +694,20 @@
 
         // -----------------------------------------------------
         // الدالة الذكية لظهور كارت ليلة القدر في الليالي الوترية 
-        // بناءً على تاريخ 1 رمضان الفعلي المعطى من الإدمن
         // -----------------------------------------------------
         function checkQadrNight() {
-            // ضبط تاريخ 1 رمضان يدوياً (19 فبراير 2026) عشان نتخطى مشكلة النتيجة
-            // الشهور في الجافاسكريبت تبدأ من 0، لذلك فبراير هو 1
             const ramadanStart = new Date(2026, 1, 19); 
             const now = new Date();
-            
-            // تصفير الساعات عشان الحسابات تكون دقيقة
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            
             const diffTime = today.getTime() - ramadanStart.getTime();
             let currentRamadanDay = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-            
             const hour = now.getHours();
             
-            // في الإسلام، الليلة تبدأ من المغرب (هنفترض الساعة 17:00 / 5 مساءً)
-            // يعني لو إحنا بعد 5 مساءً، إحنا كده دخلنا في الليلة بتاعت اليوم اللي بعده
             if (hour >= 17) {
                 currentRamadanDay += 1;
             }
             
-            // الليالي الوترية المستهدفة في العشر الأواخر
             const isOddNight = [21, 23, 25, 27, 29].includes(currentRamadanDay);
-            
-            // الكارت يظهر بالليل فقط (من 5 مساءً لـ 5 فجراً)
             const isNightTime = hour >= 17 || hour < 5;
             
             if (isNightTime && isOddNight) {
@@ -645,7 +719,7 @@
         checkQadrNight();
 
         const dailyWirds = [
-            { title: "قراءة سورة الدخان", desc: "اقرأ سورة الدخان الليلة، واجعل ثوابها للمهندس محمد المملوك لعل الله يكتبه من المعتوقين من النار." },
+            { title: "قراءة سورة الدخان", desc: "اقرأ سورة الدخان الليلة، واجعل ثوابها للحاج محمد المملوك لعل الله يكتبه من المعتوقين من النار." },
             { title: "الاستغفار 100 مرة", desc: "استغفر الله مائة مرة بنية أن يغفر الله له ويرفع درجاته في الجنة." },
             { title: "الصلاة على النبي ﷺ", desc: "صلِّ على النبي 100 مرة بنية أن يرزقه الله شفاعته وشربة هنيئة من حوضه." },
             { title: "سورة الملك", desc: "اقرأ سورة الملك المنجية، واجعل ثوابها إضاءة وسعة في قبر الوالد." },
@@ -691,7 +765,7 @@
             
             Swal.fire({
                 title: 'تُقُبِّلَ عملك 🤍',
-                text: 'تم تسجيل ثواب هذا الورد في صحيفة الحج محمد المملوك بفضلك، بارك الله فيك.',
+                text: 'تم تسجيل ثواب هذا الورد في صحيفة الحاج محمد المملوك بفضلك، بارك الله فيك.',
                 icon: 'success',
                 confirmButtonColor: '#06b6d4',
                 confirmButtonText: 'الحمد لله'
@@ -913,7 +987,7 @@
         ];
 
         const ramadanDuas = [
-            "اللهم في هذا الشهر الكريم، اجعل المهندس محمد المملوك ممن غفرت لهم وعتقت رقابهم من النار.",
+            "اللهم في هذا الشهر الكريم، اجعل الحاج محمد المملوك ممن غفرت لهم وعتقت رقابهم من النار.",
             "اللهم إننا في شهر الرحمة، فارحمه برحمتك التي وسعت كل شيء، واغفر له ذنوبه كلها.",
             "اللهم بحق صيامنا وقيامنا في رمضان، اجعل قبره روضة من رياض الجنة ولا تجعله حفرة من حفر النار.",
             "اللهم في هذه الأيام المباركة، أنزل على قبره ضياءً ونوراً وفسحة وسروراً وجازه بالحسنات إحساناً.",
@@ -921,7 +995,7 @@
             "اللهم اجعل رمضانه في الجنة أجمل، واجعله على سرر متقابلين مع النبيين والشهداء والصالحين.",
             "اللهم بحق ليلة القدر وما فيها من بركات، اكتب له عفواً ومغفرة لا يشقى بعدها أبداً.",
             "اللهم أطعمه من ثمار الجنة، واسقه من حوض نبيك محمد ﷺ شربة هنيئة مريئة لا يظمأ بعدها أبداً.",
-            "اللهم في أيام العتق من النيران، اعتق رقبة عبدك محمد المملوك من النار وحرم جسده عليها.",
+            "اللهم في أيام العتق من النيران، اعتق رقبة عبدك الحاج محمد المملوك من النار وحرم جسده عليها.",
             "اللهم اجعل دعاءنا له في هذه الأيام الفضيلة مستجاباً، واجعله في أعلى عليين مع عبادك المقربين.",
             "اللهم كما بلغتنا رمضان، بلغه سلامنا ودعاءنا، واجعل أعمالنا الصالحة نوراً يصله في قبره.",
             "اللهم تقبل منه ما قدم من صيام وقيام في حياته، واجعلها شفيعة له يوم يلقاك.",
@@ -1022,15 +1096,15 @@
 
         function shareOnWhatsApp() { 
             const siteUrl = "https://moutaz32.github.io/sadaqa/"; 
-            const message = `السلام عليكم ورحمة الله وبركاته 🤍\nبندعوكم للمشاركة في نفحات العشر الأواخر وحملة دعاء العفو والصلاة على النبي عن روح (الحج محمد المملوك) رحمه الله.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
+            const message = `السلام عليكم ورحمة الله وبركاته 🤍\nبندعوكم للمشاركة في نفحات العشر الأواخر وحملة دعاء العفو والصلاة على النبي عن روح (الحاج محمد المملوك) رحمه الله.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
             const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`; 
             window.open(whatsappUrl, '_blank'); 
         }
 
         const allahNames = [
-            { name: "الرَّحْمَنُ", meaning: "الذي وسعت رحمته كل شيء", dua: "اللهم يا رحمن، ارحم عبدك محمد المملوك برحمتك التي وسعت كل شيء، واغمره بفيض عطائك." },
+            { name: "الرَّحْمَنُ", meaning: "الذي وسعت رحمته كل شيء", dua: "اللهم يا رحمن، ارحم عبدك الحاج محمد المملوك برحمتك التي وسعت كل شيء، واغمره بفيض عطائك." },
             { name: "الرَّحِيمُ", meaning: "الموصل رحمته للمؤمنين", dua: "اللهم يا رحيم، ارحم ضعفه وغربته، وكن به رحيماً يا أرحم الراحمين." },
-            { name: "الْمَلِكُ", meaning: "المالك الحقيقي لكل شيء", dua: "اللهم يا ملك الملوك، اجعل عبدك محمد المملوك في جوارك وفي ضيافتك في جنات النعيم." },
+            { name: "الْمَلِكُ", meaning: "المالك الحقيقي لكل شيء", dua: "اللهم يا ملك الملوك، اجعل عبدك الحاج محمد المملوك في جوارك وفي ضيافتك في جنات النعيم." },
             { name: "الْقُدُّوسُ", meaning: "الطاهر المنزه عن العيوب", dua: "اللهم يا قدوس، طهره من الذنوب والخطايا كما يُنقى الثوب الأبيض من الدنس." },
             { name: "السَّلَامُ", meaning: "السالم من العيوب، وواهب الأمان", dua: "اللهم يا سلام، سلمه من عذاب القبر وأهوال القيامة، واجعل قبره برداً وسلاماً." },
             { name: "الْمُؤْمِنُ", meaning: "الذي يأمن عباده من ظلمه", dua: "اللهم يا مؤمن، أمّنه من فزع يوم القيامة واجعله من الآمنين المطمئنين." },
@@ -1041,7 +1115,7 @@
             { name: "الْخَالِقُ", meaning: "الموجد للأشياء من العدم", dua: "اللهم يا خالقنا، إنا استودعناك من خلقته ورددته إليك، فاجعل مستقره الفردوس الأعلى." },
             { name: "الْبَارِئُ", meaning: "الذي خلق المخلوقات بريئة من النقص", dua: "اللهم يا بارئ، أبرئه من كل ذنب، واجعله نقيًا طاهرًا يوم يلقاك." },
             { name: "الْمُصَوِّرُ", meaning: "الذي أعطى لكل خلق صورته", dua: "اللهم يا مصور، بيّض وجهه يوم تبيّض وجوه وتسودّ وجوه." },
-            { name: "الْغَفَّارُ", meaning: "الكثير المغفرة لذنوب عباده", dua: "اللهم يا غفار، اغفر لعبدك محمد المملوك ذنوبه كلها، دقها وجلها، أولها وآخرها." },
+            { name: "الْغَفَّارُ", meaning: "الكثير المغفرة لذنوب عباده", dua: "اللهم يا غفار، اغفر لعبدك الحاج محمد المملوك ذنوبه كلها، دقها وجلها، أولها وآخرها." },
             { name: "الْقَهَّارُ", meaning: "الغالب لكل شيء", dua: "اللهم يا قهار، اقهر عنه عذاب القبر وفتنته، واصرف عنه نار جهنم." },
             { name: "الْوَهَّابُ", meaning: "الكثير العطاء بلا عوض", dua: "اللهم يا وهاب، هب له من لدنك رحمة، وهب له قصراً في الجنة لا يفنى." },
             { name: "الرَّزَّاقُ", meaning: "المتكفل بإيصال الأرزاق لخلقه", dua: "اللهم يا رزاق، ارزقه النظر إلى وجهك الكريم، وارزقه شفاعة نبيك محمد ﷺ." },
@@ -1053,7 +1127,7 @@
             { name: "الرَّافِعُ", meaning: "الذي يرفع درجات المؤمنين", dua: "اللهم يا رافع، ارفع درجته في الجنة، واجعله مع السفرة الكرام البررة." },
             { name: "الْمُعِزُّ", meaning: "الذي يهب العزة لمن يشاء", dua: "اللهم يا معز، أعزه يوم العرض عليك، وأكرم نزله يا كريم." },
             { name: "الْمُذِلُّ", meaning: "الذي يسلب العزة عمن يشاء", dua: "اللهم أذل عنه كل ذنب وخطيئة، وباعد بينه وبين خطاياه كما باعدت بين المشرق والمغرب." },
-            { name: "السَّمِيعُ", meaning: "الذي لا يخفى عليه صوت", dua: "اللهم يا سميع الدعاء، اسمع دعاءنا للوالد محمد المملوك وتقبله بقبول حسن." },
+            { name: "السَّمِيعُ", meaning: "الذي لا يخفى عليه صوت", dua: "اللهم يا سميع الدعاء، اسمع دعاءنا للوالد الحاج محمد المملوك وتقبله بقبول حسن." },
             { name: "الْبَصِيرُ", meaning: "الذي يرى كل شيء", dua: "اللهم يا بصير، انظر إليه بعين رحمتك، فإن من تنظر إليه لا تعذبه أبداً." },
             { name: "الْحَكَمُ", meaning: "القاضي العدل الذي لا يجور", dua: "اللهم يا حكم، احكم له بالجنة بفضلك لا بعدلك، وبرحمتك لا بعملك." },
             { name: "الْعَدْلُ", meaning: "المنزه عن الظلم", dua: "اللهم يا عدل، عامله بإحسانك لا بعدلك، وتجاوز عنه يا أرحم الراحمين." },
@@ -1061,15 +1135,15 @@
             { name: "الْخَبِيرُ", meaning: "العليم ببواطن الأمور", dua: "اللهم يا خبير، أنت الخبير بضعفه وقلة حيلته، فارحمه واغفر له يا غفور." },
             { name: "الْحَلِيمُ", meaning: "الذي يصفح عن الزلات", dua: "اللهم يا حليم، احلم عنه وتجاوز عن سيئاته، واغفر له حلماً وكرماً." },
             { name: "الْعَظِيمُ", meaning: "الذي لا يحيط العقل بعظمته", dua: "اللهم يا عظيم، عظم أجره، وثقل موازينه، وأسكنه الفردوس الأعلى من الجنة." },
-            { name: "الْغَفُورُ", meaning: "الذي يستر الذنوب ويتجاوز عنها", dua: "اللهم يا غفور، اغفر لمحمد المملوك مغفرة جامعة تمحو بها كل ذنب وخطيئة." },
+            { name: "الْغَفُورُ", meaning: "الذي يستر الذنوب ويتجاوز عنها", dua: "اللهم يا غفور، اغفر للحاج محمد المملوك مغفرة جامعة تمحو بها كل ذنب وخطيئة." },
             { name: "الشَّكُورُ", meaning: "الذي يجازي على العمل القليل", dua: "اللهم يا شكور، اشكر له سعيه في الدنيا، واجعل عمله الصالح أنيسه في قبره." },
             { name: "الْعَلِيُّ", meaning: "المرتفع قدراً وشأناً", dua: "اللهم يا عليّ، اجعل منزلته في أعلى الجنان مع النبيين والصديقين والشهداء." },
             { name: "الْكَبِيرُ", meaning: "الأكبر من كل شيء", dua: "اللهم يا كبير، كبر مقامه عندك، واجعله من المكرمين في جنات النعيم." },
             { name: "الْحَفِيظُ", meaning: "الذي يحفظ أعمال عباده", dua: "اللهم يا حفيظ، احفظ له حسناته وضعفها، واحفظه من عذاب القبر وعذاب النار." },
-            { name: "الْمُقِيتُ", meaning: "المقتدر على كل شيء", dua: "اللهم أطعم عبدك محمد المملوك من ثمار الجنة، واسقه من حوض نبيك شربة لا يظمأ بعدها." },
+            { name: "الْمُقِيتُ", meaning: "المقتدر على كل شيء", dua: "اللهم أطعم عبدك الحاج محمد المملوك من ثمار الجنة، واسقه من حوض نبيك شربة لا يظمأ بعدها." },
             { name: "الْحَسِيبُ", meaning: "المحاسب لعباده", dua: "اللهم يا حسيب، حاسبه حساباً يسيراً، ويمن كتابه، ويسر حسابه." },
             { name: "الْجَلِيلُ", meaning: "الموصوف بالجلال والكبرياء", dua: "اللهم يا جليل، اجعل له جلالاً ونوراً يوم القيامة يمشي به بين الناس." },
-            { name: "الْكَرِيمُ", meaning: "الكثير الخير الذي يعطي بلا حدود", dua: "اللهم يا أكرم الأكرمين، أكرم نزل عبدك محمد المملوك، وضيافته في جناتك جنات النعيم." },
+            { name: "الْكَرِيمُ", meaning: "الكثير الخير الذي يعطي بلا حدود", dua: "اللهم يا أكرم الأكرمين، أكرم نزل عبدك الحاج محمد المملوك، وضيافته في جناتك جنات النعيم." },
             { name: "الرَّقِيبُ", meaning: "الذي لا يغفل عنه شيء", dua: "اللهم يا رقيب، أنت تعلم حبه لك ولنبيك، فاجعل ذلك شفيعاً له يوم يلقاك." },
             { name: "الْمُجِيبُ", meaning: "الذي يجيب دعوة الداعين", dua: "اللهم يا مجيب السائلين، أجب دعاءنا فيه، واغفر له وارحمه وعافه واعف عنه." },
             { name: "الْوَاسِعُ", meaning: "الذي وسعت رحمته كل شيء", dua: "اللهم يا واسع المغفرة، وسع له في قبره، واغفر له وارحمه برحمتك الواسعة." },
@@ -1079,7 +1153,7 @@
             { name: "الْبَاعِثُ", meaning: "محيي الموتى للحساب", dua: "اللهم يا باعث، ابعثه آمناً مطمئناً يوم الفزع الأكبر، وابعثه على الإيمان والتوحيد." },
             { name: "الشَّهِيدُ", meaning: "المطلع على كل شيء", dua: "اللهم يا شهيد، اشهد أنه كان يشهد أن لا إله إلا أنت، فاغفر له وارحمه." },
             { name: "الْحَقُّ", meaning: "الذي وعده حق", dua: "اللهم يا حق، وعدت عبادك المؤمنين بالجنة، فاجعله من أهلها بحقك يا أرحم الراحمين." },
-            { name: "الْوَكِيلُ", meaning: "الذي يعتمد عليه العباد", dua: "اللهم إنا وكلناك أمر عبدك محمد المملوك، فكن له خير وكيل في قبره ويوم الحساب." },
+            { name: "الْوَكِيلُ", meaning: "الذي يعتمد عليه العباد", dua: "اللهم إنا وكلناك أمر عبدك الحاج محمد المملوك، فكن له خير وكيل في قبره ويوم الحساب." },
             { name: "الْقَوِيُّ", meaning: "الذي لا يعجزه شيء", dua: "اللهم يا قوي، قهِ عذابك يوم تبعث عبادك، وقوه على الصراط يوم تزل الأقدام." },
             { name: "الْمَتِينُ", meaning: "الشديد القوة", dua: "اللهم يا متين، ثبت خُطاه على الصراط المستقيم، وأدخله الجنة من أوسع أبوابها." },
             { name: "الْوَلِيُّ", meaning: "نصير عباده المؤمنين", dua: "اللهم يا ولي المؤمنين، تولّ أمره فيمن توليت، واجعله في ولايتك وحفظك." },
@@ -1089,7 +1163,7 @@
             { name: "الْمُعِيدُ", meaning: "الذي يعيد الخلق بعد الحياة", dua: "اللهم يا معيد، أعده إلى جناتك كما بدأته طاهراً نقياً من الذنوب." },
             { name: "الْمُحْيِي", meaning: "الذي يحيي الموتى", dua: "اللهم يا محيي، أحيي ذكره بالخير في الدنيا، وأحييه في دار كرامتك وجنتك." },
             { name: "الْمُمِيتُ", meaning: "مقدر الموت على خلقه", dua: "اللهم يا من أمته على الإسلام، تقبله في الصالحين، واجعله من ورثة جنة النعيم." },
-            { name: "الْحَيُّ", meaning: "الذي لا يموت", dua: "اللهم يا حي يا قيوم، اجعل حياة عبدك محمد المملوك في البرزخ حياة نعيم وسرور." },
+            { name: "الْحَيُّ", meaning: "الذي لا يموت", dua: "اللهم يا حي يا قيوم، اجعل حياة عبدك الحاج محمد المملوك في البرزخ حياة نعيم وسرور." },
             { name: "الْقَيُّومُ", meaning: "المقيم لغيره", dua: "اللهم يا قيوم، أقم له نوراً في قبره لا ينطفئ، وأقم وجهه أبيضاً يوم القيامة." },
             { name: "الْوَاجِدُ", meaning: "الذي لا يعجزه شيء", dua: "اللهم أوجد له في قبره سعة وفسحة ونوراً وسروراً إلى يوم يبعثون." },
             { name: "الْمَاجِدُ", meaning: "ذو المجد والشرف", dua: "اللهم يا ماجد، مجده برضاك عنه، واشمله بعفوك وكرمك يا أكرم الأكرمين." },
@@ -1109,22 +1183,22 @@
             { name: "الْبَرُّ", meaning: "كثير الإحسان والعطاء", dua: "اللهم يا بَرّ، عامله ببرك وإحسانك، واجزه عن الإحسان إحساناً." },
             { name: "التَّوَّابُ", meaning: "الذي يقبل التوبة", dua: "اللهم يا تواب، إن كان قد مات وعليه ذنب فتب عليه واغفر له، إنك أنت التواب الرحيم." },
             { name: "الْمُنْتَقِمُ", meaning: "المعاقب للظالمين", dua: "اللهم انتقم له من كل ذنب بكرمك فامحه، ومن كل خطيئة بعفوك فأزلها." },
-            { name: "الْعَفُوُّ", meaning: "الذي يترك المؤاخذة على الذنب", dua: "اللهم إنك عفو كريم تحب العفو فاعف عن عبدك محمد المملوك." },
+            { name: "الْعَفُوُّ", meaning: "الذي يترك المؤاخذة على الذنب", dua: "اللهم إنك عفو كريم تحب العفو فاعف عن عبدك الحاج محمد المملوك." },
             { name: "الرَّءُوفُ", meaning: "شديد الرحمة", dua: "اللهم يا رؤوف، ارأف بحاله في قبره، واجعله منعماً مطمئناً لا خوف عليه ولا هو يحزن." },
             { name: "مَالِكُ الْمُلْكِ", meaning: "الذي بيده ملكوت كل شيء", dua: "اللهم يا مالك الملك، هب له ملكاً في الجنة لا يبلى، ونعيماً لا يفنى." },
             { name: "ذُو الْجَلَالِ وَالْإِكْرَامِ", meaning: "المستحق للتعظيم", dua: "اللهم يا ذا الجلال والإكرام، أكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد." },
             { name: "الْمُقْسِطُ", meaning: "العادل في حكمه", dua: "اللهم يا مقسط، قسط له في قبره نوراً وضياءً وفسحة وسروراً." },
-            { name: "الْجامِعُ", meaning: "الذي يجمع الخلائق ليوم الحساب", dua: "اللهم يا جامع الناس ليوم لا ريب فيه، اجمعنا بوالدنا محمد المملوك في الفردوس الأعلى من الجنة." },
+            { name: "الْجامِعُ", meaning: "الذي يجمع الخلائق ليوم الحساب", dua: "اللهم يا جامع الناس ليوم لا ريب فيه، اجمعنا بوالدنا الحاج محمد المملوك في الفردوس الأعلى من الجنة." },
             { name: "الْغَنِيُّ", meaning: "المستغني عن خلقه", dua: "اللهم يا غني، أنت الغني عن عذابه وهو الفقير إلى رحمتك، فارحمه وتجاوز عنه." },
             { name: "الْمُغْنِي", meaning: "الذي يغني من يشاء", dua: "اللهم أغنه بفضلك وجودك ورحمتك، واجعله من المستبشرين بلقائك." },
             { name: "الْمَانِعُ", meaning: "الذي يمنع البلاء", dua: "اللهم امنع عنه عذاب القبر وعذاب النار، واجعله في مأمن من كل فزع." },
             { name: "الضَّارُّ", meaning: "مقدر الضر بحكمته", dua: "اللهم اصرف عنه كل ضر وشر، واجعله في حصن حصين من عذابك." },
-            { name: "النَّافِعُ", meaning: "مقدر النفع والخير", dua: "اللهم انفع عبدك محمد المملوك بما قدم من عمل صالح، وانفعه بدعائنا له يا كريم." },
-            { name: "النُّورُ", meaning: "منور السماوات والأرض", dua: "اللهم يا نور، نور لعبدك محمد المملوك قبره، واجعله روضة من رياض الجنة مضيئة بنورك." },
+            { name: "النَّافِعُ", meaning: "مقدر النفع والخير", dua: "اللهم انفع عبدك الحاج محمد المملوك بما قدم من عمل صالح، وانفعه بدعائنا له يا كريم." },
+            { name: "النُّورُ", meaning: "منور السماوات والأرض", dua: "اللهم يا نور، نور لعبدك الحاج محمد المملوك قبره، واجعله روضة من رياض الجنة مضيئة بنورك." },
             { name: "الْهَادِي", meaning: "الذي يهدي القلوب للحق", dua: "اللهم يا هادي، اهده بالقول الثابت في الآخرة، واجعله من المهتدين الفائزين." },
             { name: "الْبَدِيعُ", meaning: "خالق الأشياء على غير مثال", dua: "اللهم يا بديع السماوات والأرض، أبدعه في أحسن صورة يوم يبعثون، ضاحكاً مستبشراً." },
             { name: "الْبَاقِي", meaning: "الدائم الذي لا يموت", dua: "اللهم يا باقي، اجعل حسناته باقية جارية، واجعل أجره مستمراً إلى يوم الدين." },
-            { name: "الْوَارِثُ", meaning: "الذي يبقى بعد فناء الخلق", dua: "اللهم يا وارث، أورث عبدك محمد المملوك الفردوس الأعلى، يخلد فيها أبد الآبدين." },
+            { name: "الْوَارِثُ", meaning: "الذي يبقى بعد فناء الخلق", dua: "اللهم يا وارث، أورث عبدك الحاج محمد المملوك الفردوس الأعلى، يخلد فيها أبد الآبدين." },
             { name: "الرَّشِيدُ", meaning: "الذي أرشد الخلائق لمصالحهم", dua: "اللهم ألهمه رشده عند السؤال، وثبته بالقول الثابت يا حليم يا كريم." },
             { name: "الصَّبُورُ", meaning: "الذي لا يعجل بالعقوبة", dua: "اللهم يا صبور، جازه على ما صبر في الدنيا خير الجزاء، واجعل ملائكة الرحمة تستقبله بسلام." }
         ];
@@ -1151,6 +1225,61 @@
             if(navigator.vibrate) navigator.vibrate(10); 
         }
         setTimeout(showRandomName, 500);
+
+        // دالة سورة الإخلاص مع الدعاء المنبثق
+        window.incrementIkhlas = async function(event) { 
+            if(navigator.vibrate) navigator.vibrate(20); 
+            const btn = event.currentTarget; 
+            btn.innerHTML = '<i class="fas fa-heart"></i> تقبل الله منك'; 
+            btn.style.background = '#059669'; 
+            btn.style.color = 'white'; 
+            
+            Swal.fire({
+                title: 'تقبل الله منك 🤍',
+                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: #0f172a;">"اللهم بحق سورة الإخلاص التي تعدل ثلث القرآن، ابْنِ لعبدك الحاج محمد المملوك قصراً في الجنة، واجعلها نوراً له في قبره."</div>',
+                icon: 'success',
+                confirmButtonText: 'آمين يارب',
+                confirmButtonColor: '#10b981'
+            });
+
+            try { 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.updateDoc(ikhlasRef, { count: m.increment(1) })); 
+            } catch (e) { 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.setDoc(ikhlasRef, { count: 1 })); 
+            } 
+            setTimeout(() => { 
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> أتممت القراءة 3 مرات للوالد'; 
+                btn.style.background = '#10b981'; 
+            }, 3000); 
+        }
+
+        // دالة سورة الملك مع الدعاء المنبثق
+        window.incrementMulk = async function(event) { 
+            if(navigator.vibrate) navigator.vibrate(20); 
+            const btn = event.currentTarget; 
+            const originalHtml = btn.innerHTML; 
+            btn.innerHTML = '<i class="fas fa-heart" style="color:white;"></i> تقبل الله'; 
+            btn.style.background = '#059669'; 
+            
+            Swal.fire({
+                title: 'بُوركت قراءتك 🤍',
+                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: #0f172a;">"اللهم اجعل سورة الملك المانعة المنجية حصناً للحاج محمد المملوك من عذاب القبر، وشفيعة له حتى تدخله الجنة."</div>',
+                icon: 'success',
+                confirmButtonText: 'آمين يارب',
+                confirmButtonColor: '#3b82f6'
+            });
+
+            try { 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.updateDoc(mulkRef, { count: m.increment(1) })); 
+            } catch (e) { 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.setDoc(mulkRef, { count: 1 })); 
+            } 
+            setTimeout(() => { 
+                btn.innerHTML = originalHtml; 
+                btn.style.background = '#3b82f6'; 
+            }, 3000); 
+        }
+
     </script>
 
     <!-- سكربتات قاعدة البيانات (Firebase) -->
@@ -1167,6 +1296,10 @@
           appId: "1:141593582678:web:16b3cf49e7c0273a2deff7"
         });
         const db = getFirestore(app);
+
+        // ربط المتغيرات العالمية لدوال السور (مهم عشان تشتغل من بره الـ module)
+        window.ikhlasRef = doc(db, 'stats', 'ikhlas_khatma');
+        window.mulkRef = doc(db, 'stats', 'mulk_khatma');
 
         // سجل الدعاء العام
         try {
@@ -1203,6 +1336,12 @@
         function updateSebhaUI() {
             const totalCount = serverCount + unsavedClicks;
             document.getElementById('globalSebhaCounter').innerText = totalCount.toLocaleString();
+            
+            // تحديث العداد اللي جوه خيمة الاعتكاف كمان
+            if(document.getElementById('itikafSebhaCounter')) {
+                document.getElementById('itikafSebhaCounter').innerText = totalCount.toLocaleString();
+            }
+
             let currentTarget = targetStep;
             while (totalCount >= currentTarget) currentTarget += targetStep;
             
@@ -1239,6 +1378,11 @@
         function updateAfwUI() {
             const totalAfwCount = serverAfwCount + unsavedAfwClicks;
             document.getElementById('globalAfwCounter').innerText = totalAfwCount.toLocaleString();
+            
+            // تحديث العداد اللي جوه خيمة الاعتكاف
+            if(document.getElementById('itikafAfwCounter')) {
+                document.getElementById('itikafAfwCounter').innerText = totalAfwCount.toLocaleString();
+            }
         }
 
         onSnapshot(afwDocRef, (docSnap) => {
@@ -1348,7 +1492,7 @@
                     btn.onclick = async () => { 
                         Swal.fire({
                             title: `حجز الجزء رقم ${i}`,
-                            text: "هل تنوي قراءة هذا الجزء بنية الصدقة الجارية عن الحج محمد المملوك؟",
+                            text: "هل تنوي قراءة هذا الجزء بنية الصدقة الجارية عن الحاج محمد المملوك؟",
                             icon: 'question',
                             showCancelButton: true,
                             confirmButtonColor: '#059669',
@@ -1361,7 +1505,7 @@
                                     await updateDoc(khatmaRef, { [`juz${i}`]: true });
                                     Swal.fire({ 
                                         title: 'تقبل الله منك! 🤍', 
-                                        html: `تم تسجيل الجزء <b>${i}</b> باسمك<br>في ميزان حسنات الحج محمد المملوك إن شاء الله.`, 
+                                        html: `تم تسجيل الجزء <b>${i}</b> باسمك<br>في ميزان حسنات الحاج محمد المملوك إن شاء الله.`, 
                                         icon: 'success', 
                                         confirmButtonText: 'آمين', 
                                         confirmButtonColor: '#059669' 
@@ -1393,80 +1537,21 @@
             }
         });
         
-        // عداد الإخلاص وسورة الملك والزوار
-        const ikhlasRef = doc(db, 'stats', 'ikhlas_khatma');
-        onSnapshot(ikhlasRef, (docSnap) => { 
+        onSnapshot(window.ikhlasRef, (docSnap) => { 
             if (docSnap.exists()) { 
                 document.getElementById('ikhlasCount').innerText = (docSnap.data().count || 0).toLocaleString(); 
             } else { 
-                setDoc(ikhlasRef, { count: 0 }); 
+                setDoc(window.ikhlasRef, { count: 0 }); 
             } 
         });
 
-        // دالة سورة الإخلاص مع الدعاء المنبثق
-        window.incrementIkhlas = async function(event) { 
-            if(navigator.vibrate) navigator.vibrate(20); 
-            const btn = event.currentTarget; 
-            btn.innerHTML = '<i class="fas fa-heart"></i> تقبل الله منك'; 
-            btn.style.background = '#059669'; 
-            btn.style.color = 'white'; 
-            
-            // إظهار دعاء سورة الإخلاص
-            Swal.fire({
-                title: 'تقبل الله منك 🤍',
-                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: #0f172a;">"اللهم بحق سورة الإخلاص التي تعدل ثلث القرآن، ابْنِ لعبدك الحج محمد المملوك قصراً في الجنة، واجعلها نوراً له في قبره."</div>',
-                icon: 'success',
-                confirmButtonText: 'آمين يارب',
-                confirmButtonColor: '#10b981'
-            });
-
-            try { 
-                await updateDoc(ikhlasRef, { count: increment(1) }); 
-            } catch (e) { 
-                await setDoc(ikhlasRef, { count: 1 }); 
-            } 
-            setTimeout(() => { 
-                btn.innerHTML = '<i class="fas fa-check-circle"></i> أتممت القراءة 3 مرات للوالد'; 
-                btn.style.background = '#10b981'; 
-            }, 3000); 
-        }
-
-        const mulkRef = doc(db, 'stats', 'mulk_khatma');
-        onSnapshot(mulkRef, (docSnap) => { 
+        onSnapshot(window.mulkRef, (docSnap) => { 
             if (docSnap.exists()) { 
                 document.getElementById('mulkCount').innerText = (docSnap.data().count || 0).toLocaleString(); 
             } else { 
-                setDoc(mulkRef, { count: 0 }); 
+                setDoc(window.mulkRef, { count: 0 }); 
             } 
         });
-
-        // دالة سورة الملك مع الدعاء المنبثق
-        window.incrementMulk = async function(event) { 
-            if(navigator.vibrate) navigator.vibrate(20); 
-            const btn = event.currentTarget; 
-            const originalHtml = btn.innerHTML; 
-            btn.innerHTML = '<i class="fas fa-heart" style="color:white;"></i> تقبل الله'; 
-            btn.style.background = '#059669'; 
-            
-            // إظهار دعاء سورة الملك
-            Swal.fire({
-                title: 'بُوركت قراءتك 🤍',
-                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: #0f172a;">"اللهم اجعل سورة الملك المانعة المنجية حصناً للحج محمد المملوك من عذاب القبر، وشفيعة له حتى تدخله الجنة."</div>',
-                icon: 'success',
-                confirmButtonText: 'آمين يارب',
-                confirmButtonColor: '#3b82f6'
-            });
-
-            try { 
-                await updateDoc(mulkRef, { count: increment(1) }); 
-            } catch (e) { 
-                await setDoc(mulkRef, { count: 1 }); 
-            } 
-            setTimeout(() => { 
-                btn.innerHTML = originalHtml; 
-                btn.style.background = '#3b82f6'; 
-            }, 3000); 
-        }
 
         const visitorsRef = doc(db, 'stats', 'visitors_count');
         onSnapshot(visitorsRef, (docSnap) => { 
