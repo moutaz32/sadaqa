@@ -63,7 +63,7 @@
         .gold-text { color: #f59e0b !important; }
         [data-theme="dark"] .gold-text { color: #fbbf24 !important; }
 
-        /* ستايل خيمة الاعتكاف (الجديد) */
+        /* ستايل خيمة الاعتكاف */
         .itikaf-btn { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fbbf24; border: 2px solid #fbbf24; padding: 15px; border-radius: 20px; font-weight: bold; font-size: 1.2rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.5); text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; animation: pulseGlow 2s infinite; }
         @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
         
@@ -665,18 +665,17 @@
         // دوال خيمة الاعتكاف
         function openItikaf() {
             document.getElementById('itikafModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // منع النزول والطلوع في الشاشة الخلفية
-            // تشغيل الراديو أوتوماتيك بصوت هادي لو مش شغال
+            document.body.style.overflow = 'hidden';
             const radio = document.getElementById('radio');
             if(radio.paused) {
-                radio.volume = 0.3; // صوت هادي للاعتكاف
+                radio.volume = 0.3; 
                 document.getElementById('volumeSlider').value = 0.3;
                 toggleRadio();
             }
         }
         function closeItikaf() {
             document.getElementById('itikafModal').classList.remove('active');
-            document.body.style.overflow = 'auto'; // إرجاع حركة الشاشة
+            document.body.style.overflow = 'auto'; 
         }
         
         function checkFriday() {
@@ -692,9 +691,6 @@
         }
         checkNightPrayer();
 
-        // -----------------------------------------------------
-        // الدالة الذكية لظهور كارت ليلة القدر في الليالي الوترية 
-        // -----------------------------------------------------
         function checkQadrNight() {
             const ramadanStart = new Date(2026, 1, 19); 
             const now = new Date();
@@ -1243,9 +1239,9 @@
             });
 
             try { 
-                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.updateDoc(ikhlasRef, { count: m.increment(1) })); 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.updateDoc(window.ikhlasRef, { count: m.increment(1) })); 
             } catch (e) { 
-                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.setDoc(ikhlasRef, { count: 1 })); 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.setDoc(window.ikhlasRef, { count: 1 }, {merge: true})); 
             } 
             setTimeout(() => { 
                 btn.innerHTML = '<i class="fas fa-check-circle"></i> أتممت القراءة 3 مرات للوالد'; 
@@ -1270,9 +1266,9 @@
             });
 
             try { 
-                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.updateDoc(mulkRef, { count: m.increment(1) })); 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.updateDoc(window.mulkRef, { count: m.increment(1) })); 
             } catch (e) { 
-                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.setDoc(mulkRef, { count: 1 })); 
+                await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.setDoc(window.mulkRef, { count: 1 }, {merge: true})); 
             } 
             setTimeout(() => { 
                 btn.innerHTML = originalHtml; 
@@ -1282,7 +1278,7 @@
 
     </script>
 
-    <!-- سكربتات قاعدة البيانات (Firebase) -->
+    <!-- سكربتات قاعدة البيانات (Firebase) المحمية بالكامل -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -1297,11 +1293,10 @@
         });
         const db = getFirestore(app);
 
-        // ربط المتغيرات العالمية لدوال السور (مهم عشان تشتغل من بره الـ module)
         window.ikhlasRef = doc(db, 'stats', 'ikhlas_khatma');
         window.mulkRef = doc(db, 'stats', 'mulk_khatma');
 
-        // سجل الدعاء العام
+        // سجل الدعاء
         try {
             onSnapshot(collection(db, 'duas'), (snapshot) => {
                 const duas = []; 
@@ -1327,7 +1322,7 @@
             }
         }
 
-        // السبحة العالمية (الصلاة على النبي)
+        // عداد الصلاة على النبي (محمي)
         const sebhaDocRef = doc(db, 'stats', 'global_sebha');
         const targetStep = 10000;
         let serverCount = 0; 
@@ -1335,12 +1330,8 @@
 
         function updateSebhaUI() {
             const totalCount = serverCount + unsavedClicks;
-            document.getElementById('globalSebhaCounter').innerText = totalCount.toLocaleString();
-            
-            // تحديث العداد اللي جوه خيمة الاعتكاف كمان
-            if(document.getElementById('itikafSebhaCounter')) {
-                document.getElementById('itikafSebhaCounter').innerText = totalCount.toLocaleString();
-            }
+            if(document.getElementById('globalSebhaCounter')) document.getElementById('globalSebhaCounter').innerText = totalCount.toLocaleString();
+            if(document.getElementById('itikafSebhaCounter')) document.getElementById('itikafSebhaCounter').innerText = totalCount.toLocaleString();
 
             let currentTarget = targetStep;
             while (totalCount >= currentTarget) currentTarget += targetStep;
@@ -1358,7 +1349,7 @@
             if (docSnap.exists()) { 
                 serverCount = docSnap.data().count || 0; 
             } else { 
-                setDoc(sebhaDocRef, { count: 0 }); 
+                // تم إزالة أمر التصفير من هنا للحماية
                 serverCount = 0; 
             }
             updateSebhaUI(); 
@@ -1370,26 +1361,22 @@
             updateSebhaUI(); 
         }
 
-        // عداد العفو (للعشر الأواخر)
+        // عداد العفو (محمي)
         const afwDocRef = doc(db, 'stats', 'global_afw');
         let serverAfwCount = 0; 
         let unsavedAfwClicks = 0;   
 
         function updateAfwUI() {
             const totalAfwCount = serverAfwCount + unsavedAfwClicks;
-            document.getElementById('globalAfwCounter').innerText = totalAfwCount.toLocaleString();
-            
-            // تحديث العداد اللي جوه خيمة الاعتكاف
-            if(document.getElementById('itikafAfwCounter')) {
-                document.getElementById('itikafAfwCounter').innerText = totalAfwCount.toLocaleString();
-            }
+            if(document.getElementById('globalAfwCounter')) document.getElementById('globalAfwCounter').innerText = totalAfwCount.toLocaleString();
+            if(document.getElementById('itikafAfwCounter')) document.getElementById('itikafAfwCounter').innerText = totalAfwCount.toLocaleString();
         }
 
         onSnapshot(afwDocRef, (docSnap) => {
             if (docSnap.exists()) { 
                 serverAfwCount = docSnap.data().count || 0; 
             } else { 
-                setDoc(afwDocRef, { count: 0 }); 
+                // تم إزالة أمر التصفير من هنا للحماية
                 serverAfwCount = 0; 
             }
             updateAfwUI(); 
@@ -1401,7 +1388,6 @@
             updateAfwUI(); 
         }
 
-        // إرسال الكليكات للسيرفر كل ثانيتين
         setInterval(async () => {
             if (unsavedClicks > 0) {
                 const clicksToSend = unsavedClicks; 
@@ -1409,7 +1395,9 @@
                 try { 
                     await updateDoc(sebhaDocRef, { count: increment(clicksToSend) }); 
                 } catch (e) { 
-                    unsavedClicks += clicksToSend; 
+                    // في حالة الفشل، سيحاول التحديث مع الدمج لإنشاء الملف إن لم يكن موجوداً
+                    try { await setDoc(sebhaDocRef, { count: increment(clicksToSend) }, {merge: true}); } 
+                    catch(err) { unsavedClicks += clicksToSend; }
                 }
             }
             if (unsavedAfwClicks > 0) {
@@ -1418,7 +1406,8 @@
                 try { 
                     await updateDoc(afwDocRef, { count: increment(afwClicksToSend) }); 
                 } catch (e) { 
-                    unsavedAfwClicks += afwClicksToSend; 
+                    try { await setDoc(afwDocRef, { count: increment(afwClicksToSend) }, {merge: true}); }
+                    catch(err) { unsavedAfwClicks += afwClicksToSend; }
                 }
             }
         }, 2000); 
@@ -1428,12 +1417,12 @@
                 if (unsavedClicks > 0) {
                     const clicksToSend = unsavedClicks; 
                     unsavedClicks = 0; 
-                    updateDoc(sebhaDocRef, { count: increment(clicksToSend) });
+                    updateDoc(sebhaDocRef, { count: increment(clicksToSend) }).catch(() => setDoc(sebhaDocRef, {count: increment(clicksToSend)}, {merge: true}));
                 }
                 if (unsavedAfwClicks > 0) {
                     const afwClicksToSend = unsavedAfwClicks; 
                     unsavedAfwClicks = 0; 
-                    updateDoc(afwDocRef, { count: increment(afwClicksToSend) });
+                    updateDoc(afwDocRef, { count: increment(afwClicksToSend) }).catch(() => setDoc(afwDocRef, {count: increment(afwClicksToSend)}, {merge: true}));
                 }
             }
         });
@@ -1455,7 +1444,7 @@
             });
         }
 
-        // الختمة الجماعية
+        // الختمة الجماعية (محمية)
         const khatmaRef = doc(db, 'stats', 'global_khatma');
         const khatmaStatsRef = doc(db, 'stats', 'khatma_stats');
 
@@ -1463,7 +1452,7 @@
             if(docSnap.exists()) {
                 document.getElementById('globalKhatmaCount').innerText = docSnap.data().completed || 0;
             } else {
-                setDoc(khatmaStatsRef, { completed: 0 });
+                document.getElementById('globalKhatmaCount').innerText = 0;
             }
         });
 
@@ -1473,8 +1462,7 @@
                 state = docSnap.data(); 
             } else { 
                 for(let i=1; i<=30; i++) state[`juz${i}`] = false; 
-                setDoc(khatmaRef, state); 
-                return; 
+                // تم إزالة أمر الكتابة هنا للحماية
             }
             
             const grid = document.getElementById('juzGrid'); 
@@ -1510,7 +1498,11 @@
                                         confirmButtonText: 'آمين', 
                                         confirmButtonColor: '#059669' 
                                     });
-                                } catch(e) { alert('خطأ بالاتصال'); }
+                                } catch(e) { 
+                                    // حماية: إذا لم يكن الملف موجوداً، سيقوم بإنشائه دون مسح الباقي
+                                    await setDoc(khatmaRef, { [`juz${i}`]: true }, {merge: true}); 
+                                    Swal.fire('تقبل الله منك! 🤍', 'تم الحجز بنجاح.', 'success');
+                                }
                             }
                         });
                     }; 
@@ -1525,13 +1517,15 @@
                      const currentSnap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.getDoc(khatmaRef));
                      let isFull = true; 
                      for(let k=1; k<=30; k++) {
-                         if(!currentSnap.data()[`juz${k}`]) isFull=false;
+                         if(!currentSnap.data() || !currentSnap.data()[`juz${k}`]) isFull=false;
                      }
                      if(isFull) { 
-                         await updateDoc(khatmaStatsRef, { completed: increment(1) }); 
+                         try { await updateDoc(khatmaStatsRef, { completed: increment(1) }); } 
+                         catch(e) { await setDoc(khatmaStatsRef, {completed: 1}, {merge: true}); }
+                         
                          let resetState = {}; 
                          for(let i=1; i<=30; i++) resetState[`juz${i}`] = false; 
-                         await setDoc(khatmaRef, resetState); 
+                         await updateDoc(khatmaRef, resetState).catch(e => setDoc(khatmaRef, resetState, {merge: true})); 
                      }
                 }, 5000); 
             }
@@ -1541,7 +1535,7 @@
             if (docSnap.exists()) { 
                 document.getElementById('ikhlasCount').innerText = (docSnap.data().count || 0).toLocaleString(); 
             } else { 
-                setDoc(window.ikhlasRef, { count: 0 }); 
+                document.getElementById('ikhlasCount').innerText = 0; 
             } 
         });
 
@@ -1549,7 +1543,7 @@
             if (docSnap.exists()) { 
                 document.getElementById('mulkCount').innerText = (docSnap.data().count || 0).toLocaleString(); 
             } else { 
-                setDoc(window.mulkRef, { count: 0 }); 
+                document.getElementById('mulkCount').innerText = 0; 
             } 
         });
 
@@ -1558,14 +1552,14 @@
             if (docSnap.exists()) { 
                 document.getElementById('visitorsCount').innerText = (docSnap.data().count || 0).toLocaleString(); 
             } else { 
-                setDoc(visitorsRef, { count: 0 }); 
+                document.getElementById('visitorsCount').innerText = 0; 
             } 
         });
 
         if(!localStorage.getItem('visited_sadaqa_permanent')) { 
             localStorage.setItem('visited_sadaqa_permanent', 'true'); 
             setTimeout(() => {
-                updateDoc(visitorsRef, { count: increment(1) }).catch(() => setDoc(visitorsRef, {count: 1}))
+                updateDoc(visitorsRef, { count: increment(1) }).catch(() => setDoc(visitorsRef, {count: 1}, {merge: true}))
             }, 2000); 
         }
     </script>
