@@ -236,6 +236,18 @@
             <audio id="takbeerAudio" src="takbeerat.mp3" loop preload="none"></audio>
         </div>
 
+        <!-- التنبيه: كارت الأجر العظيم (صيام الست من شوال) -->
+        <div class="card reveal active" style="border-top-color: #0ea5e9; text-align: center; background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(255, 255, 255, 0));">
+            <h2 style="justify-content: center; color: #0ea5e9; font-size: 1.3rem;"><i class="fas fa-calendar-check"></i> صيام الست من شوال</h2>
+            <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px; opacity: 0.9;">
+                قال رسول الله ﷺ: "مَنْ صَامَ رَمَضَانَ ثُمَّ أَتْبَعَهُ سِتًّا مِنْ شَوَّالٍ، كَانَ كَصِيَامِ الدَّهْرِ".<br>
+                <span style="font-weight: bold; color: #0284c7;">لا تفوت هذا الأجر العظيم، وانوِ صيامها بنية أن يتقبل الله منك ويهدي ثوابها لوالدك.</span>
+            </p>
+            <button onclick="this.innerHTML='<i class=\'fas fa-check-double\'></i> نويت الصيام.. تقبل الله'; this.style.background='#0ea5e9'; this.style.color='white'; Swal.fire('بُوركت نيتك 🤍', 'اللهم أعنه على صيامها، واجعل ثوابها نوراً في قبر الحاج محمد المملوك.', 'success');" style="background: rgba(14, 165, 233, 0.1); color: #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.3); padding: 12px 25px; border-radius: 20px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.3s; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.1);">
+                <i class="fas fa-heart"></i> نويت الصيام وأهديت ثوابه للوالد
+            </button>
+        </div>
+
         <!-- زر الدخول لمحراب الذكر -->
         <button class="itikaf-btn" onclick="openItikaf()">
             <i class="fas fa-mosque" style="margin-left: 5px; font-size: 1.3rem;"></i> ادخل محراب الذكر (خلوة الدعاء)
@@ -284,6 +296,7 @@
                 <i class="fas fa-coins"></i> تصدقت اليوم بنية الوالد
             </button>
         </div>
+
 
         <div id="fridayCard" class="card reveal" style="display: none; border-top-color: #f59e0b; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0));">
             <h2 style="justify-content: center; color: #f59e0b;"><i class="fas fa-mosque"></i> نفحات يوم الجمعة</h2>
@@ -1060,7 +1073,7 @@
 
         function shareOnWhatsApp() { 
             const siteUrl = "https://moutaz32.github.io/sadaqa/"; 
-            const message = `السلام عليكم ورحمة الله وبركاته ✨\nعيد فطر مبارك، وبندعوكم لزيارة موقع صدقة جارية عن روح (المهندس الحاج محمد المملوك) رحمه الله، والمشاركة في دعاء العفو والصلاة على النبي.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
+            const message = `السلام عليكم ورحمة الله وبركاته ✨\nعيد فطر مبارك، وبندعوكم لزيارة موقع صدقة جارية عن روح (المهندس الحاج محمد المملوك) رحمه الله، والمشاركة في دعاء العفو والصلاة على النبي، وتجديد نية صيام الست من شوال.\n\nالدال على الخير كفاعله، شاركنا الأجر من هنا:\n${siteUrl}`; 
             const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`; 
             window.open(whatsappUrl, '_blank'); 
         }
