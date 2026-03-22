@@ -539,19 +539,19 @@
         </div>
 
         <!-- 9. مكتبة الأثر (صدقة العلم) -->
-        <div class="card reveal">
-            <h2 style="justify-content: center;"><i class="fas fa-book-medical"></i> مكتبة الأثر (صدقة العلم)</h2>
+        <div class="card reveal card-primary">
+            <h2 class="text-primary" style="justify-content: center;"><i class="fas fa-book-medical"></i> مكتبة الأثر (صدقة العلم)</h2>
             <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px; color: var(--text-muted);">
-                حمّل هذه الكتيبات واجعلها في هاتفك، وكلما قرأت منها أو أرسلتها لغيرك، كُتب الأجر لك وصدقة جارية للوالد.
+                اقرأ وشارك هذه الكتيبات المباركة لتكون حصناً لك، وصدقة جارية ونوراً ممتداً للوالد.
             </p>
             <div class="grid-2" style="gap: 12px;">
-                <a href="hisn.pdf" download="حصن_المسلم_صدقة_عن_الحاج_محمد.pdf" class="btn-outline primary" onclick="checkFile(event, 'hisn.pdf')">
-                    <i class="fas fa-shield-alt"></i> حصن المسلم
+                <a href="library.html?book=hisn" class="btn-outline primary" style="text-decoration: none;">
+                    <i class="fas fa-shield-alt"></i> مختصر حصن المسلم
                 </a>
-                <a href="ruqyah.pdf" download="الرقية_الشرعية_صدقة_عن_الحاج_محمد.pdf" class="btn-outline primary" onclick="checkFile(event, 'ruqyah.pdf')">
+                <a href="library.html?book=ruqyah" class="btn-outline primary" style="text-decoration: none;">
                     <i class="fas fa-hand-holding-water"></i> الرقية الشرعية
                 </a>
-                <a href="azkar_salah.pdf" download="أذكار_بعد_الصلاة_صدقة_عن_الحاج_محمد.pdf" class="btn-outline primary" style="grid-column: span 2; flex-direction: row;" onclick="checkFile(event, 'azkar_salah.pdf')">
+                <a href="library.html?book=azkar" class="btn-outline primary" style="grid-column: span 2; flex-direction: row; text-decoration: none;">
                     <i class="fas fa-pray"></i> أذكار ما بعد الصلاة
                 </a>
             </div>
@@ -618,17 +618,16 @@
         <!-- المشاركة والتنبيهات -->
         <div class="card reveal" style="margin-bottom: 20px; background: transparent; box-shadow: none; border: none; padding: 0;">
             
-            <!-- كارت الصورة (تم تثبيت الإعدادات لضمان الخلفية الكحلي الفخمة دايماً) -->
-            <div id="cardCapture" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important; border: 3px solid #fbbf24 !important; padding: 40px 20px !important; border-radius: 20px !important; text-align: center !important; margin-bottom: 15px !important; position: relative !important; overflow: hidden !important;">
-                <div style="position:absolute; inset:0; background-image: radial-gradient(rgba(251, 191, 36, 0.1) 1px, transparent 1px); background-size: 15px 15px; pointer-events: none; z-index:1;"></div>
+            <!-- كارت الصورة -->
+            <div id="cardCapture" style="background-color: #0f172a; border: 3px solid #fbbf24; padding: 35px 20px; border-radius: 20px; text-align: center; margin-bottom: 15px; position: relative;">
                 <div class="content" style="position: relative; z-index: 5;">
-                    <div class="amiri" style="font-size:1.6rem !important; color:#fbbf24 !important; margin-bottom:15px !important; text-shadow: 0 2px 10px rgba(251,191,36,0.3) !important;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
-                    <p style="font-size:1.2rem !important; line-height:1.8 !important; color: #ffffff !important; font-family: 'Tajawal', sans-serif !important; margin: 0 !important;">"اللهم اغفر لعبدك<br><span style="color:#fbbf24 !important; font-weight:bold !important; font-size:1.7rem !important; display:block !important; margin: 10px 0 !important;">الحاج<br>محمد المملوك بن خديجة</span>وآنس وحشته وارحم غربته<br>واجعل قبره روضة من رياض الجنة"</p>
-                    <div style="margin-top:20px !important; font-size:0.9rem !important; color: #94a3b8 !important; font-family: 'Tajawal', sans-serif !important;">صدقة جارية مقدمة من أسرته</div>
+                    <div class="amiri" style="font-size:1.5rem; color:#fbbf24; margin-bottom:15px; text-shadow: 0 2px 10px rgba(251,191,36,0.3);">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+                    <p style="font-size:1.15rem; line-height:1.8; color: white;">"اللهم اغفر لعبدك<br><span style="color:#fbbf24; font-weight:bold; font-size:1.6rem; display:block; margin: 10px 0;">الحاج<br>محمد المملوك بن خديجة</span>وآنس وحشته وارحم غربته<br>واجعل قبره روضة من رياض الجنة"</p>
+                    <div style="margin-top:20px; font-size:0.85rem; color: #94a3b8;">صدقة جارية مقدمة من أسرته</div>
                 </div>
             </div>
             
-            <button class="btn-solid accent" style="margin-bottom: 12px;" onclick="downloadImage('cardCapture', 'Dua_Haj_Mohamed.jpg')">
+            <button class="btn-solid accent" style="margin-bottom: 12px;" onclick="downloadImage('cardCapture', 'Dua_Haj_Mohamed.png')">
                 <i class="fas fa-download"></i> تحميل الصورة للمشاركة
             </button>
 
@@ -655,8 +654,7 @@
 
     </div>
 
-    <!-- ================== النوافذ والأكواد المخفية (تم نقلها للأسفل لمنع أي فراغات في الهيدر) ================== -->
-    
+    <!-- ================== النوافذ والإشعارات (Modals & Toasts) ================== -->
     <div class="toast-notification" id="localToast">
         <i class="fas fa-praying-hands text-accent" style="font-size: 1.8rem;"></i>
         <div id="toastText" style="flex-grow: 1; font-size: 0.95rem; line-height: 1.5; font-weight: bold; text-align: right;">اللهم اغفر له وارحمه.</div>
@@ -666,7 +664,7 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="close-modal" onclick="closeModal()">X</div>
-            <h2 id="modalTitle" class="amiri" style="text-align:center; color:var(--primary); margin-bottom:20px; font-size:1.8rem; font-weight: bold;"></h2>
+            <h2 id="modalTitle" class="amiri" style="text-align:center; margin-bottom:20px; font-size:1.8rem; font-weight: bold;"></h2>
             <div id="modalBody"></div>
         </div>
     </div>
@@ -719,14 +717,6 @@
             document.body.style.overflow = 'auto'; 
         }
         
-        function checkFriday() {
-            if (new Date().getDay() === 5) {
-                const el = document.getElementById('fridayCard');
-                if(el) el.style.display = 'block';
-            }
-        }
-        checkFriday();
-
         const dailyWirds = [
             { title: "قراءة سورة الدخان", desc: "اقرأ سورة الدخان الليلة، واجعل ثوابها للحاج محمد المملوك لعل الله يكتبه من المعتوقين من النار." },
             { title: "الاستغفار 100 مرة", desc: "استغفر الله مائة مرة بنية أن يغفر الله له ويرفع درجاته في الجنة." },
@@ -1148,7 +1138,7 @@
 
             try { await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.updateDoc(window.yaseenRef, { count: m.increment(1) })); } 
             catch (e) { await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.setDoc(window.yaseenRef, { count: 1 }, {merge: true})); } 
-            setTimeout(() => { btn.innerHTML = originalHtml; }, 3000); 
+            setTimeout(() => { btn.innerHTML = originalHtml; btn.className = 'btn-solid'; }, 3000); 
         }
 
         window.incrementIkhlas = async function(event) { 
