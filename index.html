@@ -343,10 +343,15 @@
             </button>
         </div>
 
-        <!-- 2. محراب الذكر -->
-        <button class="itikaf-btn" onclick="openItikaf()">
-            <i class="fas fa-mosque"></i> ادخل محراب الذكر (خلوة الدعاء)
-        </button>
+        <!-- 2. أزرار الدخول للمحاريب -->
+        <div class="grid-2" style="margin-bottom: 20px;">
+            <button class="itikaf-btn" style="margin-bottom: 0; padding: 12px; font-size: 1rem;" onclick="openItikaf()">
+                <i class="fas fa-mosque"></i> محراب الذكر (عام)
+            </button>
+            <button class="itikaf-btn" style="margin-bottom: 0; padding: 12px; font-size: 1rem; background: linear-gradient(135deg, #78350f, #451a03); border-color: #fbbf24; color: #fbbf24;" onclick="window.location.href='family.html'">
+                <i class="fas fa-lock"></i> خلوة العائلة (خاص)
+            </button>
+        </div>
 
         <!-- 3. وِرْد اليوم -->
         <div class="card reveal card-accent">
@@ -505,7 +510,7 @@
             </div>
         </div>
 
-        <!-- 7. الختمات والسور (بإضافة فضل كل سورة بوضوح تام) -->
+        <!-- 7. الختمات والسور (مع فضل كل سورة) -->
         <div class="card reveal" style="text-align: center;">
             <h2 style="justify-content: center; border: none; margin-bottom: 10px;"><i class="fas fa-heart text-primary"></i> قلب القرآن (سورة يس)</h2>
             <div style="background: var(--primary-light); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--primary);">
@@ -565,6 +570,7 @@
                 <h2 class="text-accent" style="margin:0; border:none; padding:0;"><i class="fas fa-quran"></i> الختمة الجماعية</h2>
                 <span style="background: var(--accent-light); color: var(--accent-dark); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: bold;">اكتملت: <span id="globalKhatmaCount">0</span> مرة</span>
             </div>
+            <p style="font-size:0.85rem; color: var(--text-muted); text-align:center; margin-bottom:15px;">اضغط على الجزء لحجزه وقراءته. التحديث يظهر للجميع لحظياً.</p>
             <div class="juz-grid" id="juzGrid">
                 <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: var(--text-muted); padding: 20px;">جاري تحميل الأجزاء...</div>
             </div>
@@ -985,7 +991,6 @@
         function closeRuhModal() { document.getElementById('ruhModal').classList.remove('active'); }
 
         // ================== الأحاديث، أسماء الله، والآيات ==================
-        
         const ahadith = [
             { text: "إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له.", source: "رواه مسلم" },
             { text: "كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن: سبحان الله وبحمده، سبحان الله العظيم.", source: "متفق عليه" },
