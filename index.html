@@ -284,7 +284,7 @@
 </head>
 <body>
 
-    <!-- 1 عنصر صوتي رئيسي للإذاعة يخدم الزرار العائم والكارت -->
+    <!-- 1. عنصر صوتي رئيسي للإذاعة يخدم الزرار العائم والكارت -->
     <audio id="globalRadioPlayer" preload="none"></audio>
 
     <!-- 🌟 الزرار العائم للإذاعة (FAB) واللوحة الخاصة به -->
@@ -400,7 +400,7 @@
             <div id="randomAyahText" style="text-align:center; padding:15px; margin-top:12px; border:1px dashed var(--border-color); background: var(--surface); border-radius:12px; font-family:'Amiri'; font-size:1.3rem; color: var(--text-main);">"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا"</div>
         </div>
 
-        <!-- 8. الصوتيات والمحطات الإذاعية -->
+        <!-- 5. الصوتيات والمحطات الإذاعية -->
         <div class="card reveal card-accent">
             <h2 class="text-accent"><i class="fas fa-headphones"></i> الصوتيات والإذاعة</h2>
             
@@ -475,13 +475,13 @@
             </button>
         </div>
         
-        <!-- 5. العدادات العالمية -->
+        <!-- 6. العدادات العالمية -->
         <div class="card reveal">
             <h2 id="secretAdminBtn" style="cursor:pointer; user-select:none;"><i class="fas fa-globe"></i> حملة الصلاة على النبي</h2>
             <div class="progress-bar-container mt-4">
                 <div class="progress-text-row">
                     <span id="targetGoalText">الهدف القادم: 10,000</span>
-                    <span id="targetPercentText">0%</span>
+                    <span id="targetPercentText" style="color: var(--primary); font-weight: 900;">0%</span>
                 </div>
                 <div class="progress-track">
                     <div id="sebhaProgressBar" class="progress-fill"></div>
@@ -505,9 +505,15 @@
             </div>
         </div>
 
-        <!-- 6. الختمات والسور -->
+        <!-- 7. الختمات والسور (بإضافة فضل كل سورة بوضوح تام) -->
         <div class="card reveal" style="text-align: center;">
-            <h2 style="justify-content: center;"><i class="fas fa-heart"></i> قلب القرآن (سورة يس)</h2>
+            <h2 style="justify-content: center; border: none; margin-bottom: 10px;"><i class="fas fa-heart text-primary"></i> قلب القرآن (سورة يس)</h2>
+            <div style="background: var(--primary-light); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--primary);">
+                <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin: 0;">
+                    <strong class="text-primary"><i class="fas fa-info-circle"></i> فضل قراءة السورة:</strong><br>
+                    "اقرءوا على موتاكم يس".. قراءتها بنية خالصة تخفف الحساب عن الميت وتتنزل بها الرحمات والمغفرة على قبره.
+                </p>
+            </div>
             <div class="grid-2" style="margin-bottom: 15px;">
                 <button class="btn-outline primary" onclick="window.open('https://quran.com/ar/36', '_blank')"><i class="fas fa-book-open"></i> اقرأ السورة</button>
                 <button class="btn-solid" onclick="window.incrementYaseen(event)"><i class="fas fa-check-circle"></i> أتممت القراءة</button>
@@ -518,7 +524,13 @@
         </div>
 
         <div class="card reveal card-accent" style="text-align: center;">
-            <h2 class="text-accent" style="justify-content: center;"><i class="fas fa-shield-alt"></i> المانعة (سورة الملك)</h2>
+            <h2 class="text-accent" style="justify-content: center; border: none; margin-bottom: 10px;"><i class="fas fa-shield-alt"></i> المانعة (سورة الملك)</h2>
+            <div style="background: var(--accent-light); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--accent);">
+                <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin: 0;">
+                    <strong class="text-accent"><i class="fas fa-info-circle"></i> فضل قراءة السورة:</strong><br>
+                    "هي المَانِعَةُ، المُنجِيَةُ مِن عَذَابِ القَبْرِ".. من قرأها أضاءت قبره وشفعت له حتى يُغفر له.
+                </p>
+            </div>
             <div class="grid-2" style="margin-bottom: 15px;">
                 <button class="btn-outline accent" onclick="window.open('https://quran.com/ar/67', '_blank')"><i class="fas fa-book-open"></i> اقرأ السورة</button>
                 <button class="btn-solid accent" onclick="window.incrementMulk(event)"><i class="fas fa-check-circle"></i> أتممت القراءة</button>
@@ -529,7 +541,17 @@
         </div>
 
         <div class="card reveal" style="text-align: center;">
-            <h2 style="justify-content: center;"><i class="fas fa-gem"></i> فضل سورة الإخلاص</h2>
+            <h2 style="justify-content: center; border: none; margin-bottom: 10px;"><i class="fas fa-gem text-primary"></i> فضل سورة الإخلاص</h2>
+            <div style="background: var(--primary-light); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--primary);">
+                <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin: 0;">
+                    <strong class="text-primary"><i class="fas fa-info-circle"></i> فضل قراءة السورة 3 مرات:</strong><br>
+                    قراءتها ثلاث مرات تُعادل في ثوابها ختم القرآن الكريم كاملاً، فما أعظم أن تهدي هذا الثواب الضخم لروح الوالد!
+                </p>
+            </div>
+            <div style="background: var(--bg); padding: 15px; border-radius: 12px; font-family: 'Amiri', serif; font-size: 1.25rem; line-height: 1.8; margin-bottom: 15px; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>
+                قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
+            </div>
             <button onclick="window.incrementIkhlas(event)" class="btn-solid">
                 <i class="fas fa-check-circle"></i> أتممت القراءة 3 مرات للوالد
             </button>
@@ -548,7 +570,7 @@
             </div>
         </div>
 
-        <!-- 7. سجل الدعاء العام -->
+        <!-- 8. سجل الدعاء العام -->
         <div class="card reveal">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
                 <h2 style="margin:0; border:none; padding:0;"><i class="fas fa-pen-fancy"></i> سجل الدعاء</h2>
@@ -569,7 +591,7 @@
             </div>
         </div>
 
-        <!-- 10. الروحانيات -->
+        <!-- 10. الروحانيات (تأمل وقراءة) -->
         <div class="card reveal card-accent">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
                 <h2 class="text-accent" style="margin:0; border:none; padding:0;"><i class="fas fa-star-and-crescent"></i> أسماء الله الحسنى</h2>
@@ -648,12 +670,11 @@
                 <h3 class="ruh-title">٢. عرض أعمال الأحياء على الأموات:</h3><p class="ruh-paragraph">الميت يعلم بأخبار أهله وأحبابه، وتُعرض عليه أعمالهم، فيفرح بصالح أعمالهم ويدعو لهم.</p>
                 <h3 class="ruh-title">٣. هدايا الأحياء تُنير القبور:</h3><p class="ruh-paragraph">من أعظم ما يُسعد الميت هو وصول (هدايا الأحياء) إليه من الدعاء والصدقات.</p>
                 <h3 class="ruh-title">٤. ارتباط الروح بالقبر:</h3><p class="ruh-paragraph">رغم أن الروح المؤمنة تصعد في نعيم الجنة، إلا أن لها ارتباطاً خفياً وسريعاً بالجسد في القبر، كشعاع الشمس المتصل بالأرض.</p>
-                <h3 class="ruh-title">٥. رد السلام ومعرفة الزائر:</h3><p class="ruh-paragraph">يأنس الميت بزيارة أهله وأحبابه ويعرفهم، ويرد عليهم السلام.</p>
+                <h3 class="ruh-title">٥. رد السلام ومعرفة الزائر:</h3><p class="ruh-paragraph">يأنس الميت بزيارة أهله وأحبابه ويعرفهم.</p>
                 <h3 class="ruh-title">٦. الموت ليس فناءً:</h3><p class="ruh-paragraph">الموت ليس نهاية، بل هو انتقال من دار ضيق وتعب ومكابدة، إلى دار سعة وراحة ودار بقاء.</p>
                 <h3 class="ruh-title">٧. سرعة وصول الهدايا (أسرع من لمح البصر):</h3><p class="ruh-paragraph">بمجرد أن تنوي التصدق أو الدعاء، ينقلب الثواب فوراً إلى "نور وريحان" يدخل عليه قبره، ويتباهى به أمام الأموات قائلاً: "هذه هدية ولدي".</p>
                 <h3 class="ruh-title">٨. الشعور بخطوات المشيعين والزوار:</h3><p class="ruh-paragraph">الميت يسمع قرع نعال المشيعين إذا انصرفوا، ويأنس بوقوف أحبابه عند قبره للدعاء له، ويستوحش إذا انصرفوا عنه.</p>
                 <h3 class="ruh-title">٩. شفاعة الأرواح الصالحة:</h3><p class="ruh-paragraph">المؤمن الذي توفي صابراً (كالمبطون)، يقف يوم القيامة ينتظر أهله ليشفع لهم ويأخذ بأيديهم إلى الجنة، جزاءً لبرهم به بعد موته.</p>
-                
                 <div style="text-align: center; margin-top: 25px; font-weight: bold; color: var(--primary-dark); background: var(--primary-light); padding: 20px; border-radius: 16px; line-height: 1.8; border: 1px dashed var(--primary);">"فلا تبخلوا على الوالد بهدايا الدعاء والصدقات.. فهي تصله الآن باسمكم وتملأ قبره نوراً وسروراً."</div>
             </div>
         </div>
@@ -811,18 +832,11 @@
 
         function openItikaf() {
             const el = document.getElementById('itikafModal');
-            if(el) {
-                el.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                stopAllAudio('none');
-            }
+            if(el) { el.classList.add('active'); document.body.style.overflow = 'hidden'; stopAllAudio('none'); }
         }
         function closeItikaf() {
             const el = document.getElementById('itikafModal');
-            if(el) {
-                el.classList.remove('active');
-                document.body.style.overflow = 'auto'; 
-            }
+            if(el) { el.classList.remove('active'); document.body.style.overflow = 'auto'; }
         }
 
         const dailyWirds = [
@@ -970,6 +984,8 @@
         function openRuhModal() { stopAllAudio('none'); document.getElementById('ruhModal').classList.add('active'); }
         function closeRuhModal() { document.getElementById('ruhModal').classList.remove('active'); }
 
+        // ================== الأحاديث، أسماء الله، والآيات ==================
+        
         const ahadith = [
             { text: "إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له.", source: "رواه مسلم" },
             { text: "كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن: سبحان الله وبحمده، سبحان الله العظيم.", source: "متفق عليه" },
@@ -1039,6 +1055,7 @@
         function showRandomAyah() {
             const ayahDiv = document.getElementById('randomAyahText'); 
             if(ayahDiv) { ayahDiv.style.opacity = '0'; setTimeout(() => { ayahDiv.innerText = `"${quranMessages[Math.floor(Math.random() * quranMessages.length)]}"`; ayahDiv.style.opacity = '1'; }, 300); }
+            if(navigator.vibrate) navigator.vibrate(20);
         }
 
         function shareOnWhatsApp() { 
@@ -1087,10 +1104,36 @@
         window.ikhlasRef = doc(db, 'stats', 'ikhlas_khatma');
         window.mulkRef = doc(db, 'stats', 'mulk_khatma');
 
-        // دوال زيادة سور القرآن
-        window.incrementYaseen = async function(e) { Swal.fire({title:'تقبل الله🤍', icon:'success', confirmButtonColor:'#059669'}); try{await updateDoc(window.yaseenRef, {count: increment(1)});}catch(err){setDoc(window.yaseenRef, {count:1}, {merge:true});} }
-        window.incrementIkhlas = async function(e) { Swal.fire({title:'تقبل الله🤍', icon:'success', confirmButtonColor:'#059669'}); try{await updateDoc(window.ikhlasRef, {count: increment(1)});}catch(err){setDoc(window.ikhlasRef, {count:1}, {merge:true});} }
-        window.incrementMulk = async function(e) { Swal.fire({title:'تقبل الله🤍', icon:'success', confirmButtonColor:'#059669'}); try{await updateDoc(window.mulkRef, {count: increment(1)});}catch(err){setDoc(window.mulkRef, {count:1}, {merge:true});} }
+        // دوال زيادة سور القرآن مع الأدعية المنبثقة الشيك
+        window.incrementYaseen = async function(e) { 
+            if(navigator.vibrate) navigator.vibrate(20);
+            Swal.fire({
+                title: 'بُوركت قراءتك 🤍', 
+                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: var(--text-main);">"اللهم بحق سورة يس (قلب القرآن)، اجعل قبر الحاج محمد المملوك روضة من رياض الجنة، ويسر حسابه، واغفر ذنبه."</div>', 
+                icon: 'success', confirmButtonText: 'آمين يارب', confirmButtonColor: '#059669'
+            }); 
+            try{await updateDoc(window.yaseenRef, {count: increment(1)});}catch(err){setDoc(window.yaseenRef, {count:1}, {merge:true});} 
+        }
+        
+        window.incrementIkhlas = async function(e) { 
+            if(navigator.vibrate) navigator.vibrate(20);
+            Swal.fire({
+                title: 'تقبل الله منك 🤍', 
+                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: var(--text-main);">"اللهم بحق سورة الإخلاص التي تعدل ثلث القرآن، ابْنِ لعبدك الحاج محمد المملوك قصراً في الجنة، واجعلها نوراً له في قبره."</div>', 
+                icon: 'success', confirmButtonText: 'آمين يارب', confirmButtonColor: '#059669'
+            }); 
+            try{await updateDoc(window.ikhlasRef, {count: increment(1)});}catch(err){setDoc(window.ikhlasRef, {count:1}, {merge:true});} 
+        }
+        
+        window.incrementMulk = async function(e) { 
+            if(navigator.vibrate) navigator.vibrate(20);
+            Swal.fire({
+                title: 'بُوركت قراءتك 🤍', 
+                html: '<div style="line-height: 1.8; font-size: 1.1rem; color: var(--text-main);">"اللهم اجعل سورة الملك المانعة المنجية حصناً للحاج محمد المملوك من عذاب القبر، وشفيعة له حتى تدخله الجنة."</div>', 
+                icon: 'success', confirmButtonText: 'آمين يارب', confirmButtonColor: '#059669'
+            }); 
+            try{await updateDoc(window.mulkRef, {count: increment(1)});}catch(err){setDoc(window.mulkRef, {count:1}, {merge:true});} 
+        }
 
         // سجل الدعاء العام
         try {
@@ -1112,7 +1155,7 @@
             try { input.value = ''; await addDoc(collection(db, 'duas'), { text: text, timestamp: Date.now() }); } catch (e) { alert("حدث خطأ"); input.value = text; }
         }
 
-        // العدادات المجمعة (باتش)
+        // العدادات المجمعة مع حساب النسبة المئوية
         const sebhaDocRef = doc(db, 'stats', 'global_sebha');
         const afwDocRef = doc(db, 'stats', 'global_afw');
         let sCount = 0, uSebha = 0, aCount = 0, uAfw = 0;   
@@ -1130,7 +1173,16 @@
             let tgt = 10000; while (ts >= tgt) tgt += 10000;
             if(document.getElementById('targetGoalText')) {
                 document.getElementById('targetGoalText').innerText = `الهدف القادم: ${tgt.toLocaleString()}`;
-                document.getElementById('sebhaProgressBar').style.width = Math.min((ts/tgt)*100, 100) + '%';
+                
+                let percent = Math.floor((ts / tgt) * 100);
+                if (percent > 100) percent = 100;
+                
+                document.getElementById('sebhaProgressBar').style.width = percent + '%';
+                if(document.getElementById('targetPercentText')) {
+                    document.getElementById('targetPercentText').innerText = percent + '%';
+                    document.getElementById('targetPercentText').style.color = 'var(--primary)';
+                    document.getElementById('targetPercentText').style.fontWeight = '900';
+                }
             }
         }
 
@@ -1183,10 +1235,10 @@
                     const btn = document.createElement('div'); btn.className = `juz-btn ${isRead ? 'read' : ''}`; btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
                     if(!isRead) { 
                         btn.onclick = () => { 
-                            Swal.fire({title: `حجز الجزء ${i}`, text: "هل تنوي قراءة هذا الجزء؟", icon: 'question', showCancelButton: true, confirmButtonColor: '#059669', confirmButtonText: 'نعم', cancelButtonText: 'إلغاء'})
-                            .then(async (r) => { if (r.isConfirmed) { try{await updateDoc(khatmaRef, {[`juz${i}`]: true}); Swal.fire('تقبل الله!', '', 'success');}catch(e){setDoc(khatmaRef, {[`juz${i}`]:true}, {merge:true});} } });
+                            Swal.fire({title: `حجز الجزء ${i}`, text: "هل تنوي قراءة هذا الجزء بنية الصدقة الجارية عن الحاج محمد المملوك؟", icon: 'question', showCancelButton: true, confirmButtonColor: '#059669', cancelButtonColor: '#ef4444', confirmButtonText: 'نعم، أنوي قراءته', cancelButtonText: 'إلغاء'})
+                            .then(async (r) => { if (r.isConfirmed) { try{await updateDoc(khatmaRef, {[`juz${i}`]: true}); Swal.fire({title:'تقبل الله! 🤍', html:`تم تسجيل الجزء <b>${i}</b> باسمك في ميزان حسناته.`, icon:'success', confirmButtonColor:'#059669'});}catch(e){setDoc(khatmaRef, {[`juz${i}`]:true}, {merge:true}); Swal.fire('تقبل الله!', 'تم الحجز بنجاح.', 'success');} } });
                         }; 
-                    } else { btn.onclick = () => alert('تم قراءته مسبقاً.'); }
+                    } else { btn.onclick = () => alert('تم قراءته مسبقاً. تقبل الله من الجميع.'); }
                     grid.appendChild(btn);
                 }
             }
