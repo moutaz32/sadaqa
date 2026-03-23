@@ -53,17 +53,28 @@
         .card { background: var(--surface); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(146, 64, 14, 0.05); border: 1px solid var(--border-color); border-top: 4px solid var(--fam-primary); }
         .card h2 { font-size: 1.25rem; margin-bottom: 20px; color: var(--fam-primary); display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 900; }
 
+        /* === الختمة والأسهم === */
+        .shares-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; margin-bottom: 15px; }
+        .share-btn { background: var(--bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 0; text-align: center; font-weight: bold; font-size: 0.85rem; color: var(--text-main); cursor: pointer; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .share-btn:hover { border-color: var(--fam-primary); color: var(--fam-primary); transform: translateY(-2px); }
+        .share-btn.read { background: var(--fam-primary); color: white; border-color: var(--fam-primary); cursor: not-allowed; opacity: 0.5; transform: none; box-shadow: none;}
+
         /* === عداد العائلة === */
         .sebha-circle { width: fit-content; min-width: 150px; min-height: 150px; padding: 10px 20px; background: var(--bg); border-radius: 50%; margin: 15px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px solid var(--fam-accent); cursor: pointer; user-select: none; box-shadow: 0 10px 25px rgba(251, 191, 36, 0.2); transition: 0.1s; aspect-ratio: 1 / 1; }
         .sebha-circle:active { transform: scale(0.92); background: #fef3c7; }
         .counter { font-size: 3rem; font-weight: 900; color: var(--fam-dark); text-align: center; line-height: 1; }
 
-        /* === رسائل العائلة === */
+        /* === رسائل وأدعية العائلة === */
         .dua-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 10px; font-family: inherit; resize: none; background: var(--bg); color: var(--text-main); outline: none; transition: 0.3s;}
         .dua-input:focus { border-color: var(--fam-primary); }
         .dua-list { max-height: 350px; overflow-y: auto; text-align: right; padding-right: 5px; }
         .dua-item { background: var(--bg); padding: 15px; border-radius: 12px; margin-bottom: 10px; border-right: 4px solid var(--fam-accent); font-size: 1rem; line-height: 1.6; color: var(--text-main); border-bottom: 1px solid var(--border-color);}
         .dua-sender { font-size: 0.8rem; color: var(--fam-primary); font-weight: bold; margin-bottom: 5px; display: block; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;}
+
+        /* كارت الأم المخصص */
+        .mom-card { border-top-color: #ec4899 !important; }
+        .mom-card h2 { color: #be185d !important; }
+        .mom-dua-item { background: #fdf2f8 !important; border-right-color: #ec4899 !important; border-bottom-color: #fbcfe8 !important; color: #831843 !important; }
 
         .btn-solid { width: 100%; padding: 15px; background: var(--fam-primary); color: white; border: none; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s; box-shadow: 0 4px 15px rgba(146, 64, 14, 0.2); }
         .btn-solid:active { transform: scale(0.96); }
@@ -88,7 +99,7 @@
         <header>
             <a href="index.html" class="back-btn"><i class="fas fa-home"></i></a>
             <h1>خلوة العائلة</h1>
-            <div style="font-size: 0.95rem; opacity: 0.9;">بيننا وبينك يا أبي دعاء لا ينقطع</div>
+            <div style="font-size: 0.95rem; opacity: 0.9;">بيننا وبينكم دعاء لا ينقطع</div>
         </header>
 
         <div class="container">
@@ -96,8 +107,68 @@
             <div class="card" style="text-align: center; border-top-color: var(--fam-accent);">
                 <h2 style="color: var(--fam-dark);"><i class="fas fa-heart text-red-500"></i> عهد العائلة</h2>
                 <p class="amiri" style="font-size: 1.3rem; line-height: 1.8; color: var(--fam-primary); font-weight: bold;">
-                    "نعاهدك يا أبي أمام الله، أن نظل مترابطين كما ربيتنا، وأن لا ننساك من دعواتنا وصدقاتنا ما حيينا، وأن نكون امتداداً لأثرك الطيب."
+                    "نعاهدك يا أبي أن نظل مترابطين كما ربيتنا، وأن لا ننساك من دعواتنا.. ونعاهدك يا أمي أن نكون بارين بكِ، سنداً لكِ، وقرة عينٍ تسعد قلبك."
                 </p>
+            </div>
+
+            <!-- ================== قسم أدعية الأبناء للوالد ================== -->
+            <div class="card">
+                <h2><i class="fas fa-praying-hands text-amber-500"></i> دعواتنا لأبينا الحبيب</h2>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+                    اقرأوا هذه الأدعية المخصصة من الأبناء للأب، فدعاء الولد الصالح يرفع الدرجات:
+                </p>
+                <div class="dua-list" style="max-height: none; overflow-y: visible;">
+                    <div class="dua-item">
+                        <i class="fas fa-quote-right text-amber-500" style="opacity:0.5; margin-left:8px;"></i>
+                        اللهم ارحم من كان سندنا، وأماننا، وضحكة ديارنا. اللهم اجعل أبي (محمد المملوك) في الفردوس الأعلى من الجنة ضاحكاً مستبشراً.
+                    </div>
+                    <div class="dua-item">
+                        <i class="fas fa-quote-right text-amber-500" style="opacity:0.5; margin-left:8px;"></i>
+                        اللهم اجزهِ عنا خير ما جزيت أباً عن أبنائه، فقد أفنى عمره لإسعادنا، فأسعده اليوم برؤية مقعده من الجنة يا رب العالمين.
+                    </div>
+                    <div class="dua-item">
+                        <i class="fas fa-quote-right text-amber-500" style="opacity:0.5; margin-left:8px;"></i>
+                        اللهم اجعل كل دمعة ذرفناها شوقاً إليه، وكل عمل صالح فعلناه بنيته، سُقيا ونوراً ورفعةً له في قبره.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================== قسم أدعية الأم (حبيبة القلب) ================== -->
+            <div class="card mom-card">
+                <h2><i class="fas fa-heart"></i> لحبيبة القلب (أمي)</h2>
+                <p style="text-align: center; font-size: 0.9rem; color: #831843; margin-bottom: 15px; opacity: 0.8;">
+                    حفظها الله خيمةً تُظللكم، وبركةً تملأ بيوتكم:
+                </p>
+                <div class="dua-list" style="max-height: none; overflow-y: visible;">
+                    <div class="dua-item mom-dua-item">
+                        <i class="fas fa-quote-right text-pink-500" style="opacity:0.5; margin-left:8px;"></i>
+                        اللهم استودعناك قلب أمنا وصحتها وعافيتها، فاحفظها لنا بحفظك الذي لا يرام، وعينك التي لا تنام.
+                    </div>
+                    <div class="dua-item mom-dua-item">
+                        <i class="fas fa-quote-right text-pink-500" style="opacity:0.5; margin-left:8px;"></i>
+                        اللهم اجبر كسر قلبها على فراق رفيق دربها، واربط على قلبها بالسكينة، وأنزل عليها طمأنينة من عندك تسعد بها روحها.
+                    </div>
+                    <div class="dua-item mom-dua-item">
+                        <i class="fas fa-quote-right text-pink-500" style="opacity:0.5; margin-left:8px;"></i>
+                        اللهم بارك في عمر أمي، ولا ترنيا فيها بأساً يبكينا، واجعلنا لها قرة عين، وارزقنا برها ورضاها في كل وقت وحين.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================== ختمة العائلة (أسهم 5 صفحات) ================== -->
+            <div class="card" style="border-top-color: var(--fam-primary);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+                    <h2 style="margin:0; border:none; padding:0; color: var(--fam-primary);"><i class="fas fa-quran"></i> ختمة العائلة المشتركة</h2>
+                    <span style="background: rgba(146, 64, 14, 0.1); color: var(--fam-primary); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: bold;">اكتملت: <span id="familyKhatmaCount">0</span> مرة</span>
+                </div>
+                <p style="font-size:0.85rem; color: var(--text-muted); text-align:center; margin-bottom:15px;">
+                    للتيسير علينا كعائلة، تم تقسيم الختمة إلى ١٢٠ سهماً.<br>
+                    <strong style="color: var(--fam-dark);">السهم الواحد = (٥ صفحات فقط) تقرأها بعد الصلاة.</strong><br>
+                    اضغط على أي رقم لحجز سهمك وشاركنا الأجر.
+                </p>
+                <div class="shares-grid" id="familySharesGrid">
+                    <div style="grid-column: span 12; text-align: center; font-size: 0.8rem; color: var(--text-muted); padding: 20px;">جاري تحميل الأسهم...</div>
+                </div>
             </div>
 
             <!-- عداد حسنات العائلة المشترك -->
@@ -138,7 +209,7 @@
 
     <script>
         // ================== نظام القفل (الرقم السري) ==================
-        // 🔒 يمكنك تغيير الرقم السري من هنا (بين علامتي التنصيص)
+        // 🔒 يمكنك تغيير الرقم السري من هنا
         const FAMILY_PASSWORD = "بابا"; 
 
         function checkPassword() {
@@ -171,7 +242,7 @@
         }
     </script>
 
-    <!-- ================== فايربيز (العدادات والرسايل السرية) ================== -->
+    <!-- ================== فايربيز (العدادات والرسايل والختمة السرية) ================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -183,7 +254,74 @@
         });
         const db = getFirestore(app);
 
-        // 1. عداد العائلة السري
+        // 1. ختمة العائلة (نظام الأسهم 120 سهم)
+        const famKhatmaRef = doc(db, 'stats', 'family_khatma_shares');
+        const famKhatmaStatsRef = doc(db, 'stats', 'family_khatma_stats');
+
+        onSnapshot(famKhatmaStatsRef, (snap) => { 
+            const el = document.getElementById('familyKhatmaCount');
+            if(el) el.innerText = snap.exists() ? snap.data().completed : 0; 
+        });
+        
+        onSnapshot(famKhatmaRef, (snap) => {
+            let state = snap.exists() ? snap.data() : {};
+            const grid = document.getElementById('familySharesGrid'); 
+            if(grid) {
+                grid.innerHTML = ''; 
+                let completedParts = 0;
+                
+                for(let i=1; i<=120; i++) {
+                    const isRead = state[`share${i}`]; 
+                    if(isRead) completedParts++;
+                    
+                    const btn = document.createElement('div'); 
+                    btn.className = `share-btn ${isRead ? 'read' : ''}`; 
+                    btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
+                    
+                    if(!isRead) { 
+                        btn.onclick = () => { 
+                            Swal.fire({
+                                title: `حجز السهم رقم ${i}`, 
+                                html: 'هذا السهم يُعادل <b>(٥ صفحات فقط)</b>.<br>هل تنوي قراءتها بعد الصلاة كصدقة عن والدك؟', 
+                                icon: 'question', showCancelButton: true, confirmButtonColor: '#92400e', cancelButtonColor: '#ef4444', confirmButtonText: 'نعم، نويت القراءة', cancelButtonText: 'إلغاء'
+                            }).then(async (r) => { 
+                                if (r.isConfirmed) { 
+                                    try {
+                                        await updateDoc(famKhatmaRef, {[`share${i}`]: true}); 
+                                        Swal.fire({title:'تقبل الله! 🤍', html:`تم حجز ٥ صفحات باسمك في ميزان حسناته.<br>لا تنسَ قراءتها.`, icon:'success', confirmButtonColor:'#92400e'});
+                                    } catch(e) {
+                                        setDoc(famKhatmaRef, {[`share${i}`]:true}, {merge:true}); 
+                                        Swal.fire('تقبل الله!', 'تم الحجز بنجاح.', 'success');
+                                    } 
+                                } 
+                            });
+                        }; 
+                    } else { 
+                        btn.onclick = () => Swal.fire('تنبيه', 'هذا السهم قرأه أحد أفراد العائلة مسبقاً.. تقبل الله، يرجى اختيار سهم آخر.', 'info'); 
+                    }
+                    grid.appendChild(btn);
+                }
+                
+                if(completedParts === 120) {
+                     setTimeout(async () => {
+                         const currentSnap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.getDoc(famKhatmaRef));
+                         let isFull = true; 
+                         for(let k=1; k<=120; k++) { if(!currentSnap.data() || !currentSnap.data()[`share${k}`]) isFull=false; }
+                         
+                         if(isFull) { 
+                             try { await updateDoc(famKhatmaStatsRef, { completed: increment(1) }); } 
+                             catch(e) { await setDoc(famKhatmaStatsRef, {completed: 1}, {merge: true}); }
+                             
+                             let resetState = {}; 
+                             for(let i=1; i<=120; i++) resetState[`share${i}`] = false; 
+                             await updateDoc(famKhatmaRef, resetState).catch(e => setDoc(famKhatmaRef, resetState, {merge: true})); 
+                         }
+                    }, 5000); 
+                }
+            }
+        });
+
+        // 2. عداد العائلة السري
         const famSebhaRef = doc(db, 'stats', 'family_sebha');
         let fCount = 0, uFam = 0;
 
@@ -212,7 +350,7 @@
             }
         }, 2000);
 
-        // 2. رسائل العائلة السرية
+        // 3. رسائل العائلة السرية
         try {
             onSnapshot(collection(db, 'family_messages'), (snapshot) => {
                 const msgs = []; 
