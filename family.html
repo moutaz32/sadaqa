@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#451a03">
+    <title>خلوة العائلة | آل المملوك</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* ثيم دافئ وخاص بالعائلة (بني عنبري وذهبي) */
+        :root { 
+            --fam-primary: #92400e; 
+            --fam-dark: #451a03; 
+            --fam-accent: #fbbf24; 
+            --bg: #fffbeb; 
+            --surface: #ffffff; 
+            --text-main: #451a03;
+            --text-muted: #78350f;
+            --border-color: #fde68a;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text-main); padding-bottom: 50px; }
+        .amiri { font-family: 'Amiri', serif; }
+
+        /* === شاشة القفل (الرقم السري) === */
+        #loginScreen {
+            position: fixed; inset: 0; background: linear-gradient(135deg, #451a03 0%, #78350f 100%);
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; color: white; text-align: center;
+        }
+        .lock-icon { font-size: 4rem; color: var(--fam-accent); margin-bottom: 20px; }
+        .password-input {
+            width: 100%; max-width: 300px; padding: 15px; border-radius: 15px; border: 2px solid var(--fam-accent);
+            font-size: 1.5rem; text-align: center; margin-bottom: 20px; outline: none; letter-spacing: 5px;
+            background: rgba(255,255,255,0.1); color: white;
+        }
+        .password-input::placeholder { color: rgba(255,255,255,0.5); letter-spacing: normal; font-size: 1rem;}
+        .login-btn {
+            background: var(--fam-accent); color: #451a03; border: none; padding: 15px 40px; border-radius: 15px; font-weight: bold; font-size: 1.2rem; cursor: pointer; box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2); transition: 0.3s;
+        }
+        .login-btn:active { transform: scale(0.95); }
+
+        /* === الهيدر ومحتوى الخلوة === */
+        header { background: linear-gradient(135deg, var(--fam-dark) 0%, var(--fam-primary) 100%); color: white; padding: 30px 20px 60px; text-align: center; border-radius: 0 0 40px 40px; position: relative; box-shadow: 0 10px 30px rgba(146, 64, 14, 0.2); }
+        .back-btn { position: absolute; right: 20px; top: 30px; color: white; font-size: 1.5rem; text-decoration: none; background: rgba(255,255,255,0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        h1 { font-size: 1.8rem; margin-bottom: 5px; color: var(--fam-accent); font-weight: 900;}
+        
+        .container { max-width: 600px; margin: -30px auto 0; padding: 0 15px; position: relative; z-index: 10; }
+        .card { background: var(--surface); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(146, 64, 14, 0.05); border: 1px solid var(--border-color); border-top: 4px solid var(--fam-primary); }
+        .card h2 { font-size: 1.25rem; margin-bottom: 20px; color: var(--fam-primary); display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 900; }
+
+        /* === عداد العائلة === */
+        .sebha-circle { width: fit-content; min-width: 150px; min-height: 150px; padding: 10px 20px; background: var(--bg); border-radius: 50%; margin: 15px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px solid var(--fam-accent); cursor: pointer; user-select: none; box-shadow: 0 10px 25px rgba(251, 191, 36, 0.2); transition: 0.1s; aspect-ratio: 1 / 1; }
+        .sebha-circle:active { transform: scale(0.92); background: #fef3c7; }
+        .counter { font-size: 3rem; font-weight: 900; color: var(--fam-dark); text-align: center; line-height: 1; }
+
+        /* === رسائل العائلة === */
+        .dua-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 10px; font-family: inherit; resize: none; background: var(--bg); color: var(--text-main); outline: none; transition: 0.3s;}
+        .dua-input:focus { border-color: var(--fam-primary); }
+        .dua-list { max-height: 350px; overflow-y: auto; text-align: right; padding-right: 5px; }
+        .dua-item { background: var(--bg); padding: 15px; border-radius: 12px; margin-bottom: 10px; border-right: 4px solid var(--fam-accent); font-size: 1rem; line-height: 1.6; color: var(--text-main); border-bottom: 1px solid var(--border-color);}
+        .dua-sender { font-size: 0.8rem; color: var(--fam-primary); font-weight: bold; margin-bottom: 5px; display: block; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;}
+
+        .btn-solid { width: 100%; padding: 15px; background: var(--fam-primary); color: white; border: none; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s; box-shadow: 0 4px 15px rgba(146, 64, 14, 0.2); }
+        .btn-solid:active { transform: scale(0.96); }
+    </style>
+</head>
+<body>
+
+    <!-- ================== شاشة القفل (الرقم السري) ================== -->
+    <div id="loginScreen">
+        <i class="fas fa-lock lock-icon"></i>
+        <h2 class="amiri" style="font-size: 2rem; margin-bottom: 10px;">خلوة عائلة المملوك</h2>
+        <p style="margin-bottom: 30px; opacity: 0.8;">هذا المكان مخصص لأفراد العائلة فقط.<br>يرجى إدخال الرقم السري للدخول.</p>
+        
+        <input type="password" id="familyPassword" class="password-input" placeholder="الرقم السري" onkeypress="if(event.key === 'Enter') checkPassword()">
+        <button class="login-btn" onclick="checkPassword()"><i class="fas fa-key"></i> دخول الخلوة</button>
+        
+        <a href="index.html" style="color: rgba(255,255,255,0.6); margin-top: 30px; text-decoration: none; border-bottom: 1px dashed;"><i class="fas fa-arrow-right"></i> العودة للموقع العام</a>
+    </div>
+
+    <!-- ================== محتوى الخلوة ================== -->
+    <div id="familyContent" style="display: none;">
+        <header>
+            <a href="index.html" class="back-btn"><i class="fas fa-home"></i></a>
+            <h1>خلوة العائلة</h1>
+            <div style="font-size: 0.95rem; opacity: 0.9;">بيننا وبينك يا أبي دعاء لا ينقطع</div>
+        </header>
+
+        <div class="container">
+            
+            <div class="card" style="text-align: center; border-top-color: var(--fam-accent);">
+                <h2 style="color: var(--fam-dark);"><i class="fas fa-heart text-red-500"></i> عهد العائلة</h2>
+                <p class="amiri" style="font-size: 1.3rem; line-height: 1.8; color: var(--fam-primary); font-weight: bold;">
+                    "نعاهدك يا أبي أمام الله، أن نظل مترابطين كما ربيتنا، وأن لا ننساك من دعواتنا وصدقاتنا ما حيينا، وأن نكون امتداداً لأثرك الطيب."
+                </p>
+            </div>
+
+            <!-- عداد حسنات العائلة المشترك -->
+            <div class="card">
+                <h2><i class="fas fa-fingerprint"></i> رصيد العائلة السري</h2>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+                    هذا العداد يجمع تسبيحات واستغفار الأسرة فقط. كل ضغطة هنا هي هدية مغلفة بالحب لروح الوالد.
+                </p>
+                <div style="text-align: center;">
+                    <div class="sebha-circle" onclick="incrementFamilySebha()">
+                        <span class="counter" id="familySebhaCounter">0</span>
+                    </div>
+                    <div style="font-weight:bold; color:var(--fam-dark); font-size: 1.2rem; margin-top: 15px;">استغفر الله العظيم وأتوب إليه</div>
+                </div>
+            </div>
+
+            <!-- دفتر رسائل العائلة -->
+            <div class="card">
+                <h2><i class="fas fa-envelope-open-text"></i> رسائل إلى أبي</h2>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+                    مساحة خاصة جداً.. اكتب رسالة، دعوة، أو موقف تتذكره لوالدك. لن يقرأها سوى أفراد العائلة هنا.
+                </p>
+                
+                <input type="text" id="senderName" class="dua-input" placeholder="اسمك (مثال: ابنك معتز)..." style="margin-bottom: 10px; font-weight: bold;">
+                <textarea id="familyDuaInput" class="dua-input" rows="4" placeholder="رسالتك أو دعائك للوالد الحبيب..."></textarea>
+                
+                <button onclick="addFamilyDua()" class="btn-solid" style="margin-bottom: 20px;">
+                    <i class="fas fa-heart"></i> أرسل الرسالة
+                </button>
+                
+                <div class="dua-list" id="familyDuaList">
+                    <div style="text-align:center; opacity:0.6; padding: 20px;">جاري تحميل رسائل العائلة...</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ================== نظام القفل (الرقم السري) ==================
+        // 🔒 يمكنك تغيير الرقم السري من هنا (بين علامتي التنصيص)
+        const FAMILY_PASSWORD = "بابا"; 
+
+        function checkPassword() {
+            const input = document.getElementById('familyPassword').value;
+            if(input === FAMILY_PASSWORD) {
+                // الرقم صحيح
+                sessionStorage.setItem('family_unlocked', 'true');
+                unlockScreen();
+            } else {
+                // الرقم خطأ
+                Swal.fire({
+                    title: 'عذراً!',
+                    text: 'الرقم السري غير صحيح.',
+                    icon: 'error',
+                    confirmButtonColor: '#92400e',
+                    confirmButtonText: 'حاول مرة أخرى'
+                });
+                document.getElementById('familyPassword').value = '';
+            }
+        }
+
+        function unlockScreen() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('familyContent').style.display = 'block';
+        }
+
+        // لو مسجل دخول في نفس الجلسة، يفتح علطول
+        if(sessionStorage.getItem('family_unlocked') === 'true') {
+            unlockScreen();
+        }
+    </script>
+
+    <!-- ================== فايربيز (العدادات والرسايل السرية) ================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // نفس قاعدة البيانات بتاعة الموقع عشان تبقى كل حاجة في مكان واحد
+        const app = initializeApp({
+          apiKey: "AIzaSyAbzVBetgxuzIhf6gHhsqdK_CbkUERIgus", authDomain: "sadaqa-640e8.firebaseapp.com", projectId: "sadaqa-640e8",
+          storageBucket: "sadaqa-640e8.firebasestorage.app", messagingSenderId: "141593582678", appId: "1:141593582678:web:16b3cf49e7c0273a2deff7"
+        });
+        const db = getFirestore(app);
+
+        // 1. عداد العائلة السري
+        const famSebhaRef = doc(db, 'stats', 'family_sebha');
+        let fCount = 0, uFam = 0;
+
+        onSnapshot(famSebhaRef, (snap) => { 
+            fCount = snap.exists() ? snap.data().count : 0; 
+            updateFamUI(); 
+        });
+
+        function updateFamUI() {
+            const total = fCount + uFam;
+            const el = document.getElementById('familySebhaCounter');
+            if(el) el.innerText = total.toLocaleString();
+        }
+
+        window.incrementFamilySebha = function() { 
+            if(navigator.vibrate) navigator.vibrate(15); 
+            uFam++; 
+            updateFamUI(); 
+        }
+
+        setInterval(async () => {
+            if (uFam > 0) { 
+                let c = uFam; uFam = 0; 
+                try { await updateDoc(famSebhaRef, {count: increment(c)}); } 
+                catch(e) { setDoc(famSebhaRef, {count: c}, {merge:true}); } 
+            }
+        }, 2000);
+
+        // 2. رسائل العائلة السرية
+        try {
+            onSnapshot(collection(db, 'family_messages'), (snapshot) => {
+                const msgs = []; 
+                snapshot.forEach((doc) => { msgs.push({ id: doc.id, ...doc.data() }); });
+                msgs.sort((a, b) => b.timestamp - a.timestamp); 
+                
+                const list = document.getElementById('familyDuaList'); 
+                if(list) {
+                    list.innerHTML = '';
+                    if(msgs.length === 0) list.innerHTML = '<div style="text-align:center; opacity:0.6; padding: 20px;">الدفتر فارغ.. كن أول من يكتب رسالة للوالد.</div>';
+                    
+                    msgs.forEach(m => { 
+                        const dateObj = new Date(m.timestamp);
+                        const dateStr = dateObj.toLocaleDateString('ar-EG');
+                        list.innerHTML += `
+                            <div class="dua-item">
+                                <span class="dua-sender"><i class="fas fa-user-edit"></i> ${m.sender || 'أحد أفراد العائلة'} <span style="float:left; color:#9ca3af;">${dateStr}</span></span>
+                                ${m.text}
+                            </div>
+                        `; 
+                    });
+                }
+            });
+        } catch(e) { console.log(e); }
+
+        window.addFamilyDua = async function() {
+            const senderInput = document.getElementById('senderName');
+            const textInput = document.getElementById('familyDuaInput');
+            
+            const sender = senderInput.value.trim() || 'أحد أفراد العائلة';
+            const text = textInput.value.trim();
+            
+            if (text === '') {
+                Swal.fire('تنبيه', 'لا يمكن إرسال رسالة فارغة', 'warning');
+                return;
+            }
+            
+            try { 
+                textInput.value = ''; 
+                await addDoc(collection(db, 'family_messages'), { 
+                    sender: sender, 
+                    text: text, 
+                    timestamp: Date.now() 
+                }); 
+                Swal.fire({
+                    title: 'تم الإرسال',
+                    text: 'حُفظت رسالتك في دفتر العائلة السري.',
+                    icon: 'success',
+                    confirmButtonColor: '#92400e'
+                });
+            } catch (e) { 
+                alert("حدث خطأ في الإرسال"); 
+                textInput.value = text; 
+            }
+        }
+    </script>
+</body>
+</html>
