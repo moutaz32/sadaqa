@@ -27,7 +27,7 @@
         body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text-main); padding-bottom: 50px; }
         .amiri { font-family: 'Amiri', serif; }
 
-        /* === شاشة القفل (الرقم السري) === */
+        /* === شاشة القفل === */
         #loginScreen {
             position: fixed; inset: 0; background: linear-gradient(135deg, #451a03 0%, #78350f 100%);
             z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; color: white; text-align: center;
@@ -52,6 +52,22 @@
         .container { max-width: 600px; margin: -30px auto 0; padding: 0 15px; position: relative; z-index: 10; }
         .card { background: var(--surface); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(146, 64, 14, 0.05); border: 1px solid var(--border-color); border-top: 4px solid var(--fam-primary); }
         .card h2 { font-size: 1.25rem; margin-bottom: 20px; color: var(--fam-primary); display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 900; }
+
+        /* === وصايا أبي === */
+        .quote-box { background: #fff7ed; border-right: 4px solid #f59e0b; padding: 15px; border-radius: 12px; margin-bottom: 12px; position: relative; font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.8; color: #78350f; }
+        .quote-box i { position: absolute; top: 10px; left: 15px; color: #fde68a; font-size: 1.5rem; opacity: 0.5; }
+
+        /* === غرس العائلة (الأعمال الصالحة) === */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .deed-btn { background: var(--surface); border: 2px solid var(--border-color); padding: 15px; border-radius: 15px; text-align: center; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-main); font-weight: bold; font-family: 'Tajawal'; }
+        .deed-btn:active { transform: scale(0.95); }
+        .deed-icon { font-size: 2rem; }
+        .deed-count { background: var(--fam-primary); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.85rem; margin-top: 5px; }
+        
+        .deed-water { border-color: #bae6fd; } .deed-water .deed-icon { color: #0284c7; } .deed-water:hover { background: #f0f9ff; border-color: #0284c7; }
+        .deed-food { border-color: #fed7aa; } .deed-food .deed-icon { color: #ea580c; } .deed-food:hover { background: #fff7ed; border-color: #ea580c; }
+        .deed-money { border-color: #bbf7d0; } .deed-money .deed-icon { color: #16a34a; } .deed-money:hover { background: #f0fdf4; border-color: #16a34a; }
+        .deed-help { border-color: #e9d5ff; } .deed-help .deed-icon { color: #9333ea; } .deed-help:hover { background: #faf5ff; border-color: #9333ea; }
 
         /* === الختمة والأسهم === */
         .shares-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; margin-bottom: 15px; }
@@ -111,12 +127,39 @@
                 </p>
             </div>
 
+            <!-- ================== 2. غرس العائلة / أعمال الخير ================== -->
+            <div class="card" style="border-top-color: #10b981;">
+                <h2 style="color: #047857;"><i class="fas fa-seedling text-emerald-500"></i> غرس العائلة (صدقات واقعية)</h2>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+                    هل قمت بعمل صالح اليوم في الحقيقة (خارج الإنترنت)؟ اضغط هنا لتهدي ثوابه للوالد ونشجع بعضنا:
+                </p>
+                <div class="grid-2">
+                    <button class="deed-btn deed-water" onclick="incrementDeed('water')">
+                        <i class="fas fa-hand-holding-water deed-icon"></i>
+                        سقيا ماء / طيور
+                        <span class="deed-count" id="count_water">0</span>
+                    </button>
+                    <button class="deed-btn deed-food" onclick="incrementDeed('food')">
+                        <i class="fas fa-bread-slice deed-icon"></i>
+                        إطعام مسكين / حيوان
+                        <span class="deed-count" id="count_food" style="background: #ea580c;">0</span>
+                    </button>
+                    <button class="deed-btn deed-money" onclick="incrementDeed('money')">
+                        <i class="fas fa-hand-holding-usd deed-icon"></i>
+                        صدقة مالية
+                        <span class="deed-count" id="count_money" style="background: #16a34a;">0</span>
+                    </button>
+                    <button class="deed-btn deed-help" onclick="incrementDeed('help')">
+                        <i class="fas fa-hands-helping deed-icon"></i>
+                        جبر خاطر / مساعدة
+                        <span class="deed-count" id="count_help" style="background: #9333ea;">0</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- ================== قسم أدعية الأبناء للوالد ================== -->
             <div class="card">
                 <h2><i class="fas fa-praying-hands text-amber-500"></i> دعواتنا لأبينا الحبيب</h2>
-                <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                    اقرأوا هذه الأدعية المخصصة من الأبناء للأب، فدعاء الولد الصالح يرفع الدرجات:
-                </p>
                 <div class="dua-list" style="max-height: none; overflow-y: visible;">
                     <div class="dua-item">
                         <i class="fas fa-quote-right text-amber-500" style="opacity:0.5; margin-left:8px;"></i>
@@ -215,18 +258,10 @@
         function checkPassword() {
             const input = document.getElementById('familyPassword').value;
             if(input === FAMILY_PASSWORD) {
-                // الرقم صحيح
                 sessionStorage.setItem('family_unlocked', 'true');
                 unlockScreen();
             } else {
-                // الرقم خطأ
-                Swal.fire({
-                    title: 'عذراً!',
-                    text: 'الرقم السري غير صحيح.',
-                    icon: 'error',
-                    confirmButtonColor: '#92400e',
-                    confirmButtonText: 'حاول مرة أخرى'
-                });
+                Swal.fire({ title: 'عذراً!', text: 'الرقم السري غير صحيح.', icon: 'error', confirmButtonColor: '#92400e', confirmButtonText: 'حاول مرة أخرى' });
                 document.getElementById('familyPassword').value = '';
             }
         }
@@ -236,25 +271,66 @@
             document.getElementById('familyContent').style.display = 'block';
         }
 
-        // لو مسجل دخول في نفس الجلسة، يفتح علطول
         if(sessionStorage.getItem('family_unlocked') === 'true') {
             unlockScreen();
         }
     </script>
 
-    <!-- ================== فايربيز (العدادات والرسايل والختمة السرية) ================== -->
+    <!-- ================== فايربيز (العدادات والرسايل والأعمال) ================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // نفس قاعدة البيانات بتاعة الموقع عشان تبقى كل حاجة في مكان واحد
         const app = initializeApp({
           apiKey: "AIzaSyAbzVBetgxuzIhf6gHhsqdK_CbkUERIgus", authDomain: "sadaqa-640e8.firebaseapp.com", projectId: "sadaqa-640e8",
           storageBucket: "sadaqa-640e8.firebasestorage.app", messagingSenderId: "141593582678", appId: "1:141593582678:web:16b3cf49e7c0273a2deff7"
         });
         const db = getFirestore(app);
 
-        // 1. ختمة العائلة (نظام الأسهم 120 سهم)
+        // ================== 1. غرس العائلة (أعمال الخير) ==================
+        const deedsRef = doc(db, 'stats', 'family_deeds');
+        let deedsQueue = { water: 0, food: 0, money: 0, help: 0 };
+
+        onSnapshot(deedsRef, (snap) => {
+            let data = snap.exists() ? snap.data() : { water: 0, food: 0, money: 0, help: 0 };
+            document.getElementById('count_water').innerText = (data.water || 0) + deedsQueue.water;
+            document.getElementById('count_food').innerText = (data.food || 0) + deedsQueue.food;
+            document.getElementById('count_money').innerText = (data.money || 0) + deedsQueue.money;
+            document.getElementById('count_help').innerText = (data.help || 0) + deedsQueue.help;
+        });
+
+        window.incrementDeed = function(type) {
+            if(navigator.vibrate) navigator.vibrate(15);
+            deedsQueue[type]++;
+            const el = document.getElementById('count_' + type);
+            el.innerText = parseInt(el.innerText) + 1;
+            
+            let msg = "";
+            if(type === 'water') msg = "سقيا الماء من أعظم الصدقات.. تقبل الله.";
+            if(type === 'food') msg = "في كل كبدٍ رطبة أجر.. تقبل الله إطعامك.";
+            if(type === 'money') msg = "الصدقة تطفئ غضب الرب.. بُوركت مالك.";
+            if(type === 'help') msg = "من سار في حاجة أخيه سار الله في حاجته.";
+            
+            Swal.fire({ title: 'تقبل الله 🤍', text: msg, icon: 'success', confirmButtonColor: '#059669', timer: 2000 });
+        }
+
+        setInterval(async () => {
+            let updates = {};
+            let hasUpdates = false;
+            for(let key in deedsQueue) {
+                if(deedsQueue[key] > 0) {
+                    updates[key] = increment(deedsQueue[key]);
+                    deedsQueue[key] = 0;
+                    hasUpdates = true;
+                }
+            }
+            if(hasUpdates) {
+                try { await updateDoc(deedsRef, updates); } 
+                catch(e) { setDoc(deedsRef, updates, {merge:true}); }
+            }
+        }, 2000);
+
+        // ================== 2. الختمة العائلية (الأسهم مع أرقام الصفحات) ==================
         const famKhatmaRef = doc(db, 'stats', 'family_khatma_shares');
         const famKhatmaStatsRef = doc(db, 'stats', 'family_khatma_stats');
 
@@ -274,21 +350,27 @@
                     const isRead = state[`share${i}`]; 
                     if(isRead) completedParts++;
                     
+                    // الحسبة العبقرية لتحديد أرقام الصفحات بالظبط
+                    let startPage = (i - 1) * 5 + 1;
+                    let endPage = i * 5;
+                    
                     const btn = document.createElement('div'); 
                     btn.className = `share-btn ${isRead ? 'read' : ''}`; 
                     btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
+                    // تظهر أرقام الصفحات لما تقف بالماوس على الزرار
+                    btn.title = `الصفحات من ${startPage} إلى ${endPage}`; 
                     
                     if(!isRead) { 
                         btn.onclick = () => { 
                             Swal.fire({
                                 title: `حجز السهم رقم ${i}`, 
-                                html: 'هذا السهم يُعادل <b>(٥ صفحات فقط)</b>.<br>هل تنوي قراءتها بعد الصلاة كصدقة عن والدك؟', 
+                                html: `هذا السهم يمثل <b>(من صفحة ${startPage} إلى صفحة ${endPage})</b>.<br>هل تنوي قراءتها الآن كصدقة جارية عن والدك؟`, 
                                 icon: 'question', showCancelButton: true, confirmButtonColor: '#92400e', cancelButtonColor: '#ef4444', confirmButtonText: 'نعم، نويت القراءة', cancelButtonText: 'إلغاء'
                             }).then(async (r) => { 
                                 if (r.isConfirmed) { 
                                     try {
                                         await updateDoc(famKhatmaRef, {[`share${i}`]: true}); 
-                                        Swal.fire({title:'تقبل الله! 🤍', html:`تم حجز ٥ صفحات باسمك في ميزان حسناته.<br>لا تنسَ قراءتها.`, icon:'success', confirmButtonColor:'#92400e'});
+                                        Swal.fire({title:'تقبل الله! 🤍', html:`تم حجز الصفحات من <b>${startPage} إلى ${endPage}</b> باسمك في ميزان حسناته.<br>لا تنسَ قراءتها.`, icon:'success', confirmButtonColor:'#92400e'});
                                     } catch(e) {
                                         setDoc(famKhatmaRef, {[`share${i}`]:true}, {merge:true}); 
                                         Swal.fire('تقبل الله!', 'تم الحجز بنجاح.', 'success');
@@ -297,7 +379,7 @@
                             });
                         }; 
                     } else { 
-                        btn.onclick = () => Swal.fire('تنبيه', 'هذا السهم قرأه أحد أفراد العائلة مسبقاً.. تقبل الله، يرجى اختيار سهم آخر.', 'info'); 
+                        btn.onclick = () => Swal.fire('تنبيه', `هذا السهم (من صـ ${startPage} إلى ${endPage}) قرأه أحد أفراد العائلة مسبقاً.. تقبل الله، يرجى اختيار سهم آخر.`, 'info'); 
                     }
                     grid.appendChild(btn);
                 }
@@ -321,7 +403,7 @@
             }
         });
 
-        // 2. عداد العائلة السري
+        // ================== 3. عداد العائلة السري ==================
         const famSebhaRef = doc(db, 'stats', 'family_sebha');
         let fCount = 0, uFam = 0;
 
@@ -350,7 +432,7 @@
             }
         }, 2000);
 
-        // 3. رسائل العائلة السرية
+        // ================== 4. رسائل العائلة ==================
         try {
             onSnapshot(collection(db, 'family_messages'), (snapshot) => {
                 const msgs = []; 
