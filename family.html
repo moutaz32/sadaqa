@@ -58,6 +58,14 @@
         .days-text { font-size: 1.2rem; color: #c2410c; font-weight: bold; margin-bottom: 15px; }
         .wafaa-quote { font-size: 1rem; color: #78350f; font-style: italic; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 10px; }
 
+        /* === ركن الشيخ الشعراوي === */
+        .shaarawy-card { border-top-color: #8b5cf6 !important; background: linear-gradient(to bottom, #ffffff, #f3f4f6); }
+        .shaarawy-card h2 { color: #6d28d9 !important; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px; border: 2px solid #ddd6fe; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .shaarawy-btn { background: #8b5cf6; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-family: 'Tajawal'; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .shaarawy-btn:hover { background: #7c3aed; }
+
         /* === 2. شجرة الأثر === */
         .tree-container { text-align: center; padding: 20px 0; }
         .tree-icon { font-size: 5rem; color: #10b981; transition: all 1s ease; text-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
@@ -70,23 +78,15 @@
         .path-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 8px; margin-bottom: 15px; }
         .path-step { background: var(--bg); border: 2px solid var(--border-color); border-radius: 10px; height: 45px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; color: var(--text-main); cursor: pointer; transition: 0.3s; position: relative; }
         .path-step:hover { transform: translateY(-3px); border-color: var(--fam-accent); }
-        
-        /* تأثير النور الذهبي لما السهم يتقرأ */
-        .path-step.read { 
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); 
-            color: #fff; border-color: #f59e0b; 
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6); 
-            cursor: not-allowed; transform: none; 
-        }
+        .path-step.read { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: #fff; border-color: #f59e0b; box-shadow: 0 0 15px rgba(245, 158, 11, 0.6); cursor: not-allowed; transform: none; }
         .path-step.read i { text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
-        /* === غرس العائلة (الأعمال الصالحة) === */
+        /* === غرس العائلة === */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .deed-btn { background: var(--surface); border: 2px solid var(--border-color); padding: 15px; border-radius: 15px; text-align: center; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-main); font-weight: bold; font-family: 'Tajawal'; }
         .deed-btn:active { transform: scale(0.95); }
         .deed-icon { font-size: 2rem; }
         .deed-count { background: var(--fam-primary); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.85rem; margin-top: 5px; }
-        
         .deed-water { border-color: #bae6fd; } .deed-water .deed-icon { color: #0284c7; } .deed-water:hover { background: #f0f9ff; border-color: #0284c7; }
         .deed-food { border-color: #fed7aa; } .deed-food .deed-icon { color: #ea580c; } .deed-food:hover { background: #fff7ed; border-color: #ea580c; }
         .deed-money { border-color: #bbf7d0; } .deed-money .deed-icon { color: #16a34a; } .deed-money:hover { background: #f0fdf4; border-color: #16a34a; }
@@ -97,18 +97,15 @@
         .sebha-circle:active { transform: scale(0.92); background: #fef3c7; }
         .counter { font-size: 3rem; font-weight: 900; color: var(--fam-dark); text-align: center; line-height: 1; }
 
-        /* === رسائل العائلة === */
+        /* === رسائل وأدعية === */
         .dua-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 10px; font-family: inherit; resize: none; background: var(--bg); color: var(--text-main); outline: none; transition: 0.3s;}
         .dua-input:focus { border-color: var(--fam-primary); }
         .dua-list { max-height: 350px; overflow-y: auto; text-align: right; padding-right: 5px; }
         .dua-item { background: var(--bg); padding: 15px; border-radius: 12px; margin-bottom: 10px; border-right: 4px solid var(--fam-accent); font-size: 1rem; line-height: 1.6; color: var(--text-main); border-bottom: 1px solid var(--border-color);}
         .dua-sender { font-size: 0.8rem; color: var(--fam-primary); font-weight: bold; margin-bottom: 5px; display: block; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;}
-
-        /* كارت الأم */
         .mom-card { border-top-color: #ec4899 !important; }
         .mom-card h2 { color: #be185d !important; }
         .mom-dua-item { background: #fdf2f8 !important; border-right-color: #ec4899 !important; border-bottom-color: #fbcfe8 !important; color: #831843 !important; }
-
         .btn-solid { width: 100%; padding: 15px; background: var(--fam-primary); color: white; border: none; border-radius: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s; box-shadow: 0 4px 15px rgba(146, 64, 14, 0.2); }
         .btn-solid:active { transform: scale(0.96); }
     </style>
@@ -148,7 +145,24 @@
                 </div>
             </div>
 
-            <!-- ================== 2. شجرة الأثر (تتغير بالأعمال) ================== -->
+            <!-- ================== ركن الشيخ الشعراوي ================== -->
+            <div class="card shaarawy-card">
+                <h2><i class="fas fa-tv"></i> صوتٌ كان يُعمر بيتنا</h2>
+                <p style="text-align: center; font-size: 0.9rem; color: #4c1d95; margin-bottom: 15px; font-weight: bold;">
+                    مجلس العلم الذي كان يحبه أبي.. اقرأ الخواطر أو استمع إليها، ولتكن النية صدقة لروحه.
+                </p>
+
+                <div style="display: flex; gap: 10px;">
+                    <a href="https://www.youtube.com/results?search_query=خواطر+الشيخ+محمد+متولي+الشعراوي" target="_blank" class="shaarawy-btn" style="background: #f8fafc; color: #6d28d9; text-decoration: none; border: 1px solid #ddd6fe; flex: 1; font-size: 0.95rem;">
+                        <i class="fab fa-youtube text-red-500" style="font-size: 1.2rem;"></i> يوتيوب
+                    </a>
+                    <button class="shaarawy-btn" onclick="showShaarawyQuote()" style="flex: 2;">
+                        <i class="fas fa-lightbulb text-amber-400"></i> خاطرة اليوم للشيخ
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================== 2. شجرة الأثر ================== -->
             <div class="card" style="border-top-color: #10b981;">
                 <h2 style="color: #047857;"><i class="fas fa-leaf"></i> شجرة غرس أبينا</h2>
                 <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
@@ -187,7 +201,7 @@
                 </div>
             </div>
 
-            <!-- ================== غرس العائلة (صدقات واقعية) ================== -->
+            <!-- ================== غرس العائلة ================== -->
             <div class="card" style="border-top-color: #10b981;">
                 <h2 style="color: #047857;"><i class="fas fa-seedling text-emerald-500"></i> غرس العائلة (صدقات واقعية)</h2>
                 <div class="grid-2">
@@ -306,7 +320,7 @@
 
     <script>
         // ================== نظام القفل ==================
-        const FAMILY_PASSWORD = "بابا"; 
+        const FAMILY_PASSWORD = "1234"; 
 
         function checkPassword() {
             const input = document.getElementById('familyPassword').value;
@@ -331,20 +345,41 @@
 
         // ================== حساب عداد الوفاء ==================
         function calculateWafaaDays() {
-            // تاريخ الوفاة الدقيق: 29 يناير 2026
             const deathDate = new Date('2026-01-29T00:00:00');
             const currentDate = new Date();
-            
             const diffTime = Math.abs(currentDate - deathDate);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            
             document.getElementById('wafaaDays').innerText = diffDays;
+        }
+
+        // ================== خواطر الشيخ الشعراوي ==================
+        const shaarawyQuotes = [
+            "إذا أخذ الله منك ما لم تتوقع ضياعه، فسوف يعطيك ما لم تتوقع تملكه.",
+            "إن لم تجد من يحقد عليك، فاعلم أنك إنسان فاشل.",
+            "لا تقلق من تدابير البشر، فأقصى ما يستطيعون فعله هو تنفيذ إرادة الله.",
+            "كل نعمة لا تقرب إلى الله فهي بلية.",
+            "إن الله يعطي الدنيا لمن يحب ومن لا يحب، ولا يعطي الدين إلا لمن يحب.",
+            "الذي يزرع الخير يحصد ما يسرّه.",
+            "لا تحزن على ما فاتك، فربما لو كان من نصيبك لأهلكك."
+        ];
+
+        function showShaarawyQuote() {
+            const randomQuote = shaarawyQuotes[Math.floor(Math.random() * shaarawyQuotes.length)];
+            Swal.fire({
+                title: 'من درر الشيخ الشعراوي',
+                html: `<div style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #4c1d95; line-height: 1.8; margin-top: 15px;">"${randomQuote}"</div>
+                       <hr style="margin: 20px 0; border-color: #ddd6fe;">
+                       <div style="font-size: 0.9rem; color: #78350f;">اللهم اجعل ثواب الاستماع والقراءة في ميزان حسنات والدي.</div>`,
+                iconHtml: '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Muhammad_Metwally_El-Shaarawy.jpg/220px-Muhammad_Metwally_El-Shaarawy.jpg" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">',
+                customClass: { icon: 'no-border' },
+                confirmButtonColor: '#8b5cf6',
+                confirmButtonText: 'رحم الله أبي والشيخ'
+            });
         }
 
         // ================== تحديث شكل شجرة الأثر ==================
         function updateTreeVisual(deedsTotal, khatmaTotal, sebhaTotal) {
             const treeIcon = document.getElementById('treeVisual');
-            
             const impactScore = deedsTotal + (khatmaTotal * 10) + Math.floor(sebhaTotal / 100);
             
             if (impactScore === 0) {
@@ -371,9 +406,7 @@
         });
         const db = getFirestore(app);
 
-        let totalDeeds = 0;
-        let totalKhatma = 0;
-        let totalSebha = 0;
+        let totalDeeds = 0; let totalKhatma = 0; let totalSebha = 0;
 
         // 1. غرس العائلة (أعمال الخير)
         const deedsRef = doc(db, 'stats', 'family_deeds');
@@ -385,7 +418,6 @@
             document.getElementById('count_food').innerText = (data.food || 0) + deedsQueue.food;
             document.getElementById('count_money').innerText = (data.money || 0) + deedsQueue.money;
             document.getElementById('count_help').innerText = (data.help || 0) + deedsQueue.help;
-            
             totalDeeds = (data.water||0) + (data.food||0) + (data.money||0) + (data.help||0);
             document.getElementById('treeTotalDeeds').innerText = totalDeeds;
             updateTreeVisual(totalDeeds, totalKhatma, totalSebha);
@@ -396,7 +428,6 @@
             deedsQueue[type]++;
             const el = document.getElementById('count_' + type);
             el.innerText = parseInt(el.innerText) + 1;
-            
             Swal.fire({ title: 'تقبل الله 🤍', text: 'تم تسجيل الصدقة في شجرة أثر الوالد.', icon: 'success', timer: 2000, showConfirmButton: false });
         }
 
@@ -422,47 +453,27 @@
             let state = snap.exists() ? snap.data() : {};
             const grid = document.getElementById('familySharesGrid'); 
             if(grid) {
-                grid.innerHTML = ''; 
-                let completedParts = 0;
-                
+                grid.innerHTML = ''; let completedParts = 0;
                 for(let i=1; i<=120; i++) {
-                    const isRead = state[`share${i}`]; 
-                    if(isRead) completedParts++;
-                    
-                    let startPage = (i - 1) * 5 + 1;
-                    let endPage = i * 5;
-                    
-                    const btn = document.createElement('div'); 
-                    btn.className = `path-step ${isRead ? 'read' : ''}`; 
-                    btn.innerHTML = isRead ? '<i class="fas fa-star"></i>' : i;
-                    btn.title = `الصفحات من ${startPage} إلى ${endPage}`; 
+                    const isRead = state[`share${i}`]; if(isRead) completedParts++;
+                    let startPage = (i - 1) * 5 + 1; let endPage = i * 5;
+                    const btn = document.createElement('div'); btn.className = `path-step ${isRead ? 'read' : ''}`; btn.innerHTML = isRead ? '<i class="fas fa-star"></i>' : i; btn.title = `الصفحات من ${startPage} إلى ${endPage}`; 
                     
                     if(!isRead) { 
                         btn.onclick = () => { 
-                            Swal.fire({
-                                title: `درجة النور رقم ${i}`, 
-                                html: `ستقرأ <b>(من صفحة ${startPage} إلى ${endPage})</b>.<br>هل نويت القراءة الآن؟`, 
-                                icon: 'question', showCancelButton: true, confirmButtonColor: '#92400e', cancelButtonColor: '#ef4444', confirmButtonText: 'نعم، نويت', cancelButtonText: 'إلغاء'
-                            }).then(async (r) => { 
-                                if (r.isConfirmed) { 
-                                    try {
-                                        await updateDoc(famKhatmaRef, {[`share${i}`]: true}); 
-                                        Swal.fire({title:'أنار الله دربه وضربك! ✨', text:'تم إضاءة هذا الجزء من مسار النور باسمك.', icon:'success', confirmButtonColor:'#92400e'});
-                                    } catch(e) { setDoc(famKhatmaRef, {[`share${i}`]:true}, {merge:true}); } 
-                                } 
+                            Swal.fire({ title: `درجة النور رقم ${i}`, html: `ستقرأ <b>(من صفحة ${startPage} إلى ${endPage})</b>.<br>هل نويت القراءة الآن؟`, icon: 'question', showCancelButton: true, confirmButtonColor: '#92400e', cancelButtonColor: '#ef4444', confirmButtonText: 'نعم، نويت', cancelButtonText: 'إلغاء' })
+                            .then(async (r) => { 
+                                if (r.isConfirmed) { try { await updateDoc(famKhatmaRef, {[`share${i}`]: true}); Swal.fire({title:'أنار الله دربه وضربك! ✨', text:'تم إضاءة هذا الجزء من مسار النور باسمك.', icon:'success', confirmButtonColor:'#92400e'}); } catch(e) { setDoc(famKhatmaRef, {[`share${i}`]:true}, {merge:true}); } } 
                             });
                         }; 
-                    } else { 
-                        btn.onclick = () => Swal.fire('تنبيه', `هذا الجزء مضاء بالفعل.. اختر درجة أخرى لتُنيرها.`, 'info'); 
-                    }
+                    } else { btn.onclick = () => Swal.fire('تنبيه', `هذا الجزء مضاء بالفعل.. اختر درجة أخرى لتُنيرها.`, 'info'); }
                     grid.appendChild(btn);
                 }
                 
                 if(completedParts === 120) {
                      setTimeout(async () => {
                          const currentSnap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.getDoc(famKhatmaRef));
-                         let isFull = true; 
-                         for(let k=1; k<=120; k++) { if(!currentSnap.data() || !currentSnap.data()[`share${k}`]) isFull=false; }
+                         let isFull = true; for(let k=1; k<=120; k++) { if(!currentSnap.data() || !currentSnap.data()[`share${k}`]) isFull=false; }
                          if(isFull) { 
                              try { await updateDoc(famKhatmaStatsRef, { completed: increment(1) }); } catch(e) { await setDoc(famKhatmaStatsRef, {completed: 1}, {merge: true}); }
                              let resetState = {}; for(let i=1; i<=120; i++) resetState[`share${i}`] = false; 
@@ -478,30 +489,13 @@
         let fCount = 0, uFam = 0;
 
         onSnapshot(famSebhaRef, (snap) => { 
-            fCount = snap.exists() ? snap.data().count : 0; 
-            updateFamUI(); 
-            totalSebha = fCount;
-            document.getElementById('treeTotalSebha').innerText = totalSebha;
-            updateTreeVisual(totalDeeds, totalKhatma, totalSebha);
+            fCount = snap.exists() ? snap.data().count : 0; updateFamUI(); 
+            totalSebha = fCount; document.getElementById('treeTotalSebha').innerText = totalSebha; updateTreeVisual(totalDeeds, totalKhatma, totalSebha);
         });
 
-        function updateFamUI() {
-            const total = fCount + uFam;
-            const el = document.getElementById('familySebhaCounter');
-            if(el) el.innerText = total.toLocaleString();
-        }
-
-        window.incrementFamilySebha = function() { 
-            if(navigator.vibrate) navigator.vibrate(15); 
-            uFam++; updateFamUI(); 
-        }
-
-        setInterval(async () => {
-            if (uFam > 0) { 
-                let c = uFam; uFam = 0; 
-                try { await updateDoc(famSebhaRef, {count: increment(c)}); } catch(e) { setDoc(famSebhaRef, {count: c}, {merge:true}); } 
-            }
-        }, 2000);
+        function updateFamUI() { const total = fCount + uFam; const el = document.getElementById('familySebhaCounter'); if(el) el.innerText = total.toLocaleString(); }
+        window.incrementFamilySebha = function() { if(navigator.vibrate) navigator.vibrate(15); uFam++; updateFamUI(); }
+        setInterval(async () => { if (uFam > 0) { let c = uFam; uFam = 0; try { await updateDoc(famSebhaRef, {count: increment(c)}); } catch(e) { setDoc(famSebhaRef, {count: c}, {merge:true}); } } }, 2000);
 
         // 4. رسائل العائلة
         try {
@@ -521,15 +515,11 @@
         } catch(e) { console.log(e); }
 
         window.addFamilyDua = async function() {
-            const senderInput = document.getElementById('senderName');
-            const textInput = document.getElementById('familyDuaInput');
-            const sender = senderInput.value.trim() || 'أحد أفراد العائلة';
-            const text = textInput.value.trim();
+            const senderInput = document.getElementById('senderName'); const textInput = document.getElementById('familyDuaInput');
+            const sender = senderInput.value.trim() || 'أحد أفراد العائلة'; const text = textInput.value.trim();
             if (text === '') { Swal.fire('تنبيه', 'لا يمكن إرسال رسالة فارغة', 'warning'); return; }
-            
             try { 
-                textInput.value = ''; 
-                await addDoc(collection(db, 'family_messages'), { sender: sender, text: text, timestamp: Date.now() }); 
+                textInput.value = ''; await addDoc(collection(db, 'family_messages'), { sender: sender, text: text, timestamp: Date.now() }); 
                 Swal.fire({ title: 'تم الإرسال', text: 'حُفظت رسالتك في دفتر العائلة السري.', icon: 'success', confirmButtonColor: '#92400e' });
             } catch (e) { alert("حدث خطأ في الإرسال"); textInput.value = text; }
         }
