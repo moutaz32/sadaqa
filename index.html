@@ -280,6 +280,13 @@
         .ruh-paragraph { margin-bottom: 20px; line-height: 1.8; color: var(--text-muted); font-size: 1rem;}
         
         .media-box { width: 100%; border-radius: 15px; margin-bottom: 15px; border: 1px solid var(--border-color); }
+
+        /* === مواقيت الصلاة === */
+        .prayer-box { background: var(--bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 5px; text-align: center; flex: 1 1 calc(33.333% - 10px); min-width: 80px; transition: 0.3s; }
+        .prayer-box.active { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); transform: translateY(-3px); }
+        .prayer-box.active .prayer-name, .prayer-box.active .prayer-time { color: white; }
+        .prayer-name { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; font-weight: bold; }
+        .prayer-time { font-size: 1.1rem; color: var(--text-main); font-weight: 900; }
     </style>
 </head>
 <body>
@@ -343,7 +350,7 @@
             </button>
         </div>
 
-        <!-- 2. أزرار الدخول للمحاريب -->
+        <!-- 2. محراب الذكر -->
         <div class="grid-2" style="margin-bottom: 20px;">
             <button class="itikaf-btn" style="margin-bottom: 0; padding: 12px; font-size: 1rem;" onclick="openItikaf()">
                 <i class="fas fa-mosque"></i> محراب الذكر (عام)
@@ -351,6 +358,35 @@
             <button class="itikaf-btn" style="margin-bottom: 0; padding: 12px; font-size: 1rem; background: linear-gradient(135deg, #78350f, #451a03); border-color: #fbbf24; color: #fbbf24;" onclick="window.location.href='family.html'">
                 <i class="fas fa-lock"></i> خلوة العائلة (خاص)
             </button>
+        </div>
+
+        <!-- 2.5 مواقيت الصلاة والأذان (تم تحديثها لتشمل المحافظات) -->
+        <div class="card reveal card-accent" id="prayerTimesCard">
+            <h2 class="text-accent" style="justify-content: center;"><i class="fas fa-clock"></i> مواقيت الصلاة</h2>
+            
+            <!-- إضافة قائمة المحافظات هنا -->
+            <select id="citySelect" class="quran-select" onchange="fetchPrayerTimes(this.value)" style="margin-bottom: 15px;">
+                <option value="Alexandria">الإسكندرية (عروس البحر)</option>
+                <option value="Aswan">أسوان (عروس الصعيد)</option>
+                <option value="Sohag">سوهاج (بلد المواويل)</option>
+                <option value="Cairo">القاهرة (العاصمة)</option>
+            </select>
+
+            <div id="dateContainer" style="text-align: center; margin-bottom: 15px; font-weight: bold; color: var(--text-muted); font-size: 0.95rem;">جاري التحميل...</div>
+            <div id="nextPrayerContainer" style="text-align: center; margin-bottom: 20px; font-size: 1.2rem; font-weight: bold; background: var(--bg); padding: 10px; border-radius: 12px; border: 1px dashed var(--border-color);">
+                الصلاة القادمة: <span id="nextPrayerName" class="text-primary" style="font-size: 1.4rem;">...</span> <br>
+                <span style="font-size: 0.9rem; color: var(--text-muted);">المتبقي:</span> <span id="timeRemaining" style="color: var(--accent-dark); font-family: monospace; font-size: 1.3rem;">00:00:00</span>
+            </div>
+            <div class="grid-3" id="prayersGrid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px;">
+                <!-- سيتم إدراج المواقيت هنا -->
+            </div>
+            <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                <button class="btn-outline accent" onclick="toggleAzan()" id="azanToggleBtn" style="flex-direction: row; padding: 12px; width: 100%; display: flex; justify-content: center;">
+                    <i class="fas fa-bell-slash"></i> <span>تفعيل تنبيه الأذان التلقائي</span>
+                </button>
+            </div>
+            <!-- رابط أذان مكة المكرمة كافتراضي -->
+            <audio id="azanAudio" src="https://tvquran.com/uploads/adhan/Makkah.mp3" preload="none"></audio>
         </div>
 
         <!-- 3. وِرْد اليوم -->
@@ -510,7 +546,7 @@
             </div>
         </div>
 
-        <!-- 7. الختمات والسور (مع فضل كل سورة) -->
+        <!-- 7. الختمات والسور (بإضافة فضل كل سورة بوضوح تام) -->
         <div class="card reveal" style="text-align: center;">
             <h2 style="justify-content: center; border: none; margin-bottom: 10px;"><i class="fas fa-heart text-primary"></i> قلب القرآن (سورة يس)</h2>
             <div style="background: var(--primary-light); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--primary);">
@@ -570,7 +606,6 @@
                 <h2 class="text-accent" style="margin:0; border:none; padding:0;"><i class="fas fa-quran"></i> الختمة الجماعية</h2>
                 <span style="background: var(--accent-light); color: var(--accent-dark); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: bold;">اكتملت: <span id="globalKhatmaCount">0</span> مرة</span>
             </div>
-            <p style="font-size:0.85rem; color: var(--text-muted); text-align:center; margin-bottom:15px;">اضغط على الجزء لحجزه وقراءته. التحديث يظهر للجميع لحظياً.</p>
             <div class="juz-grid" id="juzGrid">
                 <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: var(--text-muted); padding: 20px;">جاري تحميل الأجزاء...</div>
             </div>
@@ -653,6 +688,32 @@
     </div>
 
     <!-- ================== النوافذ والإشعارات ================== -->
+    <!-- نافذة الاعتكاف (محراب الذكر) -->
+    <div id="itikafModal" class="itikaf-overlay">
+        <button class="close-itikaf" onclick="closeItikaf()"><i class="fas fa-times"></i> خروج من المحراب</button>
+        <div class="itikaf-content">
+            <h2 class="itikaf-title">محراب الذكر والدعاء</h2>
+            <p class="itikaf-subtitle">وقت مستقطع للذكر والدعاء للحاج محمد المملوك بعيداً عن مشتتات الدنيا</p>
+            
+            <div class="itikaf-dua-box">
+                <i class="fas fa-quote-right text-accent" style="font-size: 1.5rem; margin-bottom: 10px; opacity: 0.5;"></i>
+                <div style="font-size: 1.2rem; line-height: 1.8; font-family: 'Amiri';">"اللهم ارحم من توسد ثراه، وطيب ثراه، وأكرم مثواه، واجعل قبره روضة من رياض الجنة."</div>
+            </div>
+            
+            <div class="itikaf-counter-box" onclick="incrementGlobalSebha()">
+                <div style="font-size: 1.1rem; color: var(--accent);">الصلاة على النبي ﷺ</div>
+                <div class="itikaf-number" id="itikafSebhaCounter">0</div>
+                <div style="font-size: 0.85rem; color: #94a3b8;">اضغط هنا للتسبيح المشترك</div>
+            </div>
+            
+            <div class="itikaf-counter-box" onclick="incrementGlobalAfw()" style="border-color: rgba(16, 185, 129, 0.3);">
+                <div style="font-size: 1.1rem; color: #10b981;">دعاء العفو والمغفرة</div>
+                <div class="itikaf-number" id="itikafAfwCounter">0</div>
+                <div style="font-size: 0.85rem; color: #94a3b8;">اضغط هنا للدعاء المشترك</div>
+            </div>
+        </div>
+    </div>
+
     <div class="toast-notification" id="localToast">
         <i class="fas fa-praying-hands text-accent" style="font-size: 1.8rem;"></i>
         <div id="toastText" style="flex-grow: 1; font-size: 0.95rem; line-height: 1.5; font-weight: bold; text-align: right;">اللهم اغفر له وارحمه.</div>
@@ -991,6 +1052,7 @@
         function closeRuhModal() { document.getElementById('ruhModal').classList.remove('active'); }
 
         // ================== الأحاديث، أسماء الله، والآيات ==================
+        
         const ahadith = [
             { text: "إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له.", source: "رواه مسلم" },
             { text: "كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن: سبحان الله وبحمده، سبحان الله العظيم.", source: "متفق عليه" },
@@ -1091,6 +1153,144 @@
         }
         setTimeout(showPeriodicToast, 10000); 
         setInterval(showPeriodicToast, 15 * 60 * 1000);
+
+        // ================== مواقيت الصلاة والأذان ==================
+        let prayerTimes = {};
+        let azanEnabled = false;
+        let countdownInterval;
+        const prayerNamesAr = { Fajr: "الفجر", Sunrise: "الشروق", Dhuhr: "الظهر", Asr: "العصر", Maghrib: "المغرب", Isha: "العشاء" };
+
+        async function fetchPrayerTimes(city) {
+            try {
+                document.getElementById('dateContainer').innerHTML = "جاري تحديث المواقيت...";
+                const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Egypt&method=5`);
+                const data = await response.json();
+                prayerTimes = data.data.timings;
+
+                const gregorian = data.data.date.gregorian.date;
+                const hijri = data.data.date.hijri;
+                document.getElementById('dateContainer').innerHTML = `${hijri.weekday.ar} ${hijri.day} ${hijri.month.ar} ${hijri.year} هـ  <br>  ${gregorian}`;
+
+                renderPrayers();
+            } catch (error) {
+                console.error("Error fetching prayer times", error);
+                document.getElementById('dateContainer').innerHTML = "تعذر تحميل المواقيت، تأكد من اتصال الإنترنت.";
+            }
+        }
+
+        function renderPrayers() {
+            const grid = document.getElementById('prayersGrid');
+            grid.innerHTML = '';
+            for (let key in prayerNamesAr) {
+                let time24 = prayerTimes[key];
+                if(!time24) continue;
+                let [hours, minutes] = time24.split(':');
+                let ampm = hours >= 12 ? 'م' : 'ص';
+                hours = hours % 12;
+                hours = hours ? hours : 12; 
+                let time12 = `${hours}:${minutes} ${ampm}`;
+
+                grid.innerHTML += `
+                    <div class="prayer-box" id="prayer-${key}">
+                        <div class="prayer-name">${prayerNamesAr[key]}</div>
+                        <div class="prayer-time">${time12}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function startPrayerCountdown() {
+            countdownInterval = setInterval(() => {
+                if(!prayerTimes['Fajr']) return;
+                
+                const now = new Date();
+                let upcoming = null;
+                let minDiff = Infinity;
+
+                for (let key in prayerNamesAr) {
+                    let pTime = prayerTimes[key];
+                    let [pHours, pMinutes] = pTime.split(':');
+                    let pDate = new Date();
+                    pDate.setHours(pHours, pMinutes, 0, 0);
+
+                    let diff = pDate - now;
+                    if (diff > 0 && diff < minDiff) {
+                        minDiff = diff;
+                        upcoming = key;
+                    }
+                }
+
+                if (!upcoming) {
+                    upcoming = 'Fajr';
+                    let [pHours, pMinutes] = prayerTimes['Fajr'].split(':');
+                    let pDate = new Date();
+                    pDate.setDate(pDate.getDate() + 1);
+                    pDate.setHours(pHours, pMinutes, 0, 0);
+                    minDiff = pDate - now;
+                }
+
+                document.querySelectorAll('.prayer-box').forEach(el => el.classList.remove('active'));
+                const activeBox = document.getElementById(`prayer-${upcoming}`);
+                if(activeBox) activeBox.classList.add('active');
+
+                let hours = Math.floor((minDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((minDiff % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((minDiff % (1000 * 60)) / 1000);
+
+                const pad = (n) => n < 10 ? '0' + n : n;
+                
+                document.getElementById('nextPrayerName').innerText = prayerNamesAr[upcoming];
+                document.getElementById('timeRemaining').innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+                if (hours === 0 && minutes === 0 && seconds === 0 && azanEnabled && upcoming !== 'Sunrise') {
+                    playAzan(prayerNamesAr[upcoming]);
+                }
+            }, 1000);
+        }
+
+        function toggleAzan() {
+            azanEnabled = !azanEnabled;
+            const btn = document.getElementById('azanToggleBtn');
+            const audio = document.getElementById('azanAudio');
+            if (azanEnabled) {
+                btn.innerHTML = '<i class="fas fa-bell text-primary"></i> <span style="color: var(--primary); font-weight: bold;">تنبيه الأذان: مفعل</span>';
+                btn.style.borderColor = 'var(--primary)';
+                btn.style.background = 'var(--primary-light)';
+                Swal.fire('تم التفعيل', 'سيتم رفع الأذان تلقائياً وقت الصلاة (يجب ترك الموقع مفتوحاً في المتصفح).', 'success');
+                audio.volume = 0;
+                audio.play().then(() => { audio.pause(); audio.volume = 1; }).catch(()=>{});
+            } else {
+                btn.innerHTML = '<i class="fas fa-bell-slash"></i> <span>تفعيل تنبيه الأذان التلقائي</span>';
+                btn.style.borderColor = '';
+                btn.style.background = '';
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+
+        function playAzan(prayerName) {
+            stopAllAudio('azan');
+            const audio = document.getElementById('azanAudio');
+            audio.currentTime = 0;
+            audio.play().catch(e=>console.log("Autoplay blocked"));
+            
+            Swal.fire({
+                title: 'حان الآن وقت الصلاة',
+                html: `صلاة <b>${prayerName}</b><br><br><span style="font-size: 0.9rem; color: #64748b;">تقبل الله منكم ولا تنسوا المهندس محمد المملوك من دعائكم.</span>`,
+                icon: 'info',
+                confirmButtonText: 'إيقاف الأذان',
+                confirmButtonColor: '#059669',
+                allowOutsideClick: false
+            }).then(() => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        }
+
+        // تشغيل جلب المواقيت عند تحميل الصفحة بالمدينة الافتراضية المحددة في القائمة
+        const initialCity = document.getElementById('citySelect').value;
+        fetchPrayerTimes(initialCity);
+        startPrayerCountdown();
 
     </script>
 
@@ -1227,24 +1427,71 @@
         onSnapshot(window.mulkRef, (snap) => { if(document.getElementById('mulkCount')) document.getElementById('mulkCount').innerText = snap.exists() ? snap.data().count.toLocaleString() : 0; });
         onSnapshot(doc(db, 'stats', 'visitors_count'), (snap) => { if(document.getElementById('visitorsCount')) document.getElementById('visitorsCount').innerText = snap.exists() ? snap.data().count.toLocaleString() : 0; });
 
-        // الختمة الجماعية
-        const khatmaRef = doc(db, 'stats', 'global_khatma');
-        onSnapshot(doc(db, 'stats', 'khatma_stats'), (snap) => { if(document.getElementById('globalKhatmaCount')) document.getElementById('globalKhatmaCount').innerText = snap.exists() ? snap.data().completed : 0; });
+        // الختمة الجماعية (نظام الأسهم الخفيفة)
+        const khatmaRef = doc(db, 'stats', 'global_khatma_shares'); 
+        onSnapshot(doc(db, 'stats', 'khatma_shares_stats'), (snap) => { if(document.getElementById('globalKhatmaCount')) document.getElementById('globalKhatmaCount').innerText = snap.exists() ? snap.data().completed : 0; });
+        
         onSnapshot(khatmaRef, (snap) => {
             let state = snap.exists() ? snap.data() : {};
-            const grid = document.getElementById('juzGrid'); 
+            const grid = document.getElementById('juzGrid'); // 👈 تم التصحيح هنا
             if(grid) {
-                grid.innerHTML = ''; let c = 0;
-                for(let i=1; i<=30; i++) {
-                    const isRead = state[`juz${i}`]; if(isRead) c++;
-                    const btn = document.createElement('div'); btn.className = `juz-btn ${isRead ? 'read' : ''}`; btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
+                grid.innerHTML = ''; 
+                let completedParts = 0;
+                
+                // التكرار لـ 120 سهم
+                for(let i=1; i<=120; i++) {
+                    const isRead = state[`share${i}`]; 
+                    if(isRead) completedParts++;
+                    
+                    let startPage = (i - 1) * 5 + 1;
+                    let endPage = i * 5;
+                    
+                    const btn = document.createElement('div'); 
+                    btn.className = `juz-btn ${isRead ? 'read' : ''}`; // 👈 تم التصحيح هنا
+                    btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
+                    btn.title = `الصفحات من ${startPage} إلى ${endPage}`;
+                    
                     if(!isRead) { 
                         btn.onclick = () => { 
-                            Swal.fire({title: `حجز الجزء ${i}`, text: "هل تنوي قراءة هذا الجزء بنية الصدقة الجارية عن الحاج محمد المملوك؟", icon: 'question', showCancelButton: true, confirmButtonColor: '#059669', cancelButtonColor: '#ef4444', confirmButtonText: 'نعم، أنوي قراءته', cancelButtonText: 'إلغاء'})
-                            .then(async (r) => { if (r.isConfirmed) { try{await updateDoc(khatmaRef, {[`juz${i}`]: true}); Swal.fire({title:'تقبل الله! 🤍', html:`تم تسجيل الجزء <b>${i}</b> باسمك في ميزان حسناته.`, icon:'success', confirmButtonColor:'#059669'});}catch(e){setDoc(khatmaRef, {[`juz${i}`]:true}, {merge:true}); Swal.fire('تقبل الله!', 'تم الحجز بنجاح.', 'success');} } });
+                            Swal.fire({
+                                title: `حجز السهم رقم ${i}`, 
+                                html: `هذا السهم يُعادل <b>(من صـ ${startPage} إلى ${endPage})</b>.<br>هل تنوي قراءتها الآن كصدقة جارية عن الحاج محمد المملوك؟`, 
+                                icon: 'question', showCancelButton: true, confirmButtonColor: '#059669', cancelButtonColor: '#ef4444', confirmButtonText: 'نعم، نويت القراءة', cancelButtonText: 'إلغاء'
+                            }).then(async (r) => { 
+                                if (r.isConfirmed) { 
+                                    try {
+                                        await updateDoc(khatmaRef, {[`share${i}`]: true}); 
+                                        Swal.fire({title:'تقبل الله! 🤍', html:`تم حجز ٥ صفحات باسمك في ميزان حسناته.<br>ابدأ القراءة الآن.`, icon:'success', confirmButtonColor:'#059669'});
+                                    } catch(e) {
+                                        setDoc(khatmaRef, {[`share${i}`]:true}, {merge:true}); 
+                                        Swal.fire('تقبل الله!', 'تم الحجز بنجاح.', 'success');
+                                    } 
+                                } 
+                            });
                         }; 
-                    } else { btn.onclick = () => alert('تم قراءته مسبقاً. تقبل الله من الجميع.'); }
+                    } else { 
+                        btn.onclick = () => Swal.fire('تنبيه', `هذا السهم (من صـ ${startPage} إلى ${endPage}) تم قراءته مسبقاً بواسطة شخص آخر.. تقبل الله من الجميع، يرجى اختيار سهم آخر.`, 'info'); 
+                    }
                     grid.appendChild(btn);
+                }
+                
+                // إذا اكتملت الـ 120 سهم (تمت الختمة)
+                if(completedParts === 120) {
+                     setTimeout(async () => {
+                         const currentSnap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m=> m.getDoc(khatmaRef));
+                         let isFull = true; 
+                         for(let k=1; k<=120; k++) { if(!currentSnap.data() || !currentSnap.data()[`share${k}`]) isFull=false; }
+                         
+                         if(isFull) { 
+                             const statsRef = doc(db, 'stats', 'khatma_shares_stats');
+                             try { await updateDoc(statsRef, { completed: increment(1) }); } 
+                             catch(e) { await setDoc(statsRef, {completed: 1}, {merge: true}); }
+                             
+                             let resetState = {}; 
+                             for(let i=1; i<=120; i++) resetState[`share${i}`] = false; 
+                             await updateDoc(khatmaRef, resetState).catch(e => setDoc(khatmaRef, resetState, {merge: true})); 
+                         }
+                    }, 5000); 
                 }
             }
         });
