@@ -360,11 +360,10 @@
             </button>
         </div>
 
-        <!-- 2.5 مواقيت الصلاة والأذان (تم تحديثها لتشمل المحافظات) -->
+        <!-- 2.5 مواقيت الصلاة والأذان الذكي -->
         <div class="card reveal card-accent" id="prayerTimesCard">
             <h2 class="text-accent" style="justify-content: center;"><i class="fas fa-clock"></i> مواقيت الصلاة</h2>
             
-            <!-- إضافة قائمة المحافظات هنا -->
             <select id="citySelect" class="quran-select" onchange="fetchPrayerTimes(this.value)" style="margin-bottom: 15px;">
                 <option value="Alexandria">الإسكندرية (عروس البحر)</option>
                 <option value="Aswan">أسوان (عروس الصعيد)</option>
@@ -385,8 +384,8 @@
                     <i class="fas fa-bell-slash"></i> <span>تفعيل تنبيه الأذان التلقائي</span>
                 </button>
             </div>
-            <!-- رابط أذان مكة المكرمة كافتراضي -->
-            <audio id="azanAudio" src="https://tvquran.com/uploads/adhan/Makkah.mp3" preload="none"></audio>
+            <!-- رابط أذان مكة المكرمة الموثوق -->
+            <audio id="azanAudio" src="https://download.quranicaudio.com/adhan/makkah.mp3" preload="none"></audio>
         </div>
 
         <!-- 3. وِرْد اليوم -->
@@ -546,7 +545,7 @@
             </div>
         </div>
 
-        <!-- 7. الختمات والسور (بإضافة فضل كل سورة بوضوح تام) -->
+        <!-- 7. الختمات والسور (تم تصحيح الـ 120 سهم) -->
         <div class="card reveal" style="text-align: center;">
             <h2 style="justify-content: center; border: none; margin-bottom: 10px;"><i class="fas fa-heart text-primary"></i> قلب القرآن (سورة يس)</h2>
             <div style="background: var(--primary-light); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--primary);">
@@ -601,13 +600,17 @@
             </div>
         </div>
 
+        <!-- الختمة الجماعية المحدثة -->
         <div class="card reveal card-accent">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
                 <h2 class="text-accent" style="margin:0; border:none; padding:0;"><i class="fas fa-quran"></i> الختمة الجماعية</h2>
                 <span style="background: var(--accent-light); color: var(--accent-dark); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: bold;">اكتملت: <span id="globalKhatmaCount">0</span> مرة</span>
             </div>
+            <p style="font-size:0.85rem; color: var(--text-muted); text-align:center; margin-bottom:15px;">
+                لنبني له طريقاً من النور.. كل رقم يمثل <b>(٥ صفحات)</b> فقط.<br>
+            </p>
             <div class="juz-grid" id="juzGrid">
-                <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: var(--text-muted); padding: 20px;">جاري تحميل الأجزاء...</div>
+                <div style="grid-column: span 6; text-align: center; font-size: 0.8rem; color: var(--text-muted); padding: 20px;">جاري تحميل الأسهم...</div>
             </div>
         </div>
 
@@ -1200,6 +1203,7 @@
         }
 
         function startPrayerCountdown() {
+            if(countdownInterval) clearInterval(countdownInterval);
             countdownInterval = setInterval(() => {
                 if(!prayerTimes['Fajr']) return;
                 
@@ -1242,6 +1246,7 @@
                 document.getElementById('nextPrayerName').innerText = prayerNamesAr[upcoming];
                 document.getElementById('timeRemaining').innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 
+                // رفع الأذان لما العداد يوصل صفر
                 if (hours === 0 && minutes === 0 && seconds === 0 && azanEnabled && upcoming !== 'Sunrise') {
                     playAzan(prayerNamesAr[upcoming]);
                 }
@@ -1252,13 +1257,33 @@
             azanEnabled = !azanEnabled;
             const btn = document.getElementById('azanToggleBtn');
             const audio = document.getElementById('azanAudio');
+            
+            audio.src = "https://download.quranicaudio.com/adhan/makkah.mp3"; 
+            
             if (azanEnabled) {
                 btn.innerHTML = '<i class="fas fa-bell text-primary"></i> <span style="color: var(--primary); font-weight: bold;">تنبيه الأذان: مفعل</span>';
                 btn.style.borderColor = 'var(--primary)';
                 btn.style.background = 'var(--primary-light)';
-                Swal.fire('تم التفعيل', 'سيتم رفع الأذان تلقائياً وقت الصلاة (يجب ترك الموقع مفتوحاً في المتصفح).', 'success');
+                
                 audio.volume = 0;
-                audio.play().then(() => { audio.pause(); audio.volume = 1; }).catch(()=>{});
+                let playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        audio.pause();
+                        audio.currentTime = 0;
+                        audio.volume = 1;
+                        Swal.fire({
+                            title: 'تم التفعيل بنجاح', 
+                            text: 'سيتم رفع الأذان تلقائياً وقت الصلاة (يجب ترك الموقع مفتوحاً).', 
+                            icon: 'success',
+                            confirmButtonColor: '#059669'
+                        });
+                    }).catch(error => {
+                        console.log("Autoplay prevention handled.");
+                        audio.volume = 1;
+                        Swal.fire('تم التفعيل', 'سيتم تنبيهك وقت الصلاة.', 'success');
+                    });
+                }
             } else {
                 btn.innerHTML = '<i class="fas fa-bell-slash"></i> <span>تفعيل تنبيه الأذان التلقائي</span>';
                 btn.style.borderColor = '';
@@ -1272,8 +1297,20 @@
             stopAllAudio('azan');
             const audio = document.getElementById('azanAudio');
             audio.currentTime = 0;
-            audio.play().catch(e=>console.log("Autoplay blocked"));
+            audio.volume = 1;
             
+            let playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    showAzanPlayingAlert(prayerName, audio);
+                }).catch(error => {
+                    showAzanBlockedAlert(prayerName, audio);
+                });
+            }
+        }
+
+        function showAzanPlayingAlert(prayerName, audio) {
             Swal.fire({
                 title: 'حان الآن وقت الصلاة',
                 html: `صلاة <b>${prayerName}</b><br><br><span style="font-size: 0.9rem; color: #64748b;">تقبل الله منكم ولا تنسوا المهندس محمد المملوك من دعائكم.</span>`,
@@ -1287,8 +1324,26 @@
             });
         }
 
-        // تشغيل جلب المواقيت عند تحميل الصفحة بالمدينة الافتراضية المحددة في القائمة
-        const initialCity = document.getElementById('citySelect').value;
+        function showAzanBlockedAlert(prayerName, audio) {
+            Swal.fire({
+                title: 'حان الآن وقت الصلاة',
+                html: `صلاة <b>${prayerName}</b><br><br><span style="font-size: 0.95rem; color: #dc2626; font-weight: bold;">اضغط على الزر بالأسفل لسماع الأذان</span>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '🔊 تشغيل الأذان',
+                cancelButtonText: 'إغلاق',
+                confirmButtonColor: '#059669',
+                cancelButtonColor: '#64748b',
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    audio.play();
+                    showAzanPlayingAlert(prayerName, audio);
+                }
+            });
+        }
+
+        const initialCity = document.getElementById('citySelect') ? document.getElementById('citySelect').value : 'Cairo';
         fetchPrayerTimes(initialCity);
         startPrayerCountdown();
 
@@ -1427,13 +1482,13 @@
         onSnapshot(window.mulkRef, (snap) => { if(document.getElementById('mulkCount')) document.getElementById('mulkCount').innerText = snap.exists() ? snap.data().count.toLocaleString() : 0; });
         onSnapshot(doc(db, 'stats', 'visitors_count'), (snap) => { if(document.getElementById('visitorsCount')) document.getElementById('visitorsCount').innerText = snap.exists() ? snap.data().count.toLocaleString() : 0; });
 
-        // الختمة الجماعية (نظام الأسهم الخفيفة)
+        // الختمة الجماعية (نظام الأسهم الخفيفة) - النسخة المصححة لـ 120 سهم
         const khatmaRef = doc(db, 'stats', 'global_khatma_shares'); 
         onSnapshot(doc(db, 'stats', 'khatma_shares_stats'), (snap) => { if(document.getElementById('globalKhatmaCount')) document.getElementById('globalKhatmaCount').innerText = snap.exists() ? snap.data().completed : 0; });
         
         onSnapshot(khatmaRef, (snap) => {
             let state = snap.exists() ? snap.data() : {};
-            const grid = document.getElementById('juzGrid'); // 👈 تم التصحيح هنا
+            const grid = document.getElementById('juzGrid'); 
             if(grid) {
                 grid.innerHTML = ''; 
                 let completedParts = 0;
@@ -1447,7 +1502,7 @@
                     let endPage = i * 5;
                     
                     const btn = document.createElement('div'); 
-                    btn.className = `juz-btn ${isRead ? 'read' : ''}`; // 👈 تم التصحيح هنا
+                    btn.className = `juz-btn ${isRead ? 'read' : ''}`; 
                     btn.innerHTML = isRead ? '<i class="fas fa-check"></i>' : i;
                     btn.title = `الصفحات من ${startPage} إلى ${endPage}`;
                     
