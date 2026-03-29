@@ -1157,7 +1157,7 @@
         setTimeout(showPeriodicToast, 10000); 
         setInterval(showPeriodicToast, 15 * 60 * 1000);
 
-        // ================== مواقيت الصلاة والأذان ==================
+        // ================== مواقيت الصلاة والأذان (محدث بالنظام الذكي) ==================
         let prayerTimes = {};
         let azanEnabled = false;
         let countdownInterval;
@@ -1246,9 +1246,9 @@
                 document.getElementById('nextPrayerName').innerText = prayerNamesAr[upcoming];
                 document.getElementById('timeRemaining').innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 
-                // رفع الأذان لما العداد يوصل صفر
+                // عند وصول العداد للصفر بالظبط
                 if (hours === 0 && minutes === 0 && seconds === 0 && azanEnabled && upcoming !== 'Sunrise') {
-                    playAzan(prayerNamesAr[upcoming]);
+                    triggerAzanPopup(prayerNamesAr[upcoming]);
                 }
             }, 1000);
         }
@@ -1265,25 +1265,12 @@
                 btn.style.borderColor = 'var(--primary)';
                 btn.style.background = 'var(--primary-light)';
                 
-                audio.volume = 0;
-                let playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        audio.pause();
-                        audio.currentTime = 0;
-                        audio.volume = 1;
-                        Swal.fire({
-                            title: 'تم التفعيل بنجاح', 
-                            text: 'سيتم رفع الأذان تلقائياً وقت الصلاة (يجب ترك الموقع مفتوحاً).', 
-                            icon: 'success',
-                            confirmButtonColor: '#059669'
-                        });
-                    }).catch(error => {
-                        console.log("Autoplay prevention handled.");
-                        audio.volume = 1;
-                        Swal.fire('تم التفعيل', 'سيتم تنبيهك وقت الصلاة.', 'success');
-                    });
-                }
+                Swal.fire({
+                    title: 'تم تفعيل التنبيه', 
+                    text: 'سيظهر لك إشعار لرفع الأذان عند دخول وقت الصلاة (يجب ترك الموقع مفتوحاً).', 
+                    icon: 'success',
+                    confirmButtonColor: '#059669'
+                });
             } else {
                 btn.innerHTML = '<i class="fas fa-bell-slash"></i> <span>تفعيل تنبيه الأذان التلقائي</span>';
                 btn.style.borderColor = '';
@@ -1293,54 +1280,106 @@
             }
         }
 
-        function playAzan(prayerName) {
+        // الدالة المعدلة الذكية: بتشغل الأذان وترجع الإذاعة بعد ما يخلص أو بعد دقيقة
+        function triggerAzanPopup(prayerName) {
+            let wasRadioPlaying = false;
+            
+            // 1. نتحقق هل الإذاعة كانت شغالة قبل ما نوقفها؟
+            const radioPlayer = document.getElementById('globalRadioPlayer');
+            if (radioPlayer && !radioPlayer.paused) {
+                wasRadioPlaying = true;
+            }
+            
+            // نوقف كل الصوتيات (بما فيها الإذاعة مؤقتاً)
             stopAllAudio('azan');
+            
             const audio = document.getElementById('azanAudio');
             audio.currentTime = 0;
             audio.volume = 1;
             
+            if(navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 200]);
+
+            // 2. نحاول نشغل الأذان أوتوماتيك الأول
             let playPromise = audio.play();
 
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    showAzanPlayingAlert(prayerName, audio);
+                    // نجح التشغيل (وغالباً هينجح لأن الإذاعة كانت شغالة فالمتصفح واثق في الموقع)
+                    Swal.fire({
+                        title: 'حان الآن وقت الصلاة',
+                        html: `صلاة <b>${prayerName}</b><br><br><span style="font-size: 0.9rem; color: #64748b;">تقبل الله منكم ولا تنسوا المهندس محمد المملوك من دعائكم.</span>`,
+                        icon: 'info',
+                        confirmButtonText: 'إيقاف الأذان',
+                        confirmButtonColor: '#059669',
+                        allowOutsideClick: false,
+                        timer: 240000, // 4 دقائق (مدة الأذان تقريباً)
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            // لما ملف الأذان يخلص، نقفل الشاشة تلقائي
+                            audio.onended = () => Swal.close();
+                        }
+                    }).then(() => {
+                        audio.pause();
+                        audio.currentTime = 0;
+                        audio.onended = null;
+                        // 3. نرجع نشغل الإذاعة لو كانت شغالة
+                        resumeRadio(wasRadioPlaying);
+                    });
                 }).catch(error => {
-                    showAzanBlockedAlert(prayerName, audio);
+                    // المتصفح منع الصوت! نعرض زرار التشغيل مع مؤقت دقيقة واحدة
+                    Swal.fire({
+                        title: 'حَيَّ عَلَى الصَّلَاةِ',
+                        html: `حان الآن موعد أذان <b>${prayerName}</b><br><br><span style="font-size: 0.95rem; color: #059669; font-weight: bold;">اضغط لرفع الأذان وادعُ للمهندس محمد المملوك</span>`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: '🔊 استماع للأذان',
+                        cancelButtonText: 'إغلاق',
+                        confirmButtonColor: '#059669',
+                        cancelButtonColor: '#64748b',
+                        allowOutsideClick: false,
+                        timer: 60000, // مؤقت 60 ثانية (دقيقة واحدة)
+                        timerProgressBar: true,
+                        backdrop: `rgba(15, 23, 42, 0.9)`
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            audio.currentTime = 0;
+                            audio.volume = 1;
+                            audio.play();
+                            
+                            Swal.fire({
+                                title: `أذان ${prayerName}`,
+                                html: 'تقبل الله صلاتكم ودعائكم.',
+                                icon: 'success',
+                                confirmButtonText: 'إيقاف الأذان',
+                                confirmButtonColor: '#059669',
+                                allowOutsideClick: false,
+                                timer: 240000,
+                                didOpen: () => { audio.onended = () => Swal.close(); }
+                            }).then(() => {
+                                audio.pause();
+                                audio.currentTime = 0;
+                                audio.onended = null;
+                                resumeRadio(wasRadioPlaying);
+                            });
+                        } else {
+                            // لو الوقت خلص (دقيقة) أو داس إغلاق، الشاشة تختفي والإذاعة ترجع
+                            resumeRadio(wasRadioPlaying);
+                        }
+                    });
                 });
             }
         }
 
-        function showAzanPlayingAlert(prayerName, audio) {
-            Swal.fire({
-                title: 'حان الآن وقت الصلاة',
-                html: `صلاة <b>${prayerName}</b><br><br><span style="font-size: 0.9rem; color: #64748b;">تقبل الله منكم ولا تنسوا المهندس محمد المملوك من دعائكم.</span>`,
-                icon: 'info',
-                confirmButtonText: 'إيقاف الأذان',
-                confirmButtonColor: '#059669',
-                allowOutsideClick: false
-            }).then(() => {
-                audio.pause();
-                audio.currentTime = 0;
-            });
-        }
-
-        function showAzanBlockedAlert(prayerName, audio) {
-            Swal.fire({
-                title: 'حان الآن وقت الصلاة',
-                html: `صلاة <b>${prayerName}</b><br><br><span style="font-size: 0.95rem; color: #dc2626; font-weight: bold;">اضغط على الزر بالأسفل لسماع الأذان</span>`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '🔊 تشغيل الأذان',
-                cancelButtonText: 'إغلاق',
-                confirmButtonColor: '#059669',
-                cancelButtonColor: '#64748b',
-                allowOutsideClick: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    audio.play();
-                    showAzanPlayingAlert(prayerName, audio);
+        // دالة مخصصة عشان ترجع تشغل الإذاعة لوحدها
+        function resumeRadio(wasRadioPlaying) {
+            if (wasRadioPlaying) {
+                const radioPlayer = document.getElementById('globalRadioPlayer');
+                if (radioPlayer) {
+                    radioPlayer.play().then(() => {
+                        if(typeof updateRadioUI === 'function') updateRadioUI(true);
+                    }).catch(e => console.log("تعذر استئناف الإذاعة", e));
                 }
-            });
+            }
         }
 
         const initialCity = document.getElementById('citySelect') ? document.getElementById('citySelect').value : 'Cairo';
