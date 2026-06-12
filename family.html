@@ -498,6 +498,23 @@
             }
         }
 
+        window.playClickSound = function() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.setValueAtTime(800, ctx.currentTime);
+                gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.05);
+            } catch(e) {
+                console.log("AudioContext blocked or not supported");
+            }
+        };
+
         function unlockScreen() {
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('familyContent').style.display = 'block';
@@ -590,6 +607,7 @@
 
         window.incrementDeed = function(type) {
             if(navigator.vibrate) navigator.vibrate(15);
+            if(window.playClickSound) window.playClickSound();
             deedsQueue[type]++;
             const el = document.getElementById('count_' + type);
             el.innerText = parseInt(el.innerText) + 1;
@@ -659,7 +677,7 @@
         });
 
         function updateFamUI() { const total = fCount + uFam; const el = document.getElementById('familySebhaCounter'); if(el) el.innerText = total.toLocaleString(); }
-        window.incrementFamilySebha = function() { if(navigator.vibrate) navigator.vibrate(15); uFam++; updateFamUI(); }
+        window.incrementFamilySebha = function() { if(navigator.vibrate) navigator.vibrate(15); if(window.playClickSound) window.playClickSound(); uFam++; updateFamUI(); }
         setInterval(async () => { if (uFam > 0) { let c = uFam; uFam = 0; try { await updateDoc(famSebhaRef, {count: increment(c)}); } catch(e) { setDoc(famSebhaRef, {count: c}, {merge:true}); } } }, 2000);
 
         // 4. رسائل العائلة
