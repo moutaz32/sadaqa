@@ -347,9 +347,48 @@
         .prayer-box.active .prayer-name, .prayer-box.active .prayer-time { color: white; }
         .prayer-name { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; font-weight: bold; }
         .prayer-time { font-size: 1.1rem; color: var(--text-main); font-weight: 900; }
+
+        /* === شريط الأذكار الذكي === */
+        .ticker-wrap {
+            width: 100%;
+            background: rgba(4, 120, 87, 0.95);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            color: white;
+            padding: 8px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1005;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        [data-theme="dark"] .ticker-wrap {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .ticker-text {
+            display: inline-block;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            opacity: 1;
+        }
+        .ticker-text.fade-out {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+        .ticker-text.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
+
+    <!-- شريط الأذكار الذكي -->
+    <div class="ticker-wrap">
+        <span class="ticker-text" id="tickerText">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ 🌸</span>
+    </div>
 
     <!-- عنصر الإذاعة -->
     <audio id="globalRadioPlayer" preload="none"></audio>
@@ -829,6 +868,48 @@
 
     <!-- ================== سكريبتات التحكم والصوتيات ================== -->
     <script>
+        window.playClickSound = function() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.setValueAtTime(800, ctx.currentTime);
+                gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.05);
+            } catch(e) {
+                console.log("AudioContext blocked or not supported");
+            }
+        };
+
+        // سكريبت شريط الأذكار الذكي
+        const adhkar = [
+            "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ 🌸",
+            "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ وَأَتُوبُ إِلَيْهِ 📿",
+            "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ 🌟",
+            "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ ﷺ ✨",
+            "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ 💎",
+            "سُبْحَانَ اللَّهِ ، وَالْحَمْدُ لِلَّهِ ، وَلَا إِلَهَ إِلَّا اللَّهُ ، وَاللَّهُ أَكْبَرُ 🕊️",
+            "اللَّهُمَّ اغْفِرْ لِلْحَاجِّ مُحَمَّدِ الْمَمْلُوكِ وَارْحَمْهُ 🤲"
+        ];
+        let tickerIndex = 0;
+        function updateTicker() {
+            const el = document.getElementById('tickerText');
+            if(!el) return;
+            el.classList.add('fade-out');
+            setTimeout(() => {
+                tickerIndex = (tickerIndex + 1) % adhkar.length;
+                el.innerText = adhkar[tickerIndex];
+                el.classList.remove('fade-out');
+                el.classList.add('fade-in');
+                setTimeout(() => el.classList.remove('fade-in'), 500);
+            }, 500);
+        }
+        setInterval(updateTicker, 7000);
+
         function toggleTheme() { 
             const body = document.body; 
             body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); 
@@ -1505,6 +1586,7 @@
         // دوال زيادة سور القرآن مع الأدعية المنبثقة الشيك
         window.incrementYaseen = async function(e) { 
             if(navigator.vibrate) navigator.vibrate(20);
+            if(window.playClickSound) window.playClickSound();
             Swal.fire({
                 title: 'بُوركت قراءتك 🤍', 
                 html: '<div style="line-height: 1.8; font-size: 1.1rem; color: var(--text-main);">"اللهم بحق سورة يس (قلب القرآن)، اجعل قبر الحاج محمد المملوك روضة من رياض الجنة، ويسر حسابه، واغفر ذنبه."</div>', 
@@ -1515,6 +1597,7 @@
         
         window.incrementIkhlas = async function(e) { 
             if(navigator.vibrate) navigator.vibrate(20);
+            if(window.playClickSound) window.playClickSound();
             Swal.fire({
                 title: 'تقبل الله منك 🤍', 
                 html: '<div style="line-height: 1.8; font-size: 1.1rem; color: var(--text-main);">"اللهم بحق سورة الإخلاص التي تعدل ثلث القرآن، ابْنِ لعبدك الحاج محمد المملوك قصراً في الجنة، واجعلها نوراً له في قبره."</div>', 
@@ -1525,6 +1608,7 @@
         
         window.incrementMulk = async function(e) { 
             if(navigator.vibrate) navigator.vibrate(20);
+            if(window.playClickSound) window.playClickSound();
             Swal.fire({
                 title: 'بُوركت قراءتك 🤍', 
                 html: '<div style="line-height: 1.8; font-size: 1.1rem; color: var(--text-main);">"اللهم اجعل سورة الملك المانعة المنجية حصناً للحاج محمد المملوك من عذاب القبر، وشفيعة له حتى تدخله الجنة."</div>', 
@@ -1589,9 +1673,9 @@
             }
         }
 
-        window.incrementGlobalSebha = function() { if(navigator.vibrate) navigator.vibrate(15); uSebha++; updateCountersUI(); }
-        window.incrementGlobalAfw = function() { if(navigator.vibrate) navigator.vibrate(15); uAfw++; updateCountersUI(); }
-        window.incrementGlobalHawqala = function() { if(navigator.vibrate) navigator.vibrate(15); uHawqala++; updateCountersUI(); }
+        window.incrementGlobalSebha = function() { if(navigator.vibrate) navigator.vibrate(15); if(window.playClickSound) window.playClickSound(); uSebha++; updateCountersUI(); }
+        window.incrementGlobalAfw = function() { if(navigator.vibrate) navigator.vibrate(15); if(window.playClickSound) window.playClickSound(); uAfw++; updateCountersUI(); }
+        window.incrementGlobalHawqala = function() { if(navigator.vibrate) navigator.vibrate(15); if(window.playClickSound) window.playClickSound(); uHawqala++; updateCountersUI(); }
 
         setInterval(async () => {
             if (uSebha > 0) { let c = uSebha; uSebha = 0; try{await updateDoc(sebhaDocRef, {count: increment(c)});}catch(e){setDoc(sebhaDocRef, {count:c}, {merge:true});} }
